@@ -114,7 +114,6 @@ function _captcha_validate($captcha_response) {
 
   if ($_SESSION['captcha_correct']) return TRUE;
   if (is_array($captcha_response)) $captcha_response = $captcha_response['#value'];
-  if (trim($captcha_response) == '') return FALSE;
 
   global $user;
   $captcha_type = variable_get("captcha_type", NULL);
@@ -150,6 +149,7 @@ function captcha_captchachallenge(&$form, &$captcha) {
 
 function captcha_captchavalidate(&$captcha_word, &$correct) {
   $captcha_word = drupal_strtolower($captcha_word);
+  
   if ($captcha_word == $_SESSION['captcha']) {
     $correct = TRUE;
   }
