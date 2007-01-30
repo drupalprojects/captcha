@@ -149,8 +149,7 @@ function captcha_captchachallenge(&$form, &$captcha) {
 
 function captcha_captchavalidate(&$captcha_word, &$correct) {
   $captcha_word = drupal_strtolower($captcha_word);
-  
-  if ($captcha_word == $_SESSION['captcha']) {
+  if (($_SESSION['captcha'] != '') && ($captcha_word == $_SESSION['captcha'])) {
     $correct = TRUE;
   }
   else {
