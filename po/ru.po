@@ -1,0 +1,83 @@
+# LANGUAGE translation of Drupal (captcha.module)
+# Copyright 2007 Sergey Sinitsa <sin@rulinux.net.ru>
+# Generated from file: captcha.module,v 1.25 2006/07/26 19:32:02 wundo
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1\n"
+"POT-Creation-Date: 2006-10-03 13:47-0300\n"
+"PO-Revision-Date: 2007-02-26 12:00+0000\n"
+"Last-Translator: Sergey Sinitsa <sin@rulinux.net.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: captcha.module:15
+msgid "Adds a Captcha to the registration form."
+msgstr "Добвыляет Captcha к форме регистрации."
+
+#: captcha.module:26
+msgid "Comment Form"
+msgstr "Фотма комментариев"
+
+#: captcha.module:27
+msgid "User Login Form"
+msgstr "Форма логина пользователя"
+
+#: captcha.module:28
+msgid "User Login Form Block"
+msgstr "Блок с формой логина пользователя"
+
+#: captcha.module:29
+msgid "User Edit Form"
+msgstr "Форма изменения пользователя"
+
+#: captcha.module:30
+msgid "User Registration Form"
+msgstr "Форма тегистрации пользоватея"
+
+#: captcha.module:31
+msgid "User Forgot Password Form"
+msgstr "Фонма напоминания пароля пользователю"
+
+#: captcha.module:32
+msgid "User Contact Form"
+msgstr "Контактная форма пользователя"
+
+#: captcha.module:33
+msgid "Sitewide Contact Form"
+msgstr "Контактная форма сайта"
+
+#: captcha.module:34
+msgid "Create a node"
+msgstr "Создание документа"
+
+#: captcha.module:41
+msgid "Captcha Points for the role %role"
+msgstr "Точки Captcha для роли %role"
+
+#: captcha.module:59
+msgid "Type of captcha to use"
+msgstr "Тип captcha"
+
+#: captcha.module:62
+msgid "Select what kind of challenge you want to pose to the user"
+msgstr "Выберите тип испытания, которое вы ходите предложить пользователю"
+
+#: captcha.module:141
+msgid "Math Question: What is %problem?"
+msgstr "Математический вопрос: Сколько будет %problem?"
+
+#: captcha.module:143
+msgid "Please solve the math problem above and type in the result. e.g. for 1+1, type 2"
+msgstr "Можалуйста решите математическую задачу и введите результат, например для 1+1 введите 2"
+
+#: captcha.module:158
+msgid "The answer you entered to the math problem is incorrect."
+msgstr "Введённое вами решение математической задачи не верно. "
+
+#: captcha.module:0
+msgid "captcha"
+msgstr ""
+
