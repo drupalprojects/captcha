@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: captcha-module\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-30 16:13+0200\n"
-"PO-Revision-Date: 2007-03-30 16:22+0200\n"
+"PO-Revision-Date: 2007-03-30 16:36+0200\n"
 "Last-Translator: FEHÉR János <feher.janos _at- mindworks.hu>\n"
 "Language-Team: Hungarian <Drupal.hu Fordítási Csapat <forditas [at] drupal.hu>>\n"
 "MIME-Version: 1.0\n"
@@ -103,13 +103,10 @@ msgid "Math Question: What is %problem?"
 msgstr "Matematikai kérdés: Mennyi %problem?"
 
 #: captcha.module:201
-#, fuzzy
 msgid ""
 "Please solve the math problem above and type in the result. e.g. for 1+1, "
 "type 2."
-msgstr ""
-"A fenti matematikai kérdés eredménye gépelendő be. Pl. 1+1 esetén 2 "
-"gépelendő be"
+msgstr "A fenti matematikai kérdés eredménye gépelendő be. Például 1+1 esetén a válasz 2."
 
 #: captcha.module:218
 msgid "The answer you entered to the math problem is incorrect."
