@@ -15,11 +15,11 @@ msgstr ""
 
 #: captcha.module:15
 msgid "Adds a Captcha to the registration form."
-msgstr "Добвыляет Captcha к форме регистрации."
+msgstr "Добавляет Captcha к форме регистрации."
 
 #: captcha.module:26
 msgid "Comment Form"
-msgstr "Фотма комментариев"
+msgstr "Форма комментариев"
 
 #: captcha.module:27
 msgid "User Login Form"
@@ -35,11 +35,11 @@ msgstr "Форма изменения пользователя"
 
 #: captcha.module:30
 msgid "User Registration Form"
-msgstr "Форма тегистрации пользоватея"
+msgstr "Форма регистрации пользоватея"
 
 #: captcha.module:31
 msgid "User Forgot Password Form"
-msgstr "Фонма напоминания пароля пользователю"
+msgstr "Форма напоминания пароля пользователю"
 
 #: captcha.module:32
 msgid "User Contact Form"
