@@ -2,15 +2,17 @@ $Id$
 
 ##Captcha Readme##
 
-To Install:
-Enable the module, and then go to admin/settings/captcha to enable captchas
-for various actions and captcha types.
+The DRUPAL-5 branch of CAPTCHA has been removed from CVS as new releases are 
+made from HEAD.
 
-Default, and Image Captchas:
-This new version of captcha.module uses a simple math question as the
-default captcha challenge. However, this is NOT as powerful as the original
-image captcha, in case you are looking for foolproof protection.
+The DRUPAL-5 branch continued to be vulnerable to the exploit posted in 
+SA-2007-006 <http://drupal.org/node/114364>.
 
-The image captcha facility has been shifted to an additional submodule called
-"textimage". You will need to install captcha.module AND textimage.module to
-get image captchas working.
+Please use one of the 5.x releases of CAPTCHA. The 5.x-1.0 release 
+<http://drupal.org/node/110967> is functionally equivalent to the DRUPAL-5 
+branch CAPTCHA (minus the bypass).
+
+
+Heine Deelstra
+
+Security team.
