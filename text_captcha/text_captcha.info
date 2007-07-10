@@ -1,6 +1,0 @@
-; $Id$
-name = "Text captcha"
-description = "Captcha module that implements a simple text based captcha."
-package = "Spam control"
-dependencies = captcha
-version = "$Name$"

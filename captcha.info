@@ -1,5 +1,0 @@
-; $Id$
-name = Captcha
-description = "Base captcha module for adding captcha challenges to registration, comment and contact forms for example."
-package = "Spam control"
-version = "$Name$"

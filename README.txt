@@ -1,21 +1,25 @@
-$Id$
+##Captcha Readme##
 
-### Captcha Readme
+The DRUPAL-5 branch of CAPTCHA has been removed from CVS as new releases are 
+made from HEAD.
 
-captcha.module is the basic captcha module that offers general captcha
-adminstration and a simple math captcha challenge.
+The DRUPAL-5 branch continued to be vulnerable to the exploit posted in 
+SA-2007-006 <http://drupal.org/node/114364>.
 
-text_captcha offers another simple text based captcha challenge.
+Please use one of the 5.x releases of CAPTCHA. The 5.x-1.0 release 
+<http://drupal.org/node/110967> is functionally equivalent to the DRUPAL-5 
+branch CAPTCHA (minus the bypass).
 
-image_captcha offers an image based captcha challenge.
 
-Installation:
-  Installation is like all normal modules (e.g. extract in the directory sites/all/modules)
-  The basic captcha module has no dependencies, so nothing special is required.
-  If you had an old version of the captcha module installed, it is possible
-  that you need to uninstall and reinstall this captcha module after
-  overwriting/upgrading from the previous version.
+Heine Deelstra
 
-Configuration:
-  The configuration page is at admin/settings/captcha, here you can configure
-  the captcha module and enable captchas for the desired forms.
+Security team.
+
+
+
+DRUPAL-5--3
+
+On July 10th, 2007, there was a DRUPAL-5--3 branch created, which aims
+to fix many of the issues created in the past.
+
+Rob Loach (http://www.robloach.net)
