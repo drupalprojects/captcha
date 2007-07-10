@@ -1,0 +1,6 @@
+; $Id$
+name = "Image captcha"
+description = "Captcha module that implements image based captchas."
+package = "Spam control"
+dependencies = captcha
+version = "$Name$"
