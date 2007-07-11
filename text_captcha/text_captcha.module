@@ -167,7 +167,7 @@ function text_captcha_captcha($op, $captcha_type='') {
         $answer = $words[$key];
         // store the answer and build the form elements
         $result = array();
-        $result['solution'] = $answer;
+        $result['value'] = $answer;
         $result['form']['captcha_answer'] = array (
           '#type' => 'textfield',
           '#title' => t('What is the @nth word in the captcha phrase "@words"?', array('@nth' => _text_captcha_ordinal($key+1), '@words' => implode(' ', $words))),

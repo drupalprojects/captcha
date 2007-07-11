@@ -298,7 +298,7 @@ function captcha_form_alter($form_id, &$form) {
     // before validation and are the right place to store the solution in $_SESSION.
     $form['captcha']['captcha_solution'] = array (
       '#type' => 'value',
-      '#value' => $captcha['solution'],
+      '#value' => $captcha['value'],
     );
 
     // The captcha token is an additional measure to make spam submission harder.
@@ -441,7 +441,7 @@ function captcha_captcha($op, $captcha_type='') {
         $answer = mt_rand(1, 20);
         $x = mt_rand(1, $answer);
         $y = $answer - $x;
-        $result['solution'] = "$answer";
+        $result['value'] = "$answer";
         $result['form']['captcha_answer'] = array (
           '#type' => 'textfield',
           '#title' => t('Math Question: What is %problem?', array('%problem' => "$x + $y")),
