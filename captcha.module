@@ -69,6 +69,13 @@ function captcha_menu($may_cache) {
 }
 
 /**
+ * Implementation of hook_perm().
+ */
+function captcha_perm() {
+  return array('skip captcha challenges');
+}
+
+/**
  * Return an array with the available captcha types, for use as options array
  * for a select form elements.
  * The array is an associative array mapping "$module/$challenge" to
