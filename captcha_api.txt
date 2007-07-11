@@ -20,7 +20,7 @@ Functionality depends on the first argument $op:
     You should return an array that offers form elements and the solution
     of your captcha challenge, defined by the second argument $captcha_type.
     The returned array $result should have the following items:
-    $result['solution']: this is the solution of your captcha challenge
+    $result['value']: this is the solution of your captcha challenge
     $result['form']: an array of the form elements you want to add to the form.
       There should be a key 'captcha_answer' in this array, which points to
       the form element where the user enters his answer.
