@@ -77,7 +77,7 @@ function text_captcha_settings_form_validate($form_id, $form_values) {
   if ($form_id == 'text_captcha_settings_form') {
     if ($form_values['text_captcha_words'] == TEXT_CAPTCHA_USER_DEFINED_WORDS) {
       // check if there are at minimum TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM user defined words
-      if (count(explode(' ', variable_get('text_captcha_userdefined_words', ''))) < TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM) {
+      if (count(explode(' ', $form_values['text_captcha_userdefined_words'])) < TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM) {
         form_set_error('text_captcha_userdefined_words',
           t('You need to enter at least @min words if you want to use user defined words.',
             array('@min' => TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM)
