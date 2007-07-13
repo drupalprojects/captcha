@@ -93,4 +93,6 @@ function captcha_update_1() {
  */
 function captcha_uninstall() {
   db_query("DROP TABLE {captcha_points}");
+  db_query("DELETE FROM {variable} WHERE name LIKE 'captcha_%'");
+  cache_clear_all('variables', 'cache');
 }
