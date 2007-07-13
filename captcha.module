@@ -249,8 +249,8 @@ function captcha_admin_settings_submit($form_id, $form_values) {
 function captcha_form_alter($form_id, &$form) {
   global $user;
 
-  if ($user->uid == 0) {
-    // Visitor is anonymous user: add a captcha to the form if needed
+  if (!user_access('skip captcha challenges')) {
+    // Visitor does not have permission to skip the captcha challenge
 
     // Do not present captcha if not captcha-persistent and user has already solved a captcha for this form
     if(!variable_get('captcha_persistence', TRUE) && ($_SESSION['captcha'][$form_id]['success'] === TRUE)) {
