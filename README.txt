@@ -19,3 +19,12 @@ Installation:
 Configuration:
   The configuration page is at admin/settings/captcha, here you can configure
   the captcha module and enable captchas for the desired forms.
+
+Caching:
+  Captcha interacts with page caching (admin/settings/performance). A captcha
+  prevents caching of pages on which it appears. You need to make sure forms
+  with a captcha do not appear on too many pages, or cache will be effectively
+  off. The comment submission form is the cause for most concern. Make sure you
+  set the "Location of comment submission form" to "Display on separate page"
+  on Administer » Content management » Comments, tab Settings
+  (admin/content/comment/settings) or your content will no longer be cached.

@@ -339,6 +339,10 @@ function captcha_form_alter($form_id, &$form) {
     // Add a validation function for the captcha part of the form
     $form['captcha']['#validate'] = ((array) $form['captcha']['#validate']) + array('captcha_validate' => array());
 
+    // prevent caching of the page with this captcha enabled form
+    global $conf;
+    $conf['cache'] = FALSE;
+    
   }
   elseif (user_access('administer site configuration') && variable_get('captcha_administration_mode', FALSE) && arg(0) != 'admin') {
     // For administrators: show captcha info and offer link to configure it
