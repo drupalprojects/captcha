@@ -3,8 +3,9 @@
 
 /**
  * @file
- * This module enables basic captcha functionality: adminstrators can add a captcha
- * to desired forms for anonymous visitors/users.
+ * This module enables basic captcha functionality:
+ * adminstrators can add a captcha to desired forms that users without
+ * the 'skip captcha' permission (typically anonymous visitors) have to solve.
  *
  * @todo move captcha configuration page to user management/user permissions?
  *
@@ -25,7 +26,6 @@
  * fails.
  * For example: on node forms it can't be done because the node form uses a
  * custom theme function. (@see includes/form/inc::theme_node_form)
- * For anonymous users this won't be a problem probably.
  *
  */
 
@@ -37,7 +37,7 @@ define('CAPTCHA_DESCRIPTION', 'This question is used to make sure you are a huma
 function captcha_help($section = 'admin/help#captcha') {
   switch ($section) {
     case 'admin/settings/captcha':
-      return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by anonymous visitors. A captcha is an extra field (or several fields) on a form presented to the anonymous visitors. It embodies a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out.') . '</p>';
+      return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It embodies a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out. Users with the \'skip captcha\' <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators).', array('@perm' => url('admin/user/access'))) . '</p>';
   }
   return $output;
 }
@@ -145,7 +145,7 @@ function captcha_admin_settings($form_id='') {
     '#type' => 'checkbox',
     '#title' => t('Add captcha adminstration links to forms.'),
     '#default_value' => variable_get('captcha_administration_mode', FALSE),
-    '#description' => t('This option is very helpfull to enable/disable captchas on forms. When enabled, users with the "administer site configuration" permission will see captcha adminstration links on all forms (except on administrative pages, which shouldn\'t be accessible by anonymous users in the first place).'),
+    '#description' => t('This option is very helpfull to enable/disable captchas on forms. When enabled, users with the \'administer site configuration\' permission will see captcha adminstration links on all forms (except on administrative pages, which shouldn\'t be accessible to untrusted users in the first place).'),
   );
   // field set with form_id -> captcha type configuration
   $form["captcha_types"] = array(
@@ -185,14 +185,14 @@ function captcha_admin_settings($form_id='') {
   $form["captcha_description"] = array(
     '#type' => 'textfield',
     '#title' => t('Captcha description'),
-    '#description' => t('With this description you can explain to the anonymous visitor why the captcha needs to be solved.'),
+    '#description' => t('With this description you can explain to the user why the captcha needs to be solved.'),
     '#default_value' => t(variable_get('captcha_description', CAPTCHA_DESCRIPTION)),
   );
   // field for captcha persistence
   $form["captcha_persistence"] = array(
     '#type' => 'checkbox',
     '#title' => t('Persistent captchas'),
-    '#description' => t('If checked, the anonymous visitor will always have to solve a captcha. If not checked, the captcha check for a form will be omitted during the rest of the session once a visitor has successfully solved a captcha for that form.'),
+    '#description' => t('If checked, the user will always have to solve a captcha. If not checked, the captcha check for a form will be omitted during the rest of the session once the user has successfully solved a captcha for that form.'),
     '#default_value' => variable_get('captcha_persistence', TRUE),
   );
   // submit button
@@ -243,7 +243,7 @@ function captcha_admin_settings_submit($form_id, $form_values) {
 /**
  * Implementation of hook_form_alter().
  *
- * This function adds a captcha to forms for anonymous users if needed and adds
+ * This function adds a captcha to forms for untrusted users if needed and adds
  * captcha adminstration links for site adminstrators if this option is enabled.
  */
 function captcha_form_alter($form_id, &$form) {
@@ -355,7 +355,7 @@ function captcha_form_alter($form_id, &$form) {
       $form['captcha'] = array(
         '#type' => 'item',
         '#title' => t('Captcha administration'),
-        '#description' => t('The captcha challenge "@type" (by module "@module") is enabled here for anonymous visitors: !edit or !disable.', array(
+        '#description' => t('The captcha challenge "@type" (by module "@module") is enabled here for untrusted users: !edit or !disable.', array(
           '@type' => $captcha_point->type,
           '@module' => $captcha_point->module,
           '!edit' => l(t('edit captcha type'), "admin/settings/captcha/$form_id", array(), drupal_get_destination()),
@@ -367,7 +367,7 @@ function captcha_form_alter($form_id, &$form) {
       $form['captcha'] = array(
         '#type' => 'item',
         '#title' => t('Captcha administration'),
-        '#description' => l(t('Place a captcha challenge here for anonymous visitors.'), "admin/settings/captcha/$form_id/enable", array(), drupal_get_destination()),
+        '#description' => l(t('Place a captcha challenge here for untrusted users.'), "admin/settings/captcha/$form_id/enable", array(), drupal_get_destination()),
       );
     }
     // Add pre_render function for placing the captcha just above the submit button
