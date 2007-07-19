@@ -36,7 +36,7 @@ define('CAPTCHA_DESCRIPTION', 'This question is used to make sure you are a huma
  */
 function captcha_help($section = 'admin/help#captcha') {
   switch ($section) {
-    case 'admin/settings/captcha':
+    case 'admin/user/captcha':
       return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It embodies a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out. Users with the \'skip captcha\' <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators).', array('@perm' => url('admin/user/access'))) . '</p>';
   }
   return $output;
@@ -50,7 +50,7 @@ function captcha_menu($may_cache) {
   if ($may_cache) {
     // main configuration page of the basic captcha module
     $items[] = array(
-      'path' => 'admin/settings/captcha',
+      'path' => 'admin/user/captcha',
       'title' => t('Captcha'),
       'description' => t('Administer how and where Captchas are used.'),
       'callback' => 'captcha_admin',
@@ -60,7 +60,7 @@ function captcha_menu($may_cache) {
     // the default local task (needed when other modules want to offer alternative
     // captcha challenges and their own configuration page as local task)
     $items[] = array(
-      'path' => 'admin/settings/captcha/captcha',
+      'path' => 'admin/user/captcha/captcha',
       'title' => t('Captcha'),
       'type' => MENU_DEFAULT_LOCAL_TASK,
     );
@@ -113,13 +113,13 @@ function captcha_admin($form_id='', $op='') {
         db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $form_id);
         drupal_set_message(t('Disabled captcha for form %form_id.', array('%form_id'=>$form_id)));
         // goto the captcha adminstration or alternative destination if present in URI
-        drupal_goto('admin/settings/captcha');
+        drupal_goto('admin/user/captcha');
         break;
       case 'delete':
         db_query("DELETE FROM {captcha_points} WHERE form_id = '%s'", $form_id);
         drupal_set_message(t('Deleted captcha for form %form_id.', array('%form_id'=>$form_id)));
         // goto the captcha adminstration or alternative destination if present in URI
-        drupal_goto('admin/settings/captcha');
+        drupal_goto('admin/user/captcha');
         break;
       case 'enable':
         db_query("DELETE FROM {captcha_points} WHERE form_id = '%s'", $form_id);
@@ -177,7 +177,7 @@ function captcha_admin_settings($form_id='') {
     // additional operations
     $form['captcha_types'][$captcha_point->form_id]['operations'] = array(
       '#value' => implode(", ", array(
-        l(t('delete'), "admin/settings/captcha/{$captcha_point->form_id}/delete"),
+        l(t('delete'), "admin/user/captcha/{$captcha_point->form_id}/delete"),
       ))
     );
   }
@@ -358,8 +358,8 @@ function captcha_form_alter($form_id, &$form) {
         '#description' => t('The captcha challenge "@type" (by module "@module") is enabled here for untrusted users: !edit or !disable.', array(
           '@type' => $captcha_point->type,
           '@module' => $captcha_point->module,
-          '!edit' => l(t('edit captcha type'), "admin/settings/captcha/$form_id", array(), drupal_get_destination()),
-          '!disable' => l(t('disable captcha'), "admin/settings/captcha/$form_id/disable", array(), drupal_get_destination()),
+          '!edit' => l(t('edit captcha type'), "admin/user/captcha/$form_id", array(), drupal_get_destination()),
+          '!disable' => l(t('disable captcha'), "admin/user/captcha/$form_id/disable", array(), drupal_get_destination()),
         ))
       );
     }
@@ -367,7 +367,7 @@ function captcha_form_alter($form_id, &$form) {
       $form['captcha'] = array(
         '#type' => 'item',
         '#title' => t('Captcha administration'),
-        '#description' => l(t('Place a captcha challenge here for untrusted users.'), "admin/settings/captcha/$form_id/enable", array(), drupal_get_destination()),
+        '#description' => l(t('Place a captcha challenge here for untrusted users.'), "admin/user/captcha/$form_id/enable", array(), drupal_get_destination()),
       );
     }
     // Add pre_render function for placing the captcha just above the submit button

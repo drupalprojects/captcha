@@ -13,7 +13,7 @@ DEFINE('TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM', 20);
  */
 function text_captcha_help($section) {
   switch ($section) {
-    case 'admin/settings/captcha/text_captcha':
+    case 'admin/user/captcha/text_captcha':
       return '<p>' . t('This text based captcha presents a captcha phrase of a given number of words and the visitor is asked to enter the n\'th word.') . '</p>';
   }
   return $output;
@@ -27,7 +27,7 @@ function text_captcha_menu($may_cache) {
   if ($may_cache) {
     // add an administration tab for text_captcha
     $items[] = array(
-      'path' => 'admin/settings/captcha/text_captcha',
+      'path' => 'admin/user/captcha/text_captcha',
       'title' => t('Text captcha'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('text_captcha_settings_form'),

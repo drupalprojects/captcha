@@ -15,7 +15,7 @@ DEFINE(IMAGE_CAPTCHA_ALLOWED_CHARACTERS, 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ2345678
  */
 function image_captcha_help($section) {
   switch ($section) {
-    case 'admin/settings/captcha/image_captcha':
+    case 'admin/user/captcha/image_captcha':
       return '<p>' . t('The image captcha is the popular captcha type where a random text code is obfuscated in an image.') . '</p>';
   }
   return $output;
@@ -29,7 +29,7 @@ function image_captcha_menu($may_cache) {
   if ($may_cache) {
     // add an administration tab for image_captcha
     $items[] = array(
-      'path' => 'admin/settings/captcha/image_captcha',
+      'path' => 'admin/user/captcha/image_captcha',
       'title' => t('Image captcha'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('image_captcha_settings_form'),

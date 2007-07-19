@@ -80,7 +80,7 @@ dependencies = captcha
 
 More advanced captcha modules probably want some configuration page. To integrate
 nicely with the captcha module you should offer your configuration page as a
-MENU_LOCAL_TASK menu entry under 'admin/settings/captcha/'.
+MENU_LOCAL_TASK menu entry under 'admin/user/captcha/'.
 
 For our simple foo captcha module this would mean:
 
@@ -92,7 +92,7 @@ function foo_captcha_menu($may_cache) {
   $items = array();
   if ($may_cache) {
     $items[] = array(
-      'path' => 'admin/settings/captcha/foo_captcha',
+      'path' => 'admin/user/captcha/foo_captcha',
       'title' => t('Foo captcha'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('foo_captcha_settings_form'),
@@ -121,7 +121,7 @@ For our simple foo captcha module this would mean:
  */
 function text_captcha_help($section) {
   switch ($section) {
-    case 'admin/settings/captcha/foo_captcha':
+    case 'admin/user/captcha/foo_captcha':
       return '<p>' . t('This is a very simple captcha, which requires users to enter "foo" in a textfield.') . '</p>';
   }
   return $output;
