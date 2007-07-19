@@ -33,6 +33,7 @@ function image_captcha_menu($may_cache) {
       'title' => t('Image captcha'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('image_captcha_settings_form'),
+      'access' => user_access('administer captcha'),
       'type' => MENU_LOCAL_TASK,
     );
     // callback for generating an image

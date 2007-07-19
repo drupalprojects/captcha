@@ -31,6 +31,7 @@ function text_captcha_menu($may_cache) {
       'title' => t('Text captcha'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('text_captcha_settings_form'),
+      'access' => user_access('administer captcha'),
       'type' => MENU_LOCAL_TASK,
     );
   }

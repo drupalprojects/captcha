@@ -54,7 +54,7 @@ function captcha_menu($may_cache) {
       'title' => t('Captcha'),
       'description' => t('Administer how and where Captchas are used.'),
       'callback' => 'captcha_admin',
-      'access' => user_access('administer site configuration'),
+      'access' => user_access('administer captcha'),
       'type' => MENU_NORMAL_ITEM,
     );
     // the default local task (needed when other modules want to offer alternative
@@ -72,7 +72,7 @@ function captcha_menu($may_cache) {
  * Implementation of hook_perm().
  */
 function captcha_perm() {
-  return array('skip captcha challenges');
+  return array('administer captcha', 'skip captcha challenges');
 }
 
 /**
