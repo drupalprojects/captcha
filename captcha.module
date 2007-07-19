@@ -37,6 +37,7 @@ define('CAPTCHA_DESCRIPTION', 'This question is used to make sure you are a huma
 function captcha_help($section = 'admin/help#captcha') {
   switch ($section) {
     case 'admin/user/captcha':
+    case 'admin/help#captcha':
       return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It embodies a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out. Users with the \'skip captcha\' <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators).', array('@perm' => url('admin/user/access'))) . '</p>';
   }
   return $output;
