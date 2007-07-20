@@ -309,18 +309,14 @@ function captcha_form_alter($form_id, &$form) {
       '#value' => $captcha['value'],
     );
 
-    // The captcha token is an additional measure to make spam submission harder.
-    // It is hidden field with a random number between 0 and RAND_MAX (typically
-    // some billions), which will also be stored in $_SESSION in the pre_render
-    // phase to be validated against.
-    // Rationale: with the standard math captcha a spammer has a chance of 1/20
-    // on a correct guess (if he would just submit without parsing captcha challenge).
-    // With the captcha token this chance of lucky submission is *much* smaller.
-    // The spammer could of course parse the html of the form to get the token,
-    // but then he could also invest in automating the captcha solving.
+    // The captcha token is used to differentiate between different instances
+    // of the same form. This makes it possible to request the same form a
+    // couple of times before submitting them. The solution of the captcha of
+    // each of these form instances will be stored at the pre_render phase in
+    // $_SESSION['captcha'][$form_id][$captcha_token]
     $form['captcha']['captcha_token'] = array (
       '#type' => 'hidden',
-      '#value' => mt_rand(),
+      '#value' => md5(mt_rand()),
     );
 
     // other internal values needed for the validation phase
@@ -387,12 +383,13 @@ function captcha_validate($form_values) {
     $captcha_answer = module_invoke($validationdata['module'], 'captcha', 'process', $validationdata['type'], $captcha_answer);
   }
   $form_id = $validationdata['form_id'];
-  //Check captcha_token
-  if ($form_values['#post']['captcha_token'] != $_SESSION['captcha'][$form_id]['captcha_token']) {
-    form_set_error('captcha_token', t('Captcha token test failed.'));
+  $captcha_token = $form_values['#post']['captcha_token'];
+  // Check if captcha_token exists
+  if (!isset($_SESSION['captcha'][$form_id][$captcha_token])) {
+    form_set_error('captcha_token', t('Invalid captcha token.'));
   }
   // Check answer
-  if ($captcha_answer === $_SESSION['captcha'][$form_id]['captcha_solution']) {
+  if ($captcha_answer === $_SESSION['captcha'][$form_id][$captcha_token]) {
     $_SESSION['captcha'][$form_id]['success'] = TRUE;
   }
   else {
@@ -403,7 +400,7 @@ function captcha_validate($form_values) {
   // by a spammer that repeats posting a form without requesting
   // (and thus rendering) a new form. Note that a new captcha solution is only
   // set at the pre_render phase.
-  unset($_SESSION['captcha'][$form_id]['captcha_solution']);
+  unset($_SESSION['captcha'][$form_id][$captcha_token]);
 }
 
 /**
@@ -412,11 +409,16 @@ function captcha_validate($form_values) {
  * This function stores the solution of the captcha challenge in $_SESSION
  */
 function captcha_pre_render($form_id, $form) {
-  // store the captcha solution in $_SESSION
-  $_SESSION['captcha'][$form_id]['captcha_solution'] = $form['captcha']['captcha_solution']['#value'];
+  // count the number of unsolved captcha challenges and flush those if too many
+  // minus 1 is needed because 'success' is also an item of $_SESSION['captcha'][$form_id]
+  if (count($_SESSION['captcha'][$form_id]) - 1 > CAPTCHA_UNSOLVED_CHALLENGES_MAX) {
+    unset($_SESSION['captcha'][$form_id]);
+    drupal_set_message(t('You can\'t request more than @num captcha challenges without solving them. Your previous captcha challenges were flushed.', array('@num' => CAPTCHA_UNSOLVED_CHALLENGES_MAX)));
+  }
+  // store the current captcha solution in $_SESSION
+  $captcha_token = $form['captcha']['captcha_token']['#value'];
+  $_SESSION['captcha'][$form_id][$captcha_token] = $form['captcha']['captcha_solution']['#value'];
   $_SESSION['captcha'][$form_id]['success'] = FALSE;
-  // store the captcha_token in $_SESSION
-  $_SESSION['captcha'][$form_id]['captcha_token'] = $form['captcha']['captcha_token']['#value'];
 }
 
 /**
