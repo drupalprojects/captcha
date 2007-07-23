@@ -29,6 +29,7 @@
  *
  */
 
+define('CAPTCHA_UNSOLVED_CHALLENGES_MAX', 20);
 define('CAPTCHA_DESCRIPTION', 'This question is used to make sure you are a human visitor and to prevent spam submissions.');
 
 /**
