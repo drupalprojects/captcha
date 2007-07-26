@@ -30,7 +30,6 @@
  */
 
 define('CAPTCHA_UNSOLVED_CHALLENGES_MAX', 20);
-define('CAPTCHA_DESCRIPTION', 'This question is used to make sure you are a human visitor and to prevent spam submissions.');
 
 /**
  * Implementation of hook_help().
@@ -96,6 +95,13 @@ function _captcha_available_challenge_types(){
     }
   }
   return $captcha_challenges;
+}
+
+/**
+ * Get the description which appears above the captcha in forms.
+ */
+function _captcha_get_description() {
+  return variable_get('captcha_description', t('This question is used to make sure you are a human visitor and to prevent spam submissions.'));
 }
 
 /**
@@ -188,7 +194,7 @@ function captcha_admin_settings($form_id='') {
     '#type' => 'textfield',
     '#title' => t('Captcha description'),
     '#description' => t('With this description you can explain to the user why the captcha needs to be solved.'),
-    '#default_value' => t(variable_get('captcha_description', CAPTCHA_DESCRIPTION)),
+    '#default_value' => _captcha_get_description(),
   );
   // field for captcha persistence
   $form["captcha_persistence"] = array(
@@ -281,7 +287,7 @@ function captcha_form_alter($form_id, &$form) {
     }
 
     // Add a captcha part to the form (depends on value of captcha_description)
-    $captcha_description = variable_get('captcha_description', CAPTCHA_DESCRIPTION);
+    $captcha_description = _captcha_get_description();
     if ($captcha_description) {
       // $captcha_description is not empty: captcha part is a fieldset with description
       $form['captcha'] = array(
