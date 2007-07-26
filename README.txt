@@ -15,6 +15,8 @@ Installation:
   If you had an old version of the captcha module installed, it is possible
   that you need to uninstall and reinstall this captcha module after
   overwriting/upgrading from the previous version.
+  If you plan on using image_captcha, you will have to install TTF fonts into
+  the image_captcha/fonts directory. 
 
 Configuration:
   The configuration page is at admin/settings/captcha, here you can configure
