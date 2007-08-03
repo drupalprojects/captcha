@@ -153,7 +153,7 @@ function captcha_admin_settings($form_id='') {
     '#type' => 'checkbox',
     '#title' => t('Add captcha adminstration links to forms.'),
     '#default_value' => variable_get('captcha_administration_mode', FALSE),
-    '#description' => t('This option is very helpfull to enable/disable captchas on forms. When enabled, users with the \'administer site configuration\' permission will see captcha adminstration links on all forms (except on administrative pages, which shouldn\'t be accessible to untrusted users in the first place).'),
+    '#description' => t("This option is very helpful to enable/disable captchas on forms. When enabled, users with the 'administer site configuration' permission will see captcha administration links on all forms (except on administrative pages, which shouldn't be accessible to untrusted users in the first place)."),
   );
   // field set with form_id -> captcha type configuration
   $form["captcha_types"] = array(
