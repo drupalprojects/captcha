@@ -19,7 +19,7 @@ Installation:
   the image_captcha/fonts directory. 
 
 Configuration:
-  The configuration page is at admin/settings/captcha, here you can configure
+  The configuration page is at admin/user/captcha, here you can configure
   the captcha module and enable captchas for the desired forms.
 
 Caching:
