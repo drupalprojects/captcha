@@ -293,7 +293,7 @@ function captcha_form_alter($form_id, &$form) {
       $form['captcha'] = array(
         '#type' => 'fieldset',
         '#title' => t('Captcha'),
-        '#description' => t($captcha_description),
+        '#description' => $captcha_description,
       );
     }
     else {
