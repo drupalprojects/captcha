@@ -415,7 +415,7 @@ function captcha_validate($form_values) {
  *
  * This function stores the solution of the captcha challenge in $_SESSION
  */
-function captcha_pre_render($form_id, $form) {
+function captcha_pre_render($form_id, &$form) {
   // count the number of unsolved captcha challenges and flush those if too many
   // minus 1 is needed because 'success' is also an item of $_SESSION['captcha'][$form_id]
   if (count($_SESSION['captcha'][$form_id]) - 1 > CAPTCHA_UNSOLVED_CHALLENGES_MAX) {
@@ -426,6 +426,8 @@ function captcha_pre_render($form_id, $form) {
   $captcha_token = $form['captcha']['captcha_token']['#value'];
   $_SESSION['captcha'][$form_id][$captcha_token] = $form['captcha']['captcha_solution']['#value'];
   $_SESSION['captcha'][$form_id]['success'] = FALSE;
+  // empty the value of the captcha_answer form item before rendering
+  $form['captcha']['captcha_answer']['#value'] = '';
 }
 
 /**
