@@ -48,33 +48,73 @@ function image_captcha_menu($may_cache) {
 }
 
 /**
- * function for default font path
+ * Return the image captcha font or FALSE if not found or not a readable file.
+ * Sets error message on failure with drupal_set_message() or watchdog().
  */
-function _image_captcha_default_font() {
-  return drupal_get_path('module', 'image_captcha') . '/fonts/' . 'VeraSe.ttf';
+
+function _image_captcha_font($warn_watchdog) {
+  $font = variable_get('image_captcha_font', FALSE);
+  if (!$font) {
+    $msg = t('No font configured for the image captcha.');
+  }
+  elseif (!is_file($font) || !is_readable($font)) {
+    $msg = t('Could not find or read the configured font "%font" for the image captcha.', array('%font' => $font));
+    $font = FALSE;
+  }
+  if (!$font) {
+    if ($warn_watchdog) {
+      watchdog('image captcha', $msg, WATCHDOG_ERROR);
+    }
+    else {
+      drupal_set_message($msg, 'error');
+    }
+  }
+  return $font;
+}
+
+/**
+ * function to get a list of available fonts
+ */
+function _image_captcha_available_fonts() {
+  $available_fonts = array();
+  $fontsdirectories = array(
+    drupal_get_path('module', 'image_captcha') .'/fonts',
+    file_directory_path(),
+  );
+  foreach($fontsdirectories as $fontsdirectory) {
+    foreach(file_scan_directory($fontsdirectory, '\.[tT][tT][fF]$') as $filename => $font) {
+      $available_fonts[$filename] = $font->basename;
+    }
+  }
+  return $available_fonts;
 }
 
 /**
  * Configuration form for image_captcha
  */
 function image_captcha_settings_form() {
-
   if (!function_exists('imagejpeg')) {
     drupal_set_message(t('Image captchas cannot be generated, because your PHP installation\'s GD library has no JPEG support.'), 'error');
   }
-
   $form = array();
   $form['image_captcha_image_allowed_chars'] = array(
     '#type' => 'textfield',
     '#title' => t('Characters to appear in the image'),
     '#default_value' => variable_get('image_captcha_image_allowed_chars', IMAGE_CAPTCHA_ALLOWED_CHARACTERS),
   );
-  $form['image_captcha_font'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Font'),
-    '#default_value' => variable_get('image_captcha_font', _image_captcha_default_font()),
-    '#description' => t('Path to a TrueType font file (.ttf), relative to the drupal root directory.'),
-  );
+  $available_fonts = _image_captcha_available_fonts();
+  if (empty($available_fonts)) {
+    drupal_set_message(t('The image captcha module requires TrueType fonts (.ttf) to be installed. You can install fonts by putting them in the fonts directory (%fontsdir) or by uploading them to your Drupal file system (%filesdir) with, for example, the upload module.', array('%fontsdir' => drupal_get_path('module', 'image_captcha') .'/fonts', '%filesdir' => file_directory_path())), 'error');
+  }
+  else {
+    $form['image_captcha_font'] = array(
+      '#type' => 'select',
+      '#title' => t('Font'),
+      '#default_value' => _image_captcha_font(FALSE),
+      '#description' => t('The TrueType font (.ttf) to use for the text in the image captcha.'),
+      '#options' => $available_fonts,
+    );
+  }
   $form['image_captcha_code_min'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum captcha code length'),
@@ -118,12 +158,8 @@ function image_captcha_settings_form_validate($form_id, $form_values) {
   if ($form_id == 'image_captcha_settings_form') {
     // check font
     $font = $form_values['image_captcha_font'];
-    if (!file_exists($font)) {
-      form_set_error('image_captcha_font', t('Path to font does not exist.'));
-    }
-    $font_pathinfo = pathinfo($font);
-    if (strtolower($font_pathinfo['extension']) != 'ttf') {
-      form_set_error('image_captcha_font', t('Font is not TrueType (no .ttf extension).'));
+    if (!is_file($font) || !is_readable($font)) {
+      form_set_error('image_captcha_font', t('Font does not exist or is not readable.'));
     }
     // check captcha code minimum and maximum lengths
     $code_min = (int) $form_values['image_captcha_code_min'];
@@ -226,7 +262,10 @@ function _image_captcha_generate_image($code) {
 
   $width = 50*$len; $height = 75;
 
-  $font = variable_get('image_captcha_font', _image_captcha_default_font());
+  $font = _image_captcha_font(TRUE);
+  if (!$font) {
+    exit();
+  }
 
   $font_size = 37;
   $image = @imagecreatetruecolor($width, $height) or die('');
@@ -359,13 +398,13 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
   $len = strlen($text);
   $num_colors = count($colors) - 1;
 
-  $entire_textbox = imagettfbbox($font_size, 0, $font, $text);
+  $entire_textbox = @imagettfbbox($font_size, 0, $font, $text);
 
   $max_delta_x = ($width - $entire_textbox[4]) / $len;
   $x = $offset + mt_rand(0, $max_delta_x);
   for ($i = 0; $i < $len; $i++) {
 
-    $textbox = imagettfbbox($font_size, 0, $font, $text[$i]);
+    $textbox = @imagettfbbox($font_size, 0, $font, $text[$i]);
     $char_width = abs($textbox[0]) + abs($textbox[2]);
 
     if ($x > $width - $char_width) {
@@ -373,7 +412,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
     }
 
     $y = abs($textbox[5]) + mt_rand(0, abs($textbox[5] / 2)) + 10;
-    imagettftext($image, $font_size, 0, $x, $y, $color[mt_rand(0, $num_colors)], $font , $text[$i]);
+    @imagettftext($image, $font_size, 0, $x, $y, $color[mt_rand(0, $num_colors)], $font , $text[$i]);
 
     // Add the 'double vision' character noise.
     if (variable_get('image_captcha_char_noise', 0)) {
@@ -385,7 +424,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
         $dup_x = $width - $char_width;
       }
       $y = abs($textbox[5]) + mt_rand(0, abs($textbox[5] / 2)) + 10;
-      imagettftext($image, $font_size, 0, $dup_x, $y, $color[mt_rand(0, $num_colors)], $font , $text[$i]);
+      @imagettftext($image, $font_size, 0, $dup_x, $y, $color[mt_rand(0, $num_colors)], $font , $text[$i]);
       if ($dup_x > $x) {
         $x = $dup_x;
       }
