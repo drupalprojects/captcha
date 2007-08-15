@@ -88,7 +88,7 @@ function _captcha_available_challenge_types(){
   $captcha_challenges['none'] = 'none';
   foreach(module_implements('captcha') as $module) {
     $result = call_user_func_array($module .'_captcha', 'list');
-    if (isset($result)) { //&& is_array($result)) {
+    if (is_array($result)) {
       foreach($result as $challenge) {
         $captcha_challenges["$module/$challenge"] = "$challenge ($module)";
       }
