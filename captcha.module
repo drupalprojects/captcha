@@ -407,9 +407,29 @@ function captcha_validate($form_values) {
 /**
  * Implementation of form #pre_render.
  *
- * This function stores the solution of the captcha challenge in $_SESSION
+ * The main purpose of this function is to store the solution of the captcha
+ * challenge in the $_SESSION variable.
  */
 function captcha_pre_render($form_id, &$form) {
+
+  // Unset the captcha challenge if non-captcha persistent and the captcha has
+  // already been successfully solved for this form.
+  // This needs to be done in this pre_render phase when previewing for example
+  // nodes and comments before submission.
+  // On submission of such a forms for preview, captcha_form_alter() is called
+  // *before* the captcha validation function (which sets
+  // $_SESSION['captcha'][$form_id]['success'] to TRUE on a correctly answered
+  // captcha). After this the form_values are entered in the generated form
+  // and this form is presented with the preview.
+  // This means that captcha_form_alter() can't know if the captcha was
+  // correctly answered and consequently adds a captcha challenge to the form.
+  // The pre_render phase happens after the validation phase and makes it
+  // possible to remove the captcha from the form after all.
+  if (!variable_get('captcha_persistence', TRUE) && ($_SESSION['captcha'][$form_id]['success'] === TRUE)) {
+    unset($form['captcha']);
+    return;
+  }
+
   // count the number of unsolved captcha challenges and flush those if too many
   // minus 1 is needed because 'success' is also an item of $_SESSION['captcha'][$form_id]
   if (count($_SESSION['captcha'][$form_id]) - 1 > CAPTCHA_UNSOLVED_CHALLENGES_MAX) {
