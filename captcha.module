@@ -7,20 +7,6 @@
  * adminstrators can add a captcha to desired forms that users without
  * the 'skip captcha' permission (typically anonymous visitors) have to solve.
  *
- * @todo move captcha configuration page to user management/user permissions?
- *
- * @todo shouldn't it be better to drop the GUI-option for captcha persistence
- * and make it required? Captchas are for making it hard for spambots to post
- * and disabling captcha persistence is making it easier.
- *
- * @todo work on the captcha_token stuff. Submitting several forms at the same
- * time does not work with current implementation
- *
- * @todo add option for randomly selecting a captcha challenge type when several
- * are available?
- *
- * @todo add localisation (po) files
- *
  * @bug
  * In some situations the placement of the captcha just above the submit button
  * fails.
@@ -313,7 +299,7 @@ function captcha_form_alter($form_id, &$form) {
     // before validation and are the right place to store the solution in $_SESSION.
     $form['captcha']['captcha_solution'] = array (
       '#type' => 'value',
-      '#value' => $captcha['value'],
+      '#value' => $captcha['solution'],
     );
 
     // The captcha token is used to differentiate between different instances
@@ -384,10 +370,10 @@ function captcha_form_alter($form_id, &$form) {
  */
 function captcha_validate($form_values) {
   // Get answer and preprocess if needed
-  $captcha_answer = $form_values['#post']['captcha_answer'];
+  $captcha_response = $form_values['#post']['captcha_response'];
   $validationdata = $form_values['validationdata']['#value'];
   if ($validationdata['preprocess']) {
-    $captcha_answer = module_invoke($validationdata['module'], 'captcha', 'process', $validationdata['type'], $captcha_answer);
+    $captcha_response = module_invoke($validationdata['module'], 'captcha', 'preprocess', $validationdata['type'], $captcha_response);
   }
   $form_id = $validationdata['form_id'];
   $captcha_token = $form_values['#post']['captcha_token'];
@@ -396,11 +382,11 @@ function captcha_validate($form_values) {
     form_set_error('captcha_token', t('Invalid captcha token.'));
   }
   // Check answer
-  if ($captcha_answer === $_SESSION['captcha'][$form_id][$captcha_token]) {
+  if ($captcha_response === $_SESSION['captcha'][$form_id][$captcha_token]) {
     $_SESSION['captcha'][$form_id]['success'] = TRUE;
   }
   else {
-    form_set_error('captcha_answer', t('The answer you entered to the captcha challenge is not correct.'));
+    form_set_error('captcha_response', t('The answer you entered for the captcha challenge was not correct.'));
   }
 
   // Unset the solution to prevent reuse of the same captcha solution
@@ -426,8 +412,8 @@ function captcha_pre_render($form_id, &$form) {
   $captcha_token = $form['captcha']['captcha_token']['#value'];
   $_SESSION['captcha'][$form_id][$captcha_token] = $form['captcha']['captcha_solution']['#value'];
   $_SESSION['captcha'][$form_id]['success'] = FALSE;
-  // empty the value of the captcha_answer form item before rendering
-  $form['captcha']['captcha_answer']['#value'] = '';
+  // empty the value of the captcha_response form item before rendering
+  $form['captcha']['captcha_response']['#value'] = '';
 }
 
 /**
@@ -464,8 +450,8 @@ function captcha_captcha($op, $captcha_type='') {
         $answer = mt_rand(1, 20);
         $x = mt_rand(1, $answer);
         $y = $answer - $x;
-        $result['value'] = "$answer";
-        $result['form']['captcha_answer'] = array (
+        $result['solution'] = "$answer";
+        $result['form']['captcha_response'] = array (
           '#type' => 'textfield',
           '#title' => t('Math Question'),
           '#description' => t('Solve this simple math problem and enter the result. E.g. for 1+3, enter 4.'),

@@ -201,13 +201,13 @@ function image_captcha_captcha($op, $captcha_type='') {
         $_SESSION['image_captcha'][$seed] = $code;
         // build the result to return
         $result = array();
-        $result['value'] = $code;
+        $result['solution'] = $code;
         $result['form']['captcha_image'] = array(
           '#type' => 'markup',
           '#value' => '<img src="'. check_url(url("image_captcha/$seed")) .'" />',
           '#weight' => -2,
         );
-        $result['form']['captcha_answer'] = array(
+        $result['form']['captcha_response'] = array(
           '#type' => 'textfield',
           '#title' => t('What code is in the image?'),
           '#description' => t('Copy the characters (respecting upper/lower case) from the image.'),
