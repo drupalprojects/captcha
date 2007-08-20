@@ -16,7 +16,16 @@ Installation:
   that you need to uninstall and reinstall this captcha module after
   overwriting/upgrading from the previous version.
   If you plan on using image_captcha, you will have to install TTF fonts into
-  the image_captcha/fonts directory. 
+  the image_captcha/fonts or files directory.  You can find free fonts
+  available at a number of different locations:
+    - DejaVu:
+      http://dejavu.sourceforge.net/wiki/index.php/Download
+    - Gentium:
+      http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=Gentium
+    - Redhat:
+      https://www.redhat.com/promo/fonts
+    - Matt's Free Fonts Page:
+      http://www.theory.org/~matt/strthrwr/fonts/free
 
 Configuration:
   The configuration page is at admin/user/captcha, here you can configure
