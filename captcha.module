@@ -22,9 +22,16 @@ define('CAPTCHA_UNSOLVED_CHALLENGES_MAX', 20);
  */
 function captcha_help($section = 'admin/help#captcha') {
   switch ($section) {
-    case 'admin/user/captcha':
     case 'admin/help#captcha':
-      return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It embodies a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out. Users with the \'skip captcha\' <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators).', array('@perm' => url('admin/user/access'))) . '</p>';
+      return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It represents a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out.') . '</p>';
+    case 'admin/user/captcha':
+    case 'admin/user/captcha/captcha':
+      return t('<p>A captcha can be added to virtually each drupal form (which is identified by a <em>form_id</em>). The captcha module comes with some default forms to add a captcha to, but arbitrary forms can be easily added and managed when the option "%adminlinks" is enabled.</p><p>Users with the "%skipcaptcha" <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test the captcha challenges, be sure to do it as a user without the "%skipcaptcha" permission (e.g. as unauthenticated user).</p>',
+        array(
+          '@perm' => url('admin/user/access'),
+          '%adminlinks' => t('Add captcha adminstration links to forms'),
+          '%skipcaptcha' => 'skip captcha challenges',
+        ));
   }
   return $output;
 }
@@ -145,9 +152,9 @@ function captcha_admin_settings($form_id='') {
   // field for the captcha adminstration mode
   $form['captcha_administration_mode'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Add captcha adminstration links to forms.'),
+    '#title' => t('Add captcha adminstration links to forms'),
     '#default_value' => variable_get('captcha_administration_mode', FALSE),
-    '#description' => t("This option is very helpful to enable/disable captchas on forms. When enabled, users with the 'administer site configuration' permission will see captcha administration links on all forms (except on administrative pages, which shouldn't be accessible to untrusted users in the first place)."),
+    '#description' => t('This option is very helpful to enable/disable captchas on forms. When enabled, users with the "%admincaptcha" permission will see captcha administration links on all forms (except on administrative pages, which shouldn\'t be accessible to untrusted users in the first place).', array('%admincaptcha' => 'administer captcha')),
   );
   // field set with form_id -> captcha type configuration
   $form["captcha_types"] = array(
@@ -342,7 +349,7 @@ function captcha_form_alter($form_id, &$form) {
     $conf['cache'] = FALSE;
     
   }
-  elseif (user_access('administer site configuration') && variable_get('captcha_administration_mode', FALSE) && arg(0) != 'admin') {
+  elseif (user_access('administer captcha') && variable_get('captcha_administration_mode', FALSE) && arg(0) != 'admin') {
     // For administrators: show captcha info and offer link to configure it
     $result = db_query("SELECT module, type FROM {captcha_points} WHERE form_id = '%s'", $form_id);
     if (!$result) {
