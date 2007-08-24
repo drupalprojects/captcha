@@ -100,9 +100,20 @@ function _captcha_available_challenge_types(){
 
 /**
  * Get the description which appears above the captcha in forms.
+ * If the locale module is enabled, an optional language code can be given
  */
-function _captcha_get_description() {
-  return variable_get('captcha_description', t('This question is used to make sure you are a human visitor and to prevent spam submissions.'));
+function _captcha_get_description($lang_code=NULL) {
+  if (module_exists('locale')) {
+    if ($lang_code == NULL) {
+      global $locale;
+      $lang_code = $locale;
+    }
+    $description = variable_get("captcha_description_$lang_code", t('This question is for testing whether you are a human visitor and to prevent automated spam submissions.'));
+  }
+  else {
+    $description = variable_get('captcha_description', t('This question is for testing whether you are a human visitor and to prevent automated spam submissions.'));
+  }
+  return $description;
 }
 
 /**
@@ -157,7 +168,7 @@ function captcha_admin_settings($form_id='') {
     '#description' => t('This option is very helpful to enable/disable captchas on forms. When enabled, users with the "%admincaptcha" permission will see captcha administration links on all forms (except on administrative pages, which shouldn\'t be accessible to untrusted users in the first place).', array('%admincaptcha' => 'administer captcha')),
   );
   // field set with form_id -> captcha type configuration
-  $form["captcha_types"] = array(
+  $form['captcha_types'] = array(
     '#type' => 'fieldset',
     '#title' => t('Select captcha types'),
     '#description' => t('Select what kind of captcha challenge you want for each form.'),
@@ -190,15 +201,33 @@ function captcha_admin_settings($form_id='') {
       ))
     );
   }
-  // field for setting the additional captcha description
-  $form["captcha_description"] = array(
+  // field(s) for setting the additional captcha description
+  if (module_exists('locale')) {
+    global $locale;
+    $langs = locale_supported_languages();
+    $form['captcha_descriptions'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Captcha description'),
+      '#description' => t('With this description you can explain the purpose of the captcha challenge to the user.'),
+    );
+    foreach ($langs['name'] as $lang_code => $lang_name) {
+      $form['captcha_descriptions']["captcha_description_$lang_code"] = array(
+        '#type' => 'textfield',
+        '#title' => t('Captcha description for %lang_name (locale %lang_code)', array('%lang_name'=>$lang_name, '%lang_code'=>$lang_code)),
+        '#default_value' => _captcha_get_description($lang_code),
+      );
+    }
+  }
+  else {
+    $form['captcha_description'] = array(
     '#type' => 'textfield',
     '#title' => t('Captcha description'),
-    '#description' => t('With this description you can explain to the user why the captcha needs to be solved.'),
+      '#description' => t('With this description you can explain the purpose of the captcha challenge to the user.'),
     '#default_value' => _captcha_get_description(),
   );
+  }
   // field for captcha persistence
-  $form["captcha_persistence"] = array(
+  $form['captcha_persistence'] = array(
     '#type' => 'checkbox',
     '#title' => t('Persistent captchas'),
     '#description' => t('If checked, the user will always have to solve a captcha. If not checked, the captcha check for a form will be omitted during the rest of the session once the user has successfully solved a captcha for that form.'),
@@ -243,7 +272,16 @@ function captcha_admin_settings_submit($form_id, $form_values) {
         db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $form_id);
       }
     }
+    // description stuff
+    if (module_exists('locale')) {
+      $langs = locale_supported_languages();
+      foreach ($langs['name'] as $lang_code => $lang_name) {
+        variable_set("captcha_description_$lang_code", $form_values["captcha_description_$lang_code"]);
+      }
+    }
+    else {
     variable_set('captcha_description', $form_values['captcha_description']);
+    }
     variable_set('captcha_persistence', $form_values['captcha_persistence']);
     drupal_set_message(t('Your captcha settings were saved.'), 'status');
   }
