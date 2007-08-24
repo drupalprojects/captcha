@@ -83,7 +83,7 @@ function _image_captcha_available_fonts() {
   );
   foreach($fontsdirectories as $fontsdirectory) {
     foreach(file_scan_directory($fontsdirectory, '\.[tT][tT][fF]$') as $filename => $font) {
-      $available_fonts[$filename] = $font->basename;
+      $available_fonts[$filename] = "{$font->basename} ($filename)";
     }
   }
   return $available_fonts;
