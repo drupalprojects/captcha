@@ -26,6 +26,7 @@ function captcha_help($section = 'admin/help#captcha') {
       return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It represents a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out.') . '</p>';
     case 'admin/user/captcha':
     case 'admin/user/captcha/captcha':
+    case 'admin/user/captcha/captcha/settings':
       return t('<p>A captcha can be added to virtually each drupal form (which is identified by a <em>form_id</em>). The captcha module comes with some default forms to add a captcha to, but arbitrary forms can be easily added and managed when the option "%adminlinks" is enabled.</p><p>Users with the "%skipcaptcha" <a href="@perm">permission</a> won\'t be offered a captcha. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test the captcha challenges, be sure to do it as a user without the "%skipcaptcha" permission (e.g. as unauthenticated user).</p>',
         array(
           '@perm' => url('admin/user/access'),
@@ -57,14 +58,21 @@ function captcha_menu($may_cache) {
       'path' => 'admin/user/captcha/captcha',
       'title' => t('Captcha'),
       'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => -20,
     );
     $items[] = array(
-      'path' => 'admin/user/captcha/examples',
+      'path' => 'admin/user/captcha/captcha/settings',
+      'title' => t('General settings'),
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => 0,
+    );
+    $items[] = array(
+      'path' => 'admin/user/captcha/captcha/examples',
       'title' => t('Examples'),
       'description' => t('An overview of the available captcha types with examples.'),
       'callback' => 'captcha_examples',
       'type' => MENU_LOCAL_TASK,
-      'weight' => 20,
+      'weight' => 5,
     );
   }
   return $items;
@@ -548,7 +556,7 @@ function captcha_examples($module=NULL, $challenge=NULL) {
           $form['captcha'] = array_merge($form['captcha'], $captcha['form']);
           $form['captcha']['more_examples'] = array(
             '#type' => 'markup',
-            '#value' => l(t('10 more examples of this captcha type.'), "admin/user/captcha/examples/$module/$challenge"),
+            '#value' => l(t('10 more examples of this captcha type.'), "admin/user/captcha/captcha/examples/$module/$challenge"),
           );
           // return rendered form
           $id = "captcha_examples_$module_$challenge";
