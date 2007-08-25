@@ -1,4 +1,6 @@
 <?php
+// $Id$
+
 
 /**
  * Implementation of a simple text based captcha, for use with the captcha module
