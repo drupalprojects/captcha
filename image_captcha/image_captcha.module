@@ -106,7 +106,7 @@ function image_captcha_settings_form() {
   $form['image_captcha_code_length'] = array(
     '#type' => 'select',
     '#title' => t('Code length'),
-    '#options' => array_combine(range(2, 10), range(2, 10)),
+    '#options' => array(2 => 2, 3, 4, 5, 6, 7, 8, 9, 10),
     '#default_value' => (int) variable_get('image_captcha_code_length', 5),
     '#description' => t('The code length influences the size of the image. Note that larger values make the image generation more CPU intensive.'),
   );
