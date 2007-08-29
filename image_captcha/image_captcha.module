@@ -22,8 +22,8 @@ function image_captcha_help($section) {
         $result = image_captcha_captcha('generate', 'Image');
         $img = $result['form']['captcha_image']['#value'];
         $output .= t('<p>Example captcha image, generated with the current settings:</p>!img', array('!img' => $img));
-  }
-  return $output;
+      }
+      return $output;
   }
 }
 
@@ -235,7 +235,7 @@ function image_captcha_settings_form_validate($form_id, $form_values) {
     elseif (!is_file($font) || !is_readable($font)) {
       form_set_error('image_captcha_font', t('Font does not exist or is not readable.'));
     }
-    }
+  }
 }
 
 /**
@@ -250,7 +250,7 @@ function _image_captcha_utf8_split($str) {
     $chr = ord($str[$i]);
     if (($chr & 0x80) == 0x00) { // one byte character (0zzzzzzz)
       $width = 1;
-  }
+    }
     else {
       if (($chr & 0xE0) == 0xC0) { // two byte character (first byte: 110yyyyy)
         $width = 2;
@@ -427,8 +427,8 @@ function _image_captcha_generate_image($code) {
 
     if (variable_get('image_captcha_bilinair_interpolation', FALSE)) {
       // distortion with bilineair interpolation
-    for ($x = 0; $x < $width; $x++) {
-      for ($y = 0; $y < $height; $y++) {
+      for ($x = 0; $x < $width; $x++) {
+        for ($y = 0; $y < $height; $y++) {
           // get distorted sample point in source image
           $r = $distortion_amplitude * sin($x * $freq_xr + $y * $freq_yr);
           $theta = $x * $freq_xt + $y * $freq_yt;
@@ -438,8 +438,8 @@ function _image_captcha_generate_image($code) {
           $syf = (int)floor($sy);
           if ($sxf < 0 || $syf < 0 || $sxf >= $width - 1 || $syf >= $height - 1) {
             $color = $background_color;
-        }
-        else {
+          }
+          else {
             // bilineair interpolation: sample at four corners
             $color_00 = imagecolorat($image, $sxf  , $syf  );
             $color_00_r = ($color_00 >> 16) & 0xFF;
@@ -466,11 +466,11 @@ function _image_captcha_generate_image($code) {
             $b = (int)((1-$v)*((1-$u)*$color_00_b + $u*$color_10_b) + $v*((1-$u)*$color_01_b + $u*$color_11_b));
             // build color
             $color = ($r<<16) + ($g<<8) + $b;
-        }
+          }
           imagesetpixel($distorted_image, $x, $y, $color);
         }
-          }
-        }
+      }
+    }
     else {
       // distortion with nearest neighbor interpolation
       for ($x = 0; $x < $width; $x++) {
@@ -484,16 +484,16 @@ function _image_captcha_generate_image($code) {
           $syf = (int)floor($sy);
           if ($sxf < 0 || $syf < 0 || $sxf >= $width - 1 || $syf >= $height - 1) {
             $color = $background_color;
-        }
+          }
           else {
             $color = imagecolorat($image, $sxf, $syf);
-      }
+          }
           imagesetpixel($distorted_image, $x, $y, $color);
-  }
-  }
-  }
+        }
+      }
+    }
     // release undistorted image
-  imagedestroy($image);
+    imagedestroy($image);
     // return distorted image
     return $distorted_image;
   }
@@ -540,7 +540,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
     // generate random color
     if ($light_colors) {
       $color = imagecolorallocate($image, mt_rand(128, 255), mt_rand(128, 255), mt_rand(128, 255));
-      }
+    }
     else {
       $color = imagecolorallocate($image, mt_rand(0, 127), mt_rand(0, 127), mt_rand(0, 127));
     }
