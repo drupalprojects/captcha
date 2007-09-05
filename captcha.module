@@ -210,12 +210,14 @@ function captcha_admin_settings($form_id='') {
       '#type' => 'fieldset',
       '#title' => t('Captcha description'),
       '#description' => t('With this description you can explain the purpose of the captcha challenge to the user.'),
+      '#maxlength' => 256,
     );
     foreach ($langs['name'] as $lang_code => $lang_name) {
       $form['captcha_descriptions']["captcha_description_$lang_code"] = array(
         '#type' => 'textfield',
         '#title' => t('Captcha description for %lang_name (locale %lang_code)', array('%lang_name'=>$lang_name, '%lang_code'=>$lang_code)),
         '#default_value' => _captcha_get_description($lang_code),
+        '#maxlength' => 256,
       );
     }
   }
@@ -225,6 +227,7 @@ function captcha_admin_settings($form_id='') {
     '#title' => t('Captcha description'),
       '#description' => t('With this description you can explain the purpose of the captcha challenge to the user.'),
     '#default_value' => _captcha_get_description(),
+    '#maxlength' => 256,
   );
   }
   // field for captcha persistence
