@@ -6,13 +6,6 @@
  * This module enables basic captcha functionality:
  * adminstrators can add a captcha to desired forms that users without
  * the 'skip captcha' permission (typically anonymous visitors) have to solve.
- *
- * @bug
- * In some situations the placement of the captcha just above the submit button
- * fails.
- * For example: on node forms it can't be done because the node form uses a
- * custom theme function. (@see includes/form/inc::theme_node_form)
- *
  */
 
 define('CAPTCHA_UNSOLVED_CHALLENGES_MAX', 20);
