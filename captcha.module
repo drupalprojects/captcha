@@ -210,7 +210,6 @@ function captcha_admin_settings($form_id='') {
       '#type' => 'fieldset',
       '#title' => t('Captcha description'),
       '#description' => t('With this description you can explain the purpose of the captcha challenge to the user.'),
-      '#maxlength' => 256,
     );
     foreach ($langs['name'] as $lang_code => $lang_name) {
       $form['captcha_descriptions']["captcha_description_$lang_code"] = array(
