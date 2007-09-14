@@ -514,8 +514,8 @@ function captcha_pre_render_place_captcha($form_id, &$form) {
   if ($button_weights) {
     // set the weight of the captcha element a tiny bit smaller than the lightest button weight
     // (note that the default resolution of #weight values is 1/1000 (see drupal/includes/form.inc))
-    $first_button_weigth = min($button_weights);
-    $form['captcha']['#weight'] = $first_button_weigth - 0.5/1000.0;
+    $first_button_weight = min($button_weights);
+    $form['captcha']['#weight'] = $first_button_weight - 0.5/1000.0;
     // make sure the form gets sorted before rendering
     unset($form['#sorted']);
   }
