@@ -10,6 +10,10 @@
 
 define('CAPTCHA_UNSOLVED_CHALLENGES_MAX', 20);
 
+define('CAPTCHA_PERSISTENCE_SHOW_ALWAYS', 1);
+define('CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL_PER_FORM', 2);
+define('CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL', 3);
+
 /**
  * Implementation of hook_help().
  */
@@ -231,10 +235,15 @@ function captcha_admin_settings($form_id='') {
   }
   // field for captcha persistence
   $form['captcha_persistence'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Persistent captchas'),
-    '#description' => t('If checked, the user will always have to solve a captcha. If not checked, the captcha check for a form will be omitted during the rest of the session once the user has successfully solved a captcha for that form.'),
-    '#default_value' => variable_get('captcha_persistence', TRUE),
+    '#type' => 'radios',
+    '#title' => t('CAPTCHA persistence'),
+    '#default_value' => variable_get('captcha_persistence', CAPTCHA_PERSISTENCE_SHOW_ALWAYS),
+    '#options' => array(
+      CAPTCHA_PERSISTENCE_SHOW_ALWAYS => t('Always add a CAPTCHA.'),
+      CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL_PER_FORM => t('Omit CAPTCHA for a form once the user has successfully answered a CAPTCHA for that form.'),
+      CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL => t('Omit CAPTCHA for all forms once the user has successfully answered a CAPTCHA.'),
+    ),
+    '#description' => t('Define if CAPTCHAs should be omitted during the rest of a session once the user successfully answers a CAPTCHA.'),
   );
   // submit button
   $form['submit'] = array(
@@ -291,6 +300,16 @@ function captcha_admin_settings_submit($form_id, $form_values) {
 }
 
 /**
+ * Helper function for checking if the CAPTCHA for the given form_id should
+ * be skipped because of CAPTCHA persistence.
+ */
+function _captcha_persistence_skip($form_id) {
+  $persistence = variable_get('captcha_persistence', CAPTCHA_PERSISTENCE_SHOW_ALWAYS);
+  return ($persistence == CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL &&  ($_SESSION['captcha']['success'] === TRUE))
+    || ($persistence == CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL_PER_FORM && ($_SESSION['captcha'][$form_id]['success'] === TRUE));
+}
+
+/**
  * Implementation of hook_form_alter().
  *
  * This function adds a captcha to forms for untrusted users if needed and adds
@@ -302,11 +321,6 @@ function captcha_form_alter($form_id, &$form) {
   if (!user_access('skip captcha challenges')) {
     // Visitor does not have permission to skip the captcha challenge
 
-    // Do not present captcha if not captcha-persistent and user has already solved a captcha for this form
-    if(!variable_get('captcha_persistence', TRUE) && ($_SESSION['captcha'][$form_id]['success'] === TRUE)) {
-      return;
-    }
-
     // Get captcha type and module for this form. Return if no captcha was set.
     $result = db_query("SELECT module, type FROM {captcha_points} WHERE form_id = '%s'", $form_id);
     if (!$result) {
@@ -314,6 +328,18 @@ function captcha_form_alter($form_id, &$form) {
     }
     $captcha_point = db_fetch_object($result);
     if (!$captcha_point->type) {
+      return;
+    }
+
+    // Prevent caching of the page with this CAPTCHA enabled form.
+    // This needs to be done even if the CAPTCHA will be skipped (because of
+    // persistence): other untrusted users should not get a cached page when
+    // the current untrusted user can skip the current CAPTCHA.
+    global $conf;
+    $conf['cache'] = FALSE;
+
+    // Do not present captcha if not captcha-persistent and user has already solved a captcha for this form
+    if (_captcha_persistence_skip($form_id)) {
       return;
     }
 
@@ -385,10 +411,6 @@ function captcha_form_alter($form_id, &$form) {
     // Add a validation function for the captcha part of the form
     $form['captcha']['#validate'] = ((array) $form['captcha']['#validate']) + array('captcha_validate' => array());
 
-    // prevent caching of the page with this captcha enabled form
-    global $conf;
-    $conf['cache'] = FALSE;
-    
   }
   elseif (user_access('administer captcha') && variable_get('captcha_administration_mode', FALSE) && arg(0) != 'admin') {
     // For administrators: show captcha info and offer link to configure it
@@ -440,6 +462,7 @@ function captcha_validate($form_values) {
   // Check answer
   if ($captcha_response === $_SESSION['captcha'][$form_id][$captcha_token]) {
     $_SESSION['captcha'][$form_id]['success'] = TRUE;
+    $_SESSION['captcha']['success'] = TRUE;
   }
   else {
     form_set_error('captcha_response', t('The answer you entered for the captcha challenge was not correct.'));
@@ -481,7 +504,7 @@ function captcha_pre_render($form_id, &$form) {
   // correctly answered and consequently adds a captcha challenge to the form.
   // The pre_render phase happens after the validation phase and makes it
   // possible to remove the captcha from the form after all.
-  if (!variable_get('captcha_persistence', TRUE) && ($_SESSION['captcha'][$form_id]['success'] === TRUE)) {
+  if (_captcha_persistence_skip($form_id)) {
     unset($form['captcha']);
     return;
   }

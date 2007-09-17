@@ -288,6 +288,9 @@ function image_captcha_captcha($op, $captcha_type='') {
       }
     case 'generate':
       if ($captcha_type == 'Image') {
+        if (variable_get('site_offline', FALSE)) {
+          return captcha_captcha('generate', 'Math', $args);
+        }
         // generate a captcha code
         $allowed_chars = _image_captcha_utf8_split(variable_get('image_captcha_image_allowed_chars', IMAGE_CAPTCHA_ALLOWED_CHARACTERS));
         $code_length = (int)variable_get('image_captcha_code_length', 5);
