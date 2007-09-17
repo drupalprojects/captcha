@@ -9,7 +9,7 @@
  *
  */
 
-DEFINE(IMAGE_CAPTCHA_ALLOWED_CHARACTERS, 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456789%$#!@+?*');
+define('IMAGE_CAPTCHA_ALLOWED_CHARACTERS', 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456789%$#!@+?*');
 
 /**
  * Implementation of hook_help().

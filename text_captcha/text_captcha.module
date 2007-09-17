@@ -6,9 +6,9 @@
  * Implementation of a simple text based captcha, for use with the captcha module
  */
 
-DEFINE('TEXT_CAPTCHA_GENERATE_NONSENSE_WORDS', 0);
-DEFINE('TEXT_CAPTCHA_USER_DEFINED_WORDS', 1);
-DEFINE('TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM', 20);
+define('TEXT_CAPTCHA_GENERATE_NONSENSE_WORDS', 0);
+define('TEXT_CAPTCHA_USER_DEFINED_WORDS', 1);
+define('TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM', 20);
 
 /**
  * Implementation of hook_help().
