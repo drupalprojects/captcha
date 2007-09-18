@@ -288,8 +288,12 @@ function image_captcha_captcha($op, $captcha_type='') {
       }
     case 'generate':
       if ($captcha_type == 'Image') {
-        if (variable_get('site_offline', FALSE)) {
-          return captcha_captcha('generate', 'Math', $args);
+        // In offline mode, the image CAPTCHA does not work because the request
+        // for the image itself won't succeed (only ?q=user is permitted for
+        // unauthenticated users). We fall back to the Math Captcha in that case.
+        global $user;
+        if (variable_get('site_offline', FALSE) && $user->uid == 0) {
+          return captcha_captcha('generate', 'Math');
         }
         // generate a captcha code
         $allowed_chars = _image_captcha_utf8_split(variable_get('image_captcha_image_allowed_chars', IMAGE_CAPTCHA_ALLOWED_CHARACTERS));
