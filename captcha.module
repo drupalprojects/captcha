@@ -162,18 +162,20 @@ function captcha_admin($form_id='', $op='') {
         // form and not a different destination if that would be present in the
         // URI. So we call this form explicitly. The destination will be preserved
         // so after completing the form, the user will still be redirected.
-        drupal_get_form('captcha_admin_settings', $form_id);
+        return drupal_get_form('captcha_captcha_point_settings_form', $form_id);
         break;
     }
+    // return edit form for individual form (aka captcha point)
+    return drupal_get_form('captcha_captcha_point_settings_form', $form_id);
   }
   // no $form_id or legal action given: generate general captcha settings form
-  return drupal_get_form('captcha_admin_settings', $form_id);
+  return drupal_get_form('captcha_admin_settings');
 }
 
 /**
  * Form builder function for the general captcha configuration
  */
-function captcha_admin_settings($form_id='') {
+function captcha_admin_settings() {
   // field for the captcha adminstration mode
   $form['captcha_administration_mode'] = array(
     '#type' => 'checkbox',
@@ -204,10 +206,6 @@ function captcha_admin_settings($form_id='') {
       '#default_value' => "{$captcha_point->module}/{$captcha_point->type}",
       '#options' => $captcha_challenges,
     );
-    // if a form_id was given as argument of this form builder, highlight the captcha type select widget
-    if ($form_id == $captcha_point->form_id) {
-      $form['captcha_types'][$captcha_point->form_id]['captcha_type']['#attributes'] = array('class'=>'error');
-    }
     // additional operations
     $form['captcha_types'][$captcha_point->form_id]['operations'] = array(
       '#value' => implode(", ", array(
@@ -284,13 +282,13 @@ function theme_captcha_admin_settings_captcha_points($form) {
 function captcha_admin_settings_submit($form_id, $form_values) {
   if ($form_id == 'captcha_admin_settings') {
     variable_set('captcha_administration_mode', $form_values['captcha_administration_mode']);
-    foreach ($form_values['captcha_types'] as $form_id => $data) {
+    foreach ($form_values['captcha_types'] as $captcha_point_form_id => $data) {
       if ($data['captcha_type'] == 'none') {
-        db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $form_id);
+        db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $captcha_point_form_id);
       }
       else {
         list($module, $type) = explode('/', $data['captcha_type']);
-        db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $form_id);
+        db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $captcha_point_form_id);
       }
     }
     // description stuff
@@ -301,12 +299,70 @@ function captcha_admin_settings_submit($form_id, $form_values) {
       }
     }
     else {
-    variable_set('captcha_description', $form_values['captcha_description']);
+      variable_set('captcha_description', $form_values['captcha_description']);
     }
     variable_set('captcha_persistence', $form_values['captcha_persistence']);
     drupal_set_message(t('Your captcha settings were saved.'), 'status');
   }
 }
+
+/**
+ * form generating function for captcha point settings
+ */
+function captcha_captcha_point_settings_form($form_id) {
+  $result = db_query("SELECT * FROM {captcha_points} WHERE form_id = '%s'", $form_id);
+  $captcha_point = db_fetch_object($result);
+  if ($captcha_point) {
+    $form = array();
+    $form['captcha_point_form_id'] = array(
+      '#type' => 'hidden',
+      '#value' => $captcha_point->form_id,
+    );
+    // select widget for captcha type
+    $form['captcha_type'] = array(
+      '#type' => 'select',
+      '#title' => t('Select the CAPTCHA for @form_id', array('@form_id'=>$form_id)),
+      '#default_value' => "{$captcha_point->module}/{$captcha_point->type}",
+      '#options' => _captcha_available_challenge_types(),
+    );
+    // submit button
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+    // cancel button
+    $form['cancel'] = array(
+      '#type' => 'submit',
+      '#value' => t('Cancel'),
+    );
+    return $form;
+  }
+  else {
+    // illegal form_id
+    drupal_set_message(t('Unavailable form_id %form_id ', array('%form_id'=>$form_id)), 'error');
+    // goto the captcha adminstration or alternative destination if present in URI
+    drupal_goto('admin/user/captcha');
+  }
+}
+
+/**
+ * submit function for captcha_captcha_point_settings_form
+ */
+function captcha_captcha_point_settings_form_submit($form_id, $form_values) {
+  if ($form_id == 'captcha_captcha_point_settings_form' && $form_values['op'] == t('Submit')) {
+    $captcha_point_form_id = $form_values['captcha_point_form_id'];
+    $captcha_type = $form_values['captcha_type'];
+    if ($captcha_type == 'none') {
+      db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $captcha_point_form_id);
+    }
+    else {
+      list($module, $type) = explode('/', $captcha_type);
+      db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $captcha_point_form_id);
+    }
+    drupal_set_message(t('Saved CAPTCHA settings.'), 'status');
+  }
+}
+
 
 /**
  * Helper function for checking if the CAPTCHA for the given form_id should
@@ -430,11 +486,12 @@ function captcha_form_alter($form_id, &$form) {
       $form['captcha'] = array(
         '#type' => 'item',
         '#title' => t('Captcha administration'),
-        '#description' => t('The captcha challenge "@type" (by module "@module") is enabled here for untrusted users: !edit or !disable.', array(
+        '#description' => t('The captcha "@type" (by module "@module") is enabled here for untrusted users: !edit, !disable or !general.', array(
           '@type' => $captcha_point->type,
           '@module' => $captcha_point->module,
           '!edit' => l(t('edit captcha type'), "admin/user/captcha/$form_id", array(), drupal_get_destination()),
           '!disable' => l(t('disable captcha'), "admin/user/captcha/$form_id/disable", array(), drupal_get_destination()),
+          '!general' => l(t('general captcha settings'), "admin/user/captcha"),
         ))
       );
     }
