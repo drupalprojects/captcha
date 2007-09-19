@@ -20,7 +20,16 @@ define('CAPTCHA_PERSISTENCE_SKIP_ONCE_SUCCESSFUL', 3);
 function captcha_help($section = 'admin/help#captcha') {
   switch ($section) {
     case 'admin/help#captcha':
-      return '<p>' . t('A captcha is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A captcha is an extra field (or several fields) on a form presented to the user. It represents a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out.') . '</p>';
+      $output = '<p>'. t('A CAPTCHA is a tool to fight automated spam submission of forms (e.g. user registration forms, comment forms, guestbook forms, etc.) by malicious users. A CAPTCHA is an extra field (or several fields) on a form presented to the user. It represents a challenge, which should be easy for a normal human to solve (e.g. a simple math problem), but hard enough to keep automated scripts and spam bots out.') .'</p>';
+      $output .= '<p>'. t('Note that CAPTCHA interacts with page caching (see <a href="!performancesettings">performance settings</a>). Because a CAPTCHA should be a unique challenge for each generated form, the caching of the page it appears on is prevented. Make sure that the CAPTCHA enabled forms do not appear on too many pages or you will lose much caching efficiency. For example, if you put a CAPTCHA on the user login block, which typically appears on each page for anonymous visitors, caching will practically be disabled. Another example are the comment submission forms. If untrusted users can post comments (with CAPTCHA protection), you should set the "%commentlocation" to "%separatepage" in <a href="!commentsettings">the comment settings</a>. for better caching efficiency.' ,
+        array(
+          '!performancesettings' => url('admin/settings/performance'),
+          '%commentlocation' => t('Location of comment submission form'),
+          '%separatepage' => t('Display on separate page'),
+          '!commentsettings' => url('admin/content/comment/settings'),
+        )
+      ) .'</p>';
+      return $output;
     case 'admin/user/captcha':
     case 'admin/user/captcha/captcha':
     case 'admin/user/captcha/captcha/settings':
@@ -316,8 +325,6 @@ function _captcha_persistence_skip($form_id) {
  * captcha adminstration links for site adminstrators if this option is enabled.
  */
 function captcha_form_alter($form_id, &$form) {
-  global $user;
-
   if (!user_access('skip captcha challenges')) {
     // Visitor does not have permission to skip the captcha challenge
 
@@ -490,7 +497,6 @@ function captcha_validate($form_values) {
  * challenge in the $_SESSION variable.
  */
 function captcha_pre_render($form_id, &$form) {
-
   // Unset the captcha challenge if non-captcha persistent and the captcha has
   // already been successfully solved for this form.
   // This needs to be done in this pre_render phase when previewing for example
