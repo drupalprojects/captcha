@@ -28,14 +28,14 @@ enter "foo" in a textfield.
  * Implementation of hook_captcha().
  */
 function foo_captcha_captcha($op, $captcha_type='') {
-  switch($op) {
+  switch ($op) {
     case 'list':
       return array("Foo captcha");
     case 'generate':
       if ($captcha_type == "Foo captcha") {
         $captcha = array();
         $captcha['solution'] = 'foo';
-        $captcha['form']['captcha_response'] = array (
+        $captcha['form']['captcha_response'] = array(
           '#type' => 'textfield',
           '#title' => t('Enter "foo"'),
         );
@@ -116,7 +116,7 @@ For our simple foo captcha module this would mean:
 function foo_captcha_help($section) {
   switch ($section) {
     case 'admin/user/captcha/foo_captcha':
-      return '<p>' . t('This is a very simple captcha, which requires users to enter "foo" in a textfield.') . '</p>';
+      return '<p>'. t('This is a very simple captcha, which requires users to enter "foo" in a textfield.') .'</p>';
   }
   return $output;
 }

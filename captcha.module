@@ -99,12 +99,12 @@ function captcha_perm() {
  * challenge and $challenge the name of the challenge type.
  * (It also includes a 'none' => 'none' option)
  */
-function _captcha_available_challenge_types(){
+function _captcha_available_challenge_types() {
   $captcha_challenges['none'] = 'none';
-  foreach(module_implements('captcha') as $module) {
+  foreach (module_implements('captcha') as $module) {
     $result = call_user_func_array($module .'_captcha', 'list');
     if (is_array($result)) {
-      foreach($result as $challenge) {
+      foreach ($result as $challenge) {
         $captcha_challenges["$module/$challenge"] = "$challenge ($module)";
       }
     }
@@ -145,13 +145,13 @@ function captcha_admin($form_id='', $op='') {
       case 'disable':
         // disable the captcha for the form: set the module and type to NULL
         db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $form_id);
-        drupal_set_message(t('Disabled captcha for form %form_id.', array('%form_id'=>$form_id)));
+        drupal_set_message(t('Disabled captcha for form %form_id.', array('%form_id' => $form_id)));
         // goto the captcha adminstration or alternative destination if present in URI
         drupal_goto('admin/user/captcha');
         break;
       case 'delete':
         db_query("DELETE FROM {captcha_points} WHERE form_id = '%s'", $form_id);
-        drupal_set_message(t('Deleted captcha for form %form_id.', array('%form_id'=>$form_id)));
+        drupal_set_message(t('Deleted captcha for form %form_id.', array('%form_id' => $form_id)));
         // goto the captcha adminstration or alternative destination if present in URI
         drupal_goto('admin/user/captcha');
         break;
@@ -225,7 +225,7 @@ function captcha_admin_settings() {
     foreach ($langs['name'] as $lang_code => $lang_name) {
       $form['captcha_descriptions']["captcha_description_$lang_code"] = array(
         '#type' => 'textfield',
-        '#title' => t('Captcha description for %lang_name (locale %lang_code)', array('%lang_name'=>$lang_name, '%lang_code'=>$lang_code)),
+        '#title' => t('Captcha description for %lang_name (locale %lang_code)', array('%lang_name' => $lang_name, '%lang_code' => $lang_code)),
         '#default_value' => _captcha_get_description($lang_code),
         '#maxlength' => 256,
       );
@@ -321,7 +321,7 @@ function captcha_captcha_point_settings_form($form_id) {
     // select widget for captcha type
     $form['captcha_type'] = array(
       '#type' => 'select',
-      '#title' => t('Select the CAPTCHA for @form_id', array('@form_id'=>$form_id)),
+      '#title' => t('Select the CAPTCHA for @form_id', array('@form_id' => $form_id)),
       '#default_value' => "{$captcha_point->module}/{$captcha_point->type}",
       '#options' => _captcha_available_challenge_types(),
     );
@@ -339,7 +339,7 @@ function captcha_captcha_point_settings_form($form_id) {
   }
   else {
     // illegal form_id
-    drupal_set_message(t('Unavailable form_id %form_id ', array('%form_id'=>$form_id)), 'error');
+    drupal_set_message(t('Unavailable form_id %form_id ', array('%form_id' => $form_id)), 'error');
     // goto the captcha adminstration or alternative destination if present in URI
     drupal_goto('admin/user/captcha');
   }
@@ -412,7 +412,7 @@ function captcha_form_alter($form_id, &$form) {
       //The selected module returned nothing, maybe it is disabled or it's wrong, we should watchdog that and then quit.
       watchdog('captcha',
         t('Captcha problem: hook_captcha() of module %module returned nothing when trying to retrieve captcha type %type for form %form_id.',
-          array('%type' => $captcha_point->type, '%module' => $captcha_point->module, '%form_id'=> $form_id)),
+          array('%type' => $captcha_point->type, '%module' => $captcha_point->module, '%form_id' => $form_id)),
         WATCHDOG_ERROR);
       return;
     }
@@ -442,7 +442,7 @@ function captcha_form_alter($form_id, &$form) {
     // in a new (POST) request. Consequently the right captcha solution would be
     // overwritten just before validation. The pre_render functions are not run
     // before validation and are the right place to store the solution in $_SESSION.
-    $form['captcha']['captcha_solution'] = array (
+    $form['captcha']['captcha_solution'] = array(
       '#type' => 'value',
       '#value' => $captcha['solution'],
     );
@@ -452,7 +452,7 @@ function captcha_form_alter($form_id, &$form) {
     // couple of times before submitting them. The solution of the captcha of
     // each of these form instances will be stored at the pre_render phase in
     // $_SESSION['captcha'][$form_id][$captcha_token]
-    $form['captcha']['captcha_token'] = array (
+    $form['captcha']['captcha_token'] = array(
       '#type' => 'hidden',
       '#value' => md5(mt_rand()),
     );
@@ -592,7 +592,7 @@ function captcha_pre_render($form_id, &$form) {
 function captcha_pre_render_place_captcha($form_id, &$form) {
   // search the weights of the buttons in the form
   $button_weights = array();
-  foreach(element_children($form) as $key) {
+  foreach (element_children($form) as $key) {
     if ($form[$key]['#type'] == 'submit' || $form[$key]['#type'] == 'button') {
       $button_weights[] = $form[$key]['#weight'];
     }
@@ -630,10 +630,10 @@ function captcha_examples($module=NULL, $challenge=NULL) {
   else {
     // generate a list with examples of the available challenges
     $output = t('This page gives an overview of all available captcha types, generated with their current settings.');
-    foreach(module_implements('captcha') as $module) {
+    foreach (module_implements('captcha') as $module) {
       $challenges = call_user_func_array($module .'_captcha', 'list');
       if ($challenges) {
-        foreach($challenges as $challenge) {
+        foreach ($challenges as $challenge) {
           // generate captcha challenge
           $captcha = call_user_func_array($module .'_captcha', array('generate', $challenge));
           // build form
@@ -662,7 +662,7 @@ function captcha_examples($module=NULL, $challenge=NULL) {
  * Default implementation of hook_captcha
  */
 function captcha_captcha($op, $captcha_type='') {
-  switch($op) {
+  switch ($op) {
     case 'list':
       return array('Math');
     case 'generate':
@@ -672,7 +672,7 @@ function captcha_captcha($op, $captcha_type='') {
         $x = mt_rand(1, $answer);
         $y = $answer - $x;
         $result['solution'] = "$answer";
-        $result['form']['captcha_response'] = array (
+        $result['form']['captcha_response'] = array(
           '#type' => 'textfield',
           '#title' => t('Math Question'),
           '#description' => t('Solve this simple math problem and enter the result. E.g. for 1+3, enter 4.'),
