@@ -41,7 +41,7 @@ function captcha_install() {
     drupal_set_message(t('The installation of the captcha_points table and some default entries was successful'), 'status');
   }
   else {
-    drupal_set_message(t('The installation of the captcha module failed'), 'error');
+    drupal_set_message(t('The installation of the CAPTCHA module failed'), 'error');
   }
 }
 

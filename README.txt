@@ -1,21 +1,21 @@
 $Id$
 
-### Captcha Readme
+### CAPTCHA Readme
 
-captcha.module is the basic captcha module that offers general captcha
+captcha.module is the basic CAPTCHA module that offers general CAPTCHA
 adminstration and a simple math captcha challenge.
 
-text_captcha offers another simple text based captcha challenge.
+text_captcha offers another simple text based CAPTCHA challenge.
 
-image_captcha offers an image based captcha challenge.
+image_captcha offers an image based CAPTCHA challenge.
 
 Installation:
   Installation is like all normal modules (e.g. extract in the directory sites/all/modules)
-  The basic captcha module has no dependencies, so nothing special is required.
+  The basic CAPTCHA module has no dependencies, so nothing special is required.
   
 Configuration:
   The configuration page is at admin/user/captcha, here you can configure
-  the captcha module and enable captchas for the desired forms.
+  the CAPTCHA module and enable captchas for the desired forms.
   
 Using Image Captcha
   If you plan on using image_captcha, you will have to install TTF fonts into

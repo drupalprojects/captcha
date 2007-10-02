@@ -2,7 +2,7 @@
 // $Id$
 
 /**
- * Implementation of image captcha challenge for use with the captcha module
+ * Implementation of image CAPTCHA for use with the CAPTCHA module
  *
  * Loosely Based on MyCaptcha by Heine Deelstra
  * (http://heine.familiedeelstra.com/mycaptcha-download)
@@ -17,11 +17,11 @@ define('IMAGE_CAPTCHA_ALLOWED_CHARACTERS', 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456
 function image_captcha_help($section) {
   switch ($section) {
     case 'admin/user/captcha/image_captcha':
-      $output = '<p>'. t('The image captcha is a popular type of captcha challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings.') .'</p>';
+      $output = '<p>'. t('The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings.') .'</p>';
       if (in_array('Image', image_captcha_captcha('list'))) {
         $result = image_captcha_captcha('generate', 'Image');
         $img = $result['form']['captcha_image']['#value'];
-        $output .= t('<p>Example captcha image, generated with the current settings:</p>!img', array('!img' => $img));
+        $output .= t('<p>Example image, generated with the current settings:</p>!img', array('!img' => $img));
       }
       return $output;
   }
@@ -36,10 +36,9 @@ function image_captcha_menu($may_cache) {
     // add an administration tab for image_captcha
     $items[] = array(
       'path' => 'admin/user/captcha/image_captcha',
-      'title' => t('Image captcha'),
+      'title' => t('Image CAPTCHA'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('image_captcha_settings_form'),
-      'access' => user_access('administer captcha'),
       'type' => MENU_LOCAL_TASK,
     );
     // callback for generating an image
@@ -55,7 +54,7 @@ function image_captcha_menu($may_cache) {
 
 /**
  * Returns:
- *  - the path to the image captcha font or FALSE when an error occured
+ *  - the path to the image CAPTCHA font or FALSE when an error occured
  *  - error message
  */
 
@@ -68,7 +67,7 @@ function _image_captcha_get_font() {
   }
   elseif (!is_file($font) || !is_readable($font)) {
     $font = FALSE;
-    $errmsg = t('Could not find or read the configured font "%font" for the image captcha.', array('%font' => $font));
+    $errmsg = t('Could not find or read the configured font "%font" for the image CAPTCHA.', array('%font' => $font));
   }
   return array($font, $errmsg);
 }
@@ -95,7 +94,7 @@ function _image_captcha_available_fonts() {
  */
 function image_captcha_settings_form() {
   if (!function_exists('imagejpeg')) {
-    drupal_set_message(t('Image captchas cannot be generated, because your PHP installation\'s GD library has no JPEG support.'), 'error');
+    drupal_set_message(t('Images cannot be generated, because your PHP installation\'s GD library has no JPEG support.'), 'error');
   }
   $form = array();
   $form['image_captcha_image_allowed_chars'] = array(
@@ -114,7 +113,7 @@ function image_captcha_settings_form() {
   // font related stuff
   $available_fonts = _image_captcha_available_fonts();
   if (empty($available_fonts)) {
-    drupal_set_message(t('The image captcha module requires a TrueType font file (.ttf) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. You can install fonts yourself however, by putting them in the fonts directory of the image captcha module (directory "%fontsdir") or by uploading them to your Drupal file system (directory "%filesdir") with for example the upload module.', array('%fontsdir' => drupal_get_path('module', 'image_captcha') .'/fonts', '%filesdir' => file_directory_path())), 'error');
+    drupal_set_message(t('A TrueType font file (.ttf) is required for generating the images, but because of licencing issues it is not allowed to package fonts with the module. You can install fonts yourself however, by putting them in the fonts directory of the image CAPTCHA module (directory "%fontsdir") or by uploading them to your Drupal file system (directory "%filesdir") with for example the upload module.', array('%fontsdir' => drupal_get_path('module', 'image_captcha') .'/fonts', '%filesdir' => file_directory_path())), 'error');
     return array();
   }
   else {
@@ -128,7 +127,7 @@ function image_captcha_settings_form() {
       '#type' => 'select',
       '#title' => t('Font'),
       '#default_value' => $default_font,
-      '#description' => t('The TrueType font (.ttf) to use for the text in the image captcha.'),
+      '#description' => t('Select the TrueType font (.ttf) to use.'),
       '#options' => $available_fonts,
     );
   }
@@ -278,7 +277,7 @@ function _image_captcha_utf8_split($str) {
 function image_captcha_captcha($op, $captcha_type='') {
   switch ($op) {
     case 'list':
-      // only offer image captcha if possible to generate an image captcha
+      // only offer image CAPTCHA if possible to generate an image CAPTCHA
       list($font, $errmsg) = _image_captcha_get_font();
       if (function_exists('imagejpeg') && $font) {
         return array('Image');
@@ -290,12 +289,12 @@ function image_captcha_captcha($op, $captcha_type='') {
       if ($captcha_type == 'Image') {
         // In offline mode, the image CAPTCHA does not work because the request
         // for the image itself won't succeed (only ?q=user is permitted for
-        // unauthenticated users). We fall back to the Math Captcha in that case.
+        // unauthenticated users). We fall back to the Math CAPTCHA in that case.
         global $user;
         if (variable_get('site_offline', FALSE) && $user->uid == 0) {
           return captcha_captcha('generate', 'Math');
         }
-        // generate a captcha code
+        // generate a CAPTCHA code
         $allowed_chars = _image_captcha_utf8_split(variable_get('image_captcha_image_allowed_chars', IMAGE_CAPTCHA_ALLOWED_CHARACTERS));
         $code_length = (int)variable_get('image_captcha_code_length', 5);
         $code = '';
@@ -328,7 +327,7 @@ function image_captcha_captcha($op, $captcha_type='') {
 }
 
 /**
- * menu callback function that generates the captcha image
+ * menu callback function that generates the CAPTCHA image
  */
 function image_captcha_image($seed=NULL) {
   if (!$seed) {
@@ -336,7 +335,7 @@ function image_captcha_image($seed=NULL) {
   }
   // get the code to draw from $_SESSION
   $code = $_SESSION['image_captcha'][$seed];
-  // unset the code from $_SESSION to prevent rerendering the captcha
+  // unset the code from $_SESSION to prevent rerendering the CAPTCHA
   unset($_SESSION['image_captcha'][$seed]);
   // only generate an image if there is an code
   if ($code) {

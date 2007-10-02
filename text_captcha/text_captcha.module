@@ -3,7 +3,7 @@
 
 
 /**
- * Implementation of a simple text based captcha, for use with the captcha module
+ * Implementation of a simple text based CAPTCHA, for use with the CAPTCHA module
  */
 
 define('TEXT_CAPTCHA_GENERATE_NONSENSE_WORDS', 0);
@@ -16,7 +16,7 @@ define('TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM', 20);
 function text_captcha_help($section) {
   switch ($section) {
     case 'admin/user/captcha/text_captcha':
-      return '<p>'. t('This text based captcha presents a captcha phrase of a given number of words and the visitor is asked to enter the n\'th word.') .'</p>';
+      return '<p>'. t('In this challenge the visitor is asked for the n<sup>th</sup> word of a given phrase.') .'</p>';
   }
   return $output;
 }
@@ -30,10 +30,9 @@ function text_captcha_menu($may_cache) {
     // add an administration tab for text_captcha
     $items[] = array(
       'path' => 'admin/user/captcha/text_captcha',
-      'title' => t('Text captcha'),
+      'title' => t('Text CAPTCHA'),
       'callback' => 'drupal_get_form',
       'callback arguments' => array('text_captcha_settings_form'),
-      'access' => user_access('administer captcha'),
       'type' => MENU_LOCAL_TASK,
     );
   }
@@ -48,7 +47,7 @@ function text_captcha_settings_form() {
   // radio buttons for selecting the kind of words to use
   $form['text_captcha_words'] = array(
     '#type' => 'radios',
-    '#title' => t('Kind of words to use in the captcha phrase'),
+    '#title' => t('Kind of words to use in the phrase'),
     '#options' => array(
       TEXT_CAPTCHA_GENERATE_NONSENSE_WORDS => t('Generate nonsense random words.'),
       TEXT_CAPTCHA_USER_DEFINED_WORDS => t('Use user defined words.')
@@ -62,10 +61,10 @@ function text_captcha_settings_form() {
     '#default_value' => variable_get('text_captcha_userdefined_words', ''),
     '#description' => t('Enter a bunch of space separated words (at least @min).', array('@min' => TEXT_CAPTCHA_USER_DEFINED_WORD_MINIMUM)),
   );
-  // textfield for the number of words in the captcha phrase
+  // textfield for the number of words in the CAPTCHA phrase
   $form['text_captcha_word_quantity'] = array(
     '#type' => 'textfield',
-    '#title' => t('Number of words in the captcha phrase'),
+    '#title' => t('Number of words in the phrase'),
     '#default_value' => (int) variable_get('text_captcha_word_quantity', 5),
     '#size' => 2,
     '#maxlength' => 2,
@@ -91,7 +90,7 @@ function text_captcha_settings_form_validate($form_id, $form_values) {
     // chech text_captcha_word_quantity
     $word_quantity = (int) $form_values['text_captcha_word_quantity'];
     if ($word_quantity < 4 || $word_quantity > 10) {
-      form_set_error('text_captcha_word_quantity', t('Number of words in the captcha phrase should be between 4 and 10.'));
+      form_set_error('text_captcha_word_quantity', t('Number of words in the phrase should be between 4 and 10.'));
     }
   }
 }
@@ -173,7 +172,7 @@ function text_captcha_captcha($op, $captcha_type='') {
         $result['solution'] = $answer;
         $result['form']['captcha_response'] = array(
           '#type' => 'textfield',
-          '#title' => t('What is the @nth word in the captcha phrase "@words"?', array('@nth' => _text_captcha_ordinal($key+1), '@words' => implode(' ', $words))),
+          '#title' => t('What is the @nth word in the phrase "@words"?', array('@nth' => _text_captcha_ordinal($key+1), '@words' => implode(' ', $words))),
           '#weight' => 0,
           '#required' => TRUE,
         );
