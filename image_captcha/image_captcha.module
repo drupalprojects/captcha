@@ -59,15 +59,11 @@ function image_captcha_menu($may_cache) {
  */
 
 function _image_captcha_get_font() {
-  $font = variable_get('image_captcha_font', FALSE);
+  $font = variable_get('image_captcha_font', 'BUILTIN');
   $errmsg = FALSE;
-  if (!$font) {
+  if ($font != 'BUILTIN' && (!is_file($font) || !is_readable($font))) {
+    $errmsg = t('Could not find or read the configured font "%font" for the image captcha.', array('%font' => $font));
     $font = FALSE;
-    $errmsg = t('No font configured.');
-  }
-  elseif (!is_file($font) || !is_readable($font)) {
-    $font = FALSE;
-    $errmsg = t('Could not find or read the configured font "%font" for the image CAPTCHA.', array('%font' => $font));
   }
   return array($font, $errmsg);
 }
@@ -76,7 +72,7 @@ function _image_captcha_get_font() {
  * function to get a list of available fonts
  */
 function _image_captcha_available_fonts() {
-  $available_fonts = array();
+  $available_fonts = array('BUILTIN' => t('Built-in font'));
   $fontsdirectories = array(
     drupal_get_path('module', 'image_captcha') .'/fonts',
     file_directory_path(),
@@ -112,39 +108,31 @@ function image_captcha_settings_form() {
 
   // font related stuff
   $available_fonts = _image_captcha_available_fonts();
-  if (empty($available_fonts)) {
-    drupal_set_message(t('A TrueType font file (.ttf) is required for generating the images, but because of licencing issues it is not allowed to package fonts with the module. You can install fonts yourself however, by putting them in the fonts directory of the image CAPTCHA module (directory "%fontsdir") or by uploading them to your Drupal file system (directory "%filesdir") with for example the upload module.', array('%fontsdir' => drupal_get_path('module', 'image_captcha') .'/fonts', '%filesdir' => file_directory_path())), 'error');
-    return array();
-  }
-  else {
-    list($default_font, $errmsg) = _image_captcha_get_font();
-    if (!$default_font || !array_key_exists($default_font, $available_fonts)) {
-      // add an empty entry to the front of available fonts which will be the default value
-      array_splice($available_fonts, 0, 0, array('0' => t('Select a font')));
-      $default_font = '0';
-    }
-    $form['image_captcha_font'] = array(
-      '#type' => 'select',
-      '#title' => t('Font'),
-      '#default_value' => $default_font,
-      '#description' => t('Select the TrueType font (.ttf) to use.'),
-      '#options' => $available_fonts,
-    );
-  }
+  list($default_font, $errmsg) = _image_captcha_get_font();
+  $form['image_captcha_font'] = array(
+    '#type' => 'select',
+    '#title' => t('Font'),
+    '#default_value' => $default_font,
+    '#description' => t('The TrueType font (.ttf) to use for the text in the image CAPTCHA.'),
+    '#options' => $available_fonts,
+  );
   // add a prerender procedure for checking that a font should be set.
   $form['#pre_render'] = array('image_captcha_settings_form_pre_render');
-  $form['image_captcha_font_size'] = array(
-    '#type' => 'select',
-    '#title' => t('Font size'),
-    '#options' => array(
-      12 => t('tiny'),
-      20 => t('small'),
-      30 => t('normal'),
-      40 => t('large'),
-    ),
-    '#default_value' => (int) variable_get('image_captcha_font_size', 30),
-    '#description' => t('The font size influences the size of the image. Note that larger values make the image generation more CPU intensive.'),
-  );
+  // font size
+  if ($default_font != 'BUILTIN') {
+    $form['image_captcha_font_size'] = array(
+      '#type' => 'select',
+      '#title' => t('Font size'),
+      '#options' => array(
+        12 => t('tiny'),
+        20 => t('small'),
+        30 => t('normal'),
+        40 => t('large'),
+      ),
+      '#default_value' => (int) variable_get('image_captcha_font_size', 30),
+      '#description' => t('The font size influences the size of the image. Note that larger values make the image generation more CPU intensive.'),
+    );
+  }
 
   // code length settings
   $form['image_captcha_distortion_and_noise'] = array(
@@ -211,9 +199,13 @@ function image_captcha_settings_form() {
  * Pre render function for image_captcha_settings_form
  */
 function image_captcha_settings_form_pre_render($form_id, $form) {
-  if ($form['image_captcha_font']['#default_value'] == '0') {
-    form_set_error('image_captcha_font', t('You need to select a font'));
+  if (count($form['image_captcha_font']['#options']) == 1) {
+    drupal_set_message(t('The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory "%fontsdir") or by uploading them to your Drupal file system (directory "%filesdir") with for example the upload module.', array('%fontsdir' => drupal_get_path('module', 'image_captcha') .'/fonts', '%filesdir' => file_directory_path())), 'warning');
   }
+  if ($form['image_captcha_font']['#default_value'] == 'BUILTIN') {
+    drupal_set_message(t('The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support.'), 'warning');
+  }
+
 }
 
 
@@ -231,7 +223,7 @@ function image_captcha_settings_form_validate($form_id, $form_values) {
     if ($font == '0') {
       form_set_error('image_captcha_font', t('You need to select a font'));
     }
-    elseif (!is_file($font) || !is_readable($font)) {
+    elseif ($font != 'BUILTIN' && (!is_file($font) || !is_readable($font))) {
       form_set_error('image_captcha_font', t('Font does not exist or is not readable.'));
     }
   }
@@ -527,23 +519,35 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
   // get characters
   $characters = _image_captcha_utf8_split($text);
   $character_quantity = count($characters);
-  // get entire bounding box
-  $entire_textbox = imagettfbbox($font_size, 0, $font, $text);
-  if (!$entire_textbox) {
-    return FALSE;
+  // get total width
+  if ($font == 'BUILTIN') {
+    $character_width = imagefontwidth(5);
+    $character_height = imagefontheight(5);
+    $textwidth = $character_quantity * $character_width;
+  }
+  else {
+    $bbox = imagettfbbox($font_size, 0, $font, $text);
+    if (!$bbox) {
+      return FALSE;
+    }
+    $textwidth = $bbox[2] - $bbox[0];
   }
   // calculate spacing
-  $spacing = ($width - $entire_textbox[4]) / ($character_quantity + 1);
+  $spacing = ($width - $textwidth) / ($character_quantity + 1);
   // character jittering
   $jittering_x = .3 * $font_size;
   $jittering_y = .3 * $font_size;
   // start cursor
   $x = $spacing;
   foreach ($characters as $character) {
-    // get bounding box of character
-    $textbox = imagettfbbox($font_size, 0, $font, $character);
+    // get character dimensions
+    if ($font != 'BUILTIN') {
+      $bbox = imagettfbbox($font_size, 0, $font, $character);
+      $character_width = $bbox[2] - $bbox[0];
+      $character_height = $bbox[5] - $bbox[3];
+    }
     // calculate y position
-    $y = .5 * ($height - $textbox[5]);
+    $y = .5 * ($height - $character_height);
     // generate random color
     if ($light_colors) {
       $color = imagecolorallocate($image, mt_rand(128, 255), mt_rand(128, 255), mt_rand(128, 255));
@@ -551,13 +555,17 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
     else {
       $color = imagecolorallocate($image, mt_rand(0, 127), mt_rand(0, 127), mt_rand(0, 127));
     }
+    // add jitter to position
+    $pos_x = $x + mt_rand(-$jittering_x, $jittering_x);
+    $pos_y = $y + mt_rand(-$jittering_y, $jittering_y);
     // draw character
-    imagettftext($image, $font_size, 0,
-      $x + mt_rand(-$jittering_x, $jittering_x),
-      $y + mt_rand(-$jittering_y, $jittering_y),
-      $color, $font , $character);
+    if ($font == 'BUILTIN') {
+      imagestring($image, 5, $pos_x, $pos_y, $character, $color);
+    } else {
+      imagettftext($image, $font_size, 0, $pos_x, $pos_y, $color, $font , $character);
+    }
     // shift cursor
-    $x += $textbox[2] + $spacing;
+    $x += $character_width + $spacing;
   }
   // return a sign of success
   return TRUE;
