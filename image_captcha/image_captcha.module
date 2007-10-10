@@ -93,12 +93,16 @@ function image_captcha_settings_form() {
     drupal_set_message(t('Images cannot be generated, because your PHP installation\'s GD library has no JPEG support.'), 'error');
   }
   $form = array();
-  $form['image_captcha_image_allowed_chars'] = array(
+  $form['image_captcha_code_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Code settings'),
+  );
+  $form['image_captcha_code_settings']['image_captcha_image_allowed_chars'] = array(
     '#type' => 'textfield',
     '#title' => t('Characters to use in the code'),
     '#default_value' => variable_get('image_captcha_image_allowed_chars', IMAGE_CAPTCHA_ALLOWED_CHARACTERS),
   );
-  $form['image_captcha_code_length'] = array(
+  $form['image_captcha_code_settings']['image_captcha_code_length'] = array(
     '#type' => 'select',
     '#title' => t('Code length'),
     '#options' => array(2 => 2, 3, 4, 5, 6, 7, 8, 9, 10),
@@ -107,9 +111,13 @@ function image_captcha_settings_form() {
   );
 
   // font related stuff
+  $form['image_captcha_font_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Font settings'),
+  );
   $available_fonts = _image_captcha_available_fonts();
   list($default_font, $errmsg) = _image_captcha_get_font();
-  $form['image_captcha_font'] = array(
+  $form['image_captcha_font_settings']['image_captcha_font'] = array(
     '#type' => 'select',
     '#title' => t('Font'),
     '#default_value' => $default_font,
@@ -120,7 +128,7 @@ function image_captcha_settings_form() {
   $form['#pre_render'] = array('image_captcha_settings_form_pre_render');
   // font size
   if ($default_font != 'BUILTIN') {
-    $form['image_captcha_font_size'] = array(
+    $form['image_captcha_font_settings']['image_captcha_font_size'] = array(
       '#type' => 'select',
       '#title' => t('Font size'),
       '#options' => array(
@@ -133,8 +141,20 @@ function image_captcha_settings_form() {
       '#description' => t('The font size influences the size of the image. Note that larger values make the image generation more CPU intensive.'),
     );
   }
+  // character spacing
+  $form['image_captcha_font_settings']['image_captcha_character_spacing'] = array(
+    '#type' => 'select',
+    '#title' => t('Character spacing'),
+    '#description' => t('Define the average spacing between characters. Note that larger values make the image generation more CPU intensive.'),
+    '#default_value' => variable_get('image_captcha_character_spacing', '1.2'),
+    '#options' => array(
+      '1' => t('small'),
+      '1.2' => t('normal'),
+      '1.5' => t('large'),
+    ),
+  );
 
-  // code length settings
+  // distortion and noise settings
   $form['image_captcha_distortion_and_noise'] = array(
     '#type' => 'fieldset',
     '#title' => t('Distortion and noise'),
@@ -366,9 +386,10 @@ function _image_captcha_generate_image($code) {
   }
   // get other settings
   $font_size = (int) variable_get('image_captcha_font_size', 30);
+  $character_spacing = (float) variable_get('image_captcha_character_spacing', '1.2');
   $characters = _image_captcha_utf8_split($code);
   $character_quantity = count($characters);
-  $width = 1.2 * $font_size * $character_quantity;
+  $width = $character_spacing * $font_size * $character_quantity;
   $height = 2 * $font_size;
 
   // create image resource
