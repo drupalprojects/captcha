@@ -547,7 +547,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
     $textwidth = $character_quantity * $character_width;
   }
   else {
-    $bbox = imagettfbbox($font_size, 0, $font, $text);
+    $bbox = imagettfbbox($font_size, 0, realpath($font), $text);
     if (!$bbox) {
       return FALSE;
     }
@@ -563,7 +563,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
   foreach ($characters as $character) {
     // get character dimensions
     if ($font != 'BUILTIN') {
-      $bbox = imagettfbbox($font_size, 0, $font, $character);
+      $bbox = imagettfbbox($font_size, 0, realpath($font), $character);
       $character_width = $bbox[2] - $bbox[0];
       $character_height = $bbox[5] - $bbox[3];
     }
@@ -583,7 +583,7 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
     if ($font == 'BUILTIN') {
       imagestring($image, 5, $pos_x, $pos_y, $character, $color);
     } else {
-      imagettftext($image, $font_size, 0, $pos_x, $pos_y, $color, $font , $character);
+      imagettftext($image, $font_size, 0, $pos_x, $pos_y, $color, realpath($font), $character);
     }
     // shift cursor
     $x += $character_width + $spacing;
