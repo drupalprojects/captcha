@@ -93,6 +93,24 @@ function captcha_perm() {
   return array('administer CAPTCHA settings', 'skip CAPTCHA');
 }
 
+
+/**
+ * Implementation of hook_requirements().
+ */
+function captcha_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'runtime') {
+    // show the wrong response counter in the status report
+    $requirements['captcha_wrong_response_counter'] = array(
+      'title' => $t('CAPTCHA'),
+      'value' => $t('Already @counter blocked form submissions', array('@counter' => variable_get('captcha_wrong_response_counter', 0))),
+      'severity' => REQUIREMENT_INFO,
+    );
+  }
+  return $requirements;
+}
+
 /**
  * Return an array with the available CAPTCHA types, for use as options array
  * for a select form elements.
@@ -254,6 +272,13 @@ function captcha_admin_settings() {
     ),
     '#description' => t('Define if challenges should be omitted during the rest of a session once the user successfully responses to a challenge.'),
   );
+  // option for logging wrong responses
+  $form['captcha_log_wrong_responses'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Log wrong responses'),
+    '#description' => t('Report information about wrong responses to the !watchdoglog.', array('!watchdoglog' => l('log', 'admin/logs/watchdog'))),
+    '#default_value' => variable_get('captcha_log_wrong_responses', FALSE),
+  );
   // submit button
   $form['submit'] = array(
     '#type' => 'submit',
@@ -304,6 +329,7 @@ function captcha_admin_settings_submit($form_id, $form_values) {
       variable_set('captcha_description', $form_values['captcha_description']);
     }
     variable_set('captcha_persistence', $form_values['captcha_persistence']);
+    variable_set('captcha_log_wrong_responses', $form_values['captcha_log_wrong_responses']);
     drupal_set_message(t('The CAPTCHA settings were saved.'), 'status');
   }
 }
@@ -533,7 +559,21 @@ function captcha_validate($form_values) {
     $_SESSION['captcha']['success'] = TRUE;
   }
   else {
+    // set form error
     form_set_error('captcha_response', t('The answer you entered for the CAPTCHA was not correct.'));
+    // update wrong response counter
+    variable_set('captcha_wrong_response_counter', variable_get('captcha_wrong_response_counter', 0) + 1);
+    // log to watchdog if needed
+    if (variable_get('captcha_log_wrong_responses', FALSE)) {
+      watchdog('CAPTCHA',
+        t('%form_id post blocked by CAPTCHA module: challenge "%challenge" (by module "%module"), user answered "%response", but the solution was "%solution".',
+          array('%form_id' => $form_id,
+            '%response' => $captcha_response, '%solution'=> $_SESSION['captcha'][$form_id][$captcha_token],
+            '%challenge' => $validationdata['type'], '%module' => $validationdata['module'],
+          )
+        ),
+        WATCHDOG_NOTICE);
+    }
     // If CAPTCHA was on a login form: stop validating, quit the current request
     // and forward to the current page (like a reload) to prevent loging in.
     // We do that because the log in procedure, which happens after
