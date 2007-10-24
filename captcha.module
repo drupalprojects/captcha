@@ -459,7 +459,11 @@ function captcha_form_alter($form_id, &$form) {
     }
     else {
       // $captcha_description is empty: CAPTCHA part is an empty markup form element
-      $form['captcha'] = array();
+      $form['captcha'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div class="captcha">',
+        '#suffix' => '</div>',
+      );
     }
 
     // Add the form elements of the generated CAPTCHA to the form
