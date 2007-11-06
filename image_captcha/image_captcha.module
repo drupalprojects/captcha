@@ -52,6 +52,41 @@ function image_captcha_menu($may_cache) {
   return $items;
 }
 
+
+/*
+ * Implementation of hook_requirements()
+ * @todo these checks should be for the install phase,
+ * but this is not possible now for contributed modules (modules outside the
+ * drupal/modules directory)
+ */
+function image_captcha_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'runtime') {
+   if (function_exists('imagegd2')) {
+      $gd_info = gd_info();
+      if (!$gd_info['FreeType Support']) {
+        $requirements['image_captcha_ft'] = array(
+          'title' => $t('Image CAPTCHA'),
+          'value' => $t('No FreeType support'),
+          'description' => $t('FreeType support is required for working with TrueType fonts (.ttf), but the GD library for PHP does not support it.'),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+    }
+    else {
+      $requirements['image_captcha_gd'] = array(
+        'title' => $t('Image CAPTCHA'),
+        'value' => $t('No GD library'),
+        'description' => $t('The GD library for PHP is missing or outdated. Please check the <a href="@url">PHP image documentation</a> for information on how to correct this.', array('@url' => 'http://www.php.net/manual/en/ref.image.php')),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  return $requirements;
+}
+
+
 /**
  * Returns:
  *  - the path to the image CAPTCHA font or FALSE when an error occured
