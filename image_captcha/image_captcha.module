@@ -354,9 +354,13 @@ function image_captcha_captcha($op, $captcha_type='') {
         // build the result to return
         $result = array();
         $result['solution'] = $code;
+        // Create the image CAPTCHA form elements
+        // The img markup isn't done with theme('image', ...) because that
+        // function needs a path to a real file (not applicable)
+        // or a full absolute URL (which requires to add protocol and domain)
         $result['form']['captcha_image'] = array(
           '#type' => 'markup',
-          '#value' => '<img src="'. check_url(url("image_captcha/$seed")) .'" />',
+          '#value' => '<img src="'. check_url(url("image_captcha/$seed")) .'" alt="'. t('Image CAPTCHA') .'" title="'. t('Image CAPTCHA') .'" />',
           '#weight' => -2,
         );
         $result['form']['captcha_response'] = array(
