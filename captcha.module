@@ -235,7 +235,6 @@ function captcha_admin_settings() {
   }
   // field(s) for setting the additional CAPTCHA description
   if (module_exists('locale')) {
-    global $locale;
     $langs = locale_supported_languages();
     $form['captcha_descriptions'] = array(
       '#type' => 'fieldset',
@@ -419,7 +418,7 @@ function captcha_form_alter($form_id, &$form) {
       return;
     }
     $captcha_point = db_fetch_object($result);
-    if (!$captcha_point->type) {
+    if (!$captcha_point || !$captcha_point->type) {
       return;
     }
 
@@ -516,7 +515,7 @@ function captcha_form_alter($form_id, &$form) {
       return;
     }
     $captcha_point = db_fetch_object($result);
-    if ($captcha_point->type) {
+    if ($captcha_point && $captcha_point->type) {
       $form['captcha'] = array(
         '#type' => 'item',
         '#title' => t('CAPTCHA administration'),
