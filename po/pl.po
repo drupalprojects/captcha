@@ -37,7 +37,7 @@ msgid "<p>A CAPTCHA can be added to virtually each Drupal form. Some default for
 msgstr "<p>Pułapki łapirobota mogą być w praktyce dodane do wszystkich formularzy występujących w Drupalu. Niektóre z nich są już ujęte na liście formularzy, a inne można ręcznie dodać do listy, włączając uprzednio opcję \"%adminlinks\".</p><p>Użytkownikom z <a href=\"@perm\">uprawnieniami</a> do omijania pułapek nie zostaną one przedstawione. Pamiętaj, by nadać to uprawnienie zaufanym użytkownikom (np. administratorom witryny). Jeśli chcesz przetestować działanie łapirobota, nie rób tego z konta, które posiada takie uprawnienia.</p>"
 
 #: captcha.module:42;202;210
-msgid "Add CAPTCHA adminstration links to forms"
+msgid "Add CAPTCHA administration links to forms"
 msgstr "Dodaj do formularzy odnośniki umożliwiające zarządzanie łapirobotem."
 
 #: captcha.module:57;67;455;106;442;568

@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2007-12-12 11:20+0100\n"
+"POT-Creation-Date: 2007-12-12 23:06+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -49,7 +49,7 @@ msgid "<p>A CAPTCHA can be added to virtually each Drupal form. Some default for
 msgstr ""
 
 #: captcha.module:42;202;210
-msgid "Add CAPTCHA adminstration links to forms"
+msgid "Add CAPTCHA administration links to forms"
 msgstr ""
 
 #: captcha.module:57;67;454;520;106;441;583 captcha.info:0 image_captcha/image_captcha.module:311;397;423
