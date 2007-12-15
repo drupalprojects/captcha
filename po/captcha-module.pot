@@ -3,19 +3,21 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  captcha.module,v 1.42.2.41 2007/12/07 09:02:08 soxofaan
+#  captcha.module,v 1.42.2.42 2007/12/12 22:08:29 soxofaan
 #  captcha.info,v 1.3.2.3 2007/10/02 19:21:20 robloach
-#  image_captcha.module,v 1.1.4.25 2007/11/27 23:47:02 soxofaan
+#  image_captcha.user.inc,v 1.1 2007/12/11 12:55:38 soxofaan
+#  image_captcha.module,v 1.6 2007/12/11 12:55:38 soxofaan
 #  captcha.install,v 1.1.4.6 2007/10/02 19:21:20 robloach
-#  image_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
-#  text_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
-#  text_captcha.module,v 1.1.4.11 2007/10/02 19:21:21 robloach
+#  image_captcha.info,v 1.3 2007/12/11 12:05:32 soxofaan
+#  text_captcha.info,v 1.2 2007/10/27 14:44:16 robloach
+#  image_captcha.admin.inc,v 1.1 2007/12/11 12:55:38 soxofaan
+#  text_captcha.module,v 1.2 2007/10/27 14:44:16 robloach
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2007-12-12 23:06+0100\n"
+"POT-Creation-Date: 2007-12-15 01:53+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -52,7 +54,7 @@ msgstr ""
 msgid "Add CAPTCHA administration links to forms"
 msgstr ""
 
-#: captcha.module:57;67;454;520;106;441;583 captcha.info:0 image_captcha/image_captcha.module:311;397;423
+#: captcha.module:57;67;454;520;106;441;583 captcha.info:0 image_captcha/image_captcha.user.inc:28;53 image_captcha/image_captcha.module:89
 msgid "CAPTCHA"
 msgstr ""
 
@@ -252,6 +254,18 @@ msgstr ""
 msgid "Already @counter blocked form submissions"
 msgstr ""
 
+#: captcha.module:93
+msgid "administer CAPTCHA settings"
+msgstr ""
+
+#: captcha.module:93
+msgid "skip CAPTCHA"
+msgstr ""
+
+#: captcha.module:0
+msgid "captcha"
+msgstr ""
+
 #: captcha.install:31;76
 msgid "Unsupported database."
 msgstr ""
@@ -272,212 +286,200 @@ msgstr ""
 msgid "Spam control"
 msgstr ""
 
-#: image_captcha/image_captcha.module:20
-msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
-msgstr ""
-
-#: image_captcha/image_captcha.module:24
-msgid "<p>Example image, generated with the current settings:</p>!img"
-msgstr ""
-
-#: image_captcha/image_captcha.module:39;363;363;70;79 image_captcha/image_captcha.info:0
-msgid "Image CAPTCHA"
-msgstr ""
-
-#: image_captcha/image_captcha.module:100
-msgid "Could not find or read the configured font \"%font\" for the image captcha."
-msgstr ""
-
-#: image_captcha/image_captcha.module:110
+#: image_captcha/image_captcha.admin.inc:8
 msgid "Built-in font"
 msgstr ""
 
-#: image_captcha/image_captcha.module:128
+#: image_captcha/image_captcha.admin.inc:26
 msgid "Images cannot be generated, because your PHP installation's GD library has no JPEG support."
 msgstr ""
 
-#: image_captcha/image_captcha.module:133
+#: image_captcha/image_captcha.admin.inc:31
 msgid "Code settings"
 msgstr ""
 
-#: image_captcha/image_captcha.module:137
+#: image_captcha/image_captcha.admin.inc:35
 msgid "Characters to use in the code"
 msgstr ""
 
-#: image_captcha/image_captcha.module:142
+#: image_captcha/image_captcha.admin.inc:40
 msgid "Code length"
 msgstr ""
 
-#: image_captcha/image_captcha.module:145
+#: image_captcha/image_captcha.admin.inc:43
 msgid "The code length influences the size of the image. Note that larger values make the image generation more CPU intensive."
 msgstr ""
 
-#: image_captcha/image_captcha.module:151
+#: image_captcha/image_captcha.admin.inc:49
 msgid "Font settings"
 msgstr ""
 
-#: image_captcha/image_captcha.module:157
+#: image_captcha/image_captcha.admin.inc:55
 msgid "Font"
 msgstr ""
 
-#: image_captcha/image_captcha.module:159
+#: image_captcha/image_captcha.admin.inc:57
 msgid "The TrueType font (.ttf) to use for the text in the image CAPTCHA."
 msgstr ""
 
-#: image_captcha/image_captcha.module:168
+#: image_captcha/image_captcha.admin.inc:66
 msgid "Font size"
 msgstr ""
 
-#: image_captcha/image_captcha.module:170
+#: image_captcha/image_captcha.admin.inc:68
 msgid "tiny"
 msgstr ""
 
-#: image_captcha/image_captcha.module:171;186
+#: image_captcha/image_captcha.admin.inc:69;84
 msgid "small"
 msgstr ""
 
-#: image_captcha/image_captcha.module:172;187;206;244
+#: image_captcha/image_captcha.admin.inc:70;85;104;142
 msgid "normal"
 msgstr ""
 
-#: image_captcha/image_captcha.module:173;188
+#: image_captcha/image_captcha.admin.inc:71;86
 msgid "large"
 msgstr ""
 
-#: image_captcha/image_captcha.module:176
+#: image_captcha/image_captcha.admin.inc:74
 msgid "The font size influences the size of the image. Note that larger values make the image generation more CPU intensive."
 msgstr ""
 
-#: image_captcha/image_captcha.module:182
+#: image_captcha/image_captcha.admin.inc:80
 msgid "Character spacing"
 msgstr ""
 
-#: image_captcha/image_captcha.module:183
+#: image_captcha/image_captcha.admin.inc:81
 msgid "Define the average spacing between characters. Note that larger values make the image generation more CPU intensive."
 msgstr ""
 
-#: image_captcha/image_captcha.module:195
+#: image_captcha/image_captcha.admin.inc:93
 msgid "Distortion and noise"
 msgstr ""
 
-#: image_captcha/image_captcha.module:196
+#: image_captcha/image_captcha.admin.inc:94
 msgid "With these settings you can control the degree of obfuscation by distortion and added noise. Do not exaggerate the obfuscation and assure that the code in the image is reasonably readable. For example, do not combine high levels of distortion and noise."
 msgstr ""
 
-#: image_captcha/image_captcha.module:201
+#: image_captcha/image_captcha.admin.inc:99
 msgid "Distortion level"
 msgstr ""
 
-#: image_captcha/image_captcha.module:203
+#: image_captcha/image_captcha.admin.inc:101
 msgid "none"
 msgstr ""
 
-#: image_captcha/image_captcha.module:204;243
+#: image_captcha/image_captcha.admin.inc:102;141
 msgid "low"
 msgstr ""
 
-#: image_captcha/image_captcha.module:205
+#: image_captcha/image_captcha.admin.inc:103
 msgid "moderate"
 msgstr ""
 
-#: image_captcha/image_captcha.module:207;245
+#: image_captcha/image_captcha.admin.inc:105;143
 msgid "high"
 msgstr ""
 
-#: image_captcha/image_captcha.module:208;246
+#: image_captcha/image_captcha.admin.inc:106;144
 msgid "severe"
 msgstr ""
 
-#: image_captcha/image_captcha.module:211
+#: image_captcha/image_captcha.admin.inc:109
 msgid "Set the degree of wave distortion in the image."
 msgstr ""
 
-#: image_captcha/image_captcha.module:215
+#: image_captcha/image_captcha.admin.inc:113
 msgid "Smooth distortion"
 msgstr ""
 
-#: image_captcha/image_captcha.module:217
+#: image_captcha/image_captcha.admin.inc:115
 msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr ""
 
-#: image_captcha/image_captcha.module:222
+#: image_captcha/image_captcha.admin.inc:120
 msgid "Double vision"
 msgstr ""
 
-#: image_captcha/image_captcha.module:224
+#: image_captcha/image_captcha.admin.inc:122
 msgid "When enabled, characters appear twice in the image, overlayed onto each other."
 msgstr ""
 
-#: image_captcha/image_captcha.module:229
+#: image_captcha/image_captcha.admin.inc:127
 msgid "Add salt and peper noise"
 msgstr ""
 
-#: image_captcha/image_captcha.module:231
+#: image_captcha/image_captcha.admin.inc:129
 msgid "This option adds randomly colored point noise."
 msgstr ""
 
-#: image_captcha/image_captcha.module:235
+#: image_captcha/image_captcha.admin.inc:133
 msgid "Add line noise"
 msgstr ""
 
-#: image_captcha/image_captcha.module:237
+#: image_captcha/image_captcha.admin.inc:135
 msgid "This option enables lines randomly drawn on top of the text code."
 msgstr ""
 
-#: image_captcha/image_captcha.module:241
+#: image_captcha/image_captcha.admin.inc:139
 msgid "Noise level"
 msgstr ""
 
-#: image_captcha/image_captcha.module:258
+#: image_captcha/image_captcha.admin.inc:157
 msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
 msgstr ""
 
-#: image_captcha/image_captcha.module:261
+#: image_captcha/image_captcha.admin.inc:160
 msgid "The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support."
 msgstr ""
 
-#: image_captcha/image_captcha.module:274
+#: image_captcha/image_captcha.admin.inc:172
 msgid "The list of characters to use should not contain spaces."
 msgstr ""
 
-#: image_captcha/image_captcha.module:279
+#: image_captcha/image_captcha.admin.inc:177
 msgid "You need to select a font"
 msgstr ""
 
-#: image_captcha/image_captcha.module:282
+#: image_captcha/image_captcha.admin.inc:180
 msgid "Font does not exist or is not readable."
 msgstr ""
 
-#: image_captcha/image_captcha.module:311
-msgid "Encountered an illegal byte while splitting an utf8 string in characters."
-msgstr ""
-
-#: image_captcha/image_captcha.module:368
-msgid "What code is in the image?"
-msgstr ""
-
-#: image_captcha/image_captcha.module:369
-msgid "Copy the characters (respecting upper/lower case) from the image."
-msgstr ""
-
-#: image_captcha/image_captcha.module:397
+#: image_captcha/image_captcha.user.inc:28
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
 msgstr ""
 
-#: image_captcha/image_captcha.module:71
-msgid "No FreeType support"
+#: image_captcha/image_captcha.module:16
+msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
 msgstr ""
 
-#: image_captcha/image_captcha.module:72
-msgid "FreeType support is required for working with TrueType fonts (.ttf), but the GD library for PHP does not support it."
+#: image_captcha/image_captcha.module:20
+msgid "<p>Example image, generated with the current settings:</p>!img"
 msgstr ""
 
-#: image_captcha/image_captcha.module:80
-msgid "No GD library"
+#: image_captcha/image_captcha.module:59
+msgid "Could not find or read the configured font \"%font\" for the image captcha."
 msgstr ""
 
-#: image_captcha/image_captcha.module:81
-msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
+#: image_captcha/image_captcha.module:89
+msgid "Encountered an illegal byte while splitting an utf8 string in characters."
+msgstr ""
+
+#: image_captcha/image_captcha.module:142
+msgid "What code is in the image?"
+msgstr ""
+
+#: image_captcha/image_captcha.module:143
+msgid "Copy the characters (respecting upper/lower case) from the image."
+msgstr ""
+
+#: image_captcha/image_captcha.module:0
+msgid "image_captcha"
+msgstr ""
+
+#: image_captcha/image_captcha.info:0
+msgid "Image CAPTCHA"
 msgstr ""
 
 #: image_captcha/image_captcha.info:0
@@ -568,35 +570,11 @@ msgstr ""
 msgid "What is the @nth word in the phrase \"@words\"?"
 msgstr ""
 
+#: text_captcha/text_captcha.module:0
+msgid "text_captcha"
+msgstr ""
+
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
-msgstr ""
-
-#: (duplicate) captcha.module:106 
-msgid "CAPTCHA"
-msgstr ""
-
-#: (duplicate) captcha.module:107 
-msgid "Already @counter blocked form submissions"
-msgstr ""
-
-#: (duplicate) image_captcha/image_captcha.module:70 ;79 
-msgid "Image CAPTCHA"
-msgstr ""
-
-#: (duplicate) image_captcha/image_captcha.module:71 
-msgid "No FreeType support"
-msgstr ""
-
-#: (duplicate) image_captcha/image_captcha.module:72 
-msgid "FreeType support is required for working with TrueType fonts (.ttf), but the GD library for PHP does not support it."
-msgstr ""
-
-#: (duplicate) image_captcha/image_captcha.module:80 
-msgid "No GD library"
-msgstr ""
-
-#: (duplicate) image_captcha/image_captcha.module:81 
-msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
 msgstr ""
 
