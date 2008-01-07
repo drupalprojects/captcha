@@ -115,12 +115,12 @@ function captcha_requirements($phase) {
  * Return an array with the available CAPTCHA types, for use as options array
  * for a select form elements.
  * The array is an associative array mapping "$module/$type" to
- * "$module/$type" with $module the module name implementing the CAPTCHA
+ * "$type ($module)" with $module the module name implementing the CAPTCHA
  * and $type the name of the CAPTCHA type.
- * (It also includes a 'none' => 'none' option)
+ * (It also includes a 'none' => '<none>' option)
  */
 function _captcha_available_challenge_types() {
-  $captcha_types['none'] = 'none';
+  $captcha_types['none'] = '<'. t('none') .'>';
   foreach (module_implements('captcha') as $module) {
     $result = call_user_func_array($module .'_captcha', 'list');
     if (is_array($result)) {
@@ -137,15 +137,16 @@ function _captcha_available_challenge_types() {
  * If the locale module is enabled, an optional language code can be given
  */
 function _captcha_get_description($lang_code=NULL) {
+  $default = t('This question is for testing whether you are a human visitor and to prevent automated spam submissions.');
   if (module_exists('locale')) {
     if ($lang_code == NULL) {
       global $locale;
       $lang_code = $locale;
     }
-    $description = variable_get("captcha_description_$lang_code", t('This question is for testing whether you are a human visitor and to prevent automated spam submissions.'));
+    $description = variable_get("captcha_description_$lang_code", $default);
   }
   else {
-    $description = variable_get('captcha_description', t('This question is for testing whether you are a human visitor and to prevent automated spam submissions.'));
+    $description = variable_get('captcha_description', $default);
   }
   return $description;
 }
@@ -390,7 +391,6 @@ function captcha_captcha_point_settings_form_submit($form_id, $form_values) {
   }
 }
 
-
 /**
  * Helper function for checking if the CAPTCHA for the given form_id should
  * be skipped because of CAPTCHA persistence.
@@ -453,7 +453,7 @@ function captcha_form_alter($form_id, &$form) {
         '#type' => 'fieldset',
         '#title' => t('CAPTCHA'),
         '#description' => $captcha_description,
-        '#attributes' => array('class' => 'captcha')
+        '#attributes' => array('class' => 'captcha'),
       );
     }
     else {
