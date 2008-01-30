@@ -37,7 +37,7 @@ function captcha_help($path, $arg) {
     case 'admin/user/captcha/captcha/settings':
       $output = '<p>'. t('A CAPTCHA can be added to virtually each Drupal form. Some default forms are already provided in the form list, but arbitrary forms can be easily added and managed when the option "%adminlinks" is enabled.',
         array('%adminlinks' => t('Add CAPTCHA administration links to forms'))) .'</p>';
-      $output .= '<p>' . t('Users with the "%skipcaptcha" <a href="@perm">permission</a> won\'t be offered a challenge. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test a protected form, be sure to do it as a user without the "%skipcaptcha" permission (e.g. as anonymous user).',
+      $output .= '<p>'. t('Users with the "%skipcaptcha" <a href="@perm">permission</a> won\'t be offered a challenge. Be sure to grant this permission to the trusted users (e.g. site administrators). If you want to test a protected form, be sure to do it as a user without the "%skipcaptcha" permission (e.g. as anonymous user).',
         array('%skipcaptcha' => 'skip CAPTCHA', '@perm' => url('admin/user/permissions'))) .'</p>';
       return $output;
   }
@@ -304,7 +304,7 @@ function captcha_form_alter(&$form, $form_state, $form_id) {
 function captcha_validate($form, &$form_state) {
   // Get answer and preprocess if needed
   $captcha_response = $form_state['values']['captcha_response'];
-  $captcha_info = $form['captcha_info']['#value'];
+  $captcha_info = $form_state['values']['captcha_info'];
   if ($captcha_info['preprocess']) {
     $captcha_response = module_invoke($captcha_info['module'], 'captcha', 'preprocess', $captcha_info['type'], $captcha_response);
   }

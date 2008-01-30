@@ -155,6 +155,8 @@ function captcha_admin_settings() {
     '#type' => 'submit',
     '#value' => t('Save'),
   );
+  $form['#submit'][] = 'captcha_admin_settings_submit';
+
   return $form;
 }
 
@@ -178,31 +180,29 @@ function theme_captcha_admin_settings_captcha_points($form) {
  * Submission function for captcha_admin_settings form
  */
 function captcha_admin_settings_submit($form, &$form_state) {
-  if ($form['form_id']['#value'] == 'captcha_admin_settings') {
-    variable_set('captcha_administration_mode', $form_state['values']['captcha_administration_mode']);
-    foreach ($form_state['values']['captcha_types'] as $captcha_point_form_id => $data) {
-      if ($data['captcha_type'] == 'none') {
-        db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $captcha_point_form_id);
-      }
-      else {
-        list($module, $type) = explode('/', $data['captcha_type']);
-        db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $captcha_point_form_id);
-      }
-    }
-    // description stuff
-    if (module_exists('locale')) {
-      $langs = locale_language_list();
-      foreach ($langs as $lang_code => $lang_name) {
-        variable_set("captcha_description_$lang_code", $form_state['values']["captcha_description_$lang_code"]);
-      }
+  variable_set('captcha_administration_mode', $form_state['values']['captcha_administration_mode']);
+  foreach ($form_state['values']['captcha_types'] as $captcha_point_form_id => $data) {
+    if ($data['captcha_type'] == 'none') {
+      db_query("UPDATE {captcha_points} SET module = NULL, type = NULL WHERE form_id = '%s'", $captcha_point_form_id);
     }
     else {
-      variable_set('captcha_description', $form_state['values']['captcha_description']);
+      list($module, $type) = explode('/', $data['captcha_type']);
+      db_query("UPDATE {captcha_points} SET module = '%s', type = '%s' WHERE form_id = '%s'", $module, $type, $captcha_point_form_id);
     }
-    variable_set('captcha_persistence', $form_state['values']['captcha_persistence']);
-    variable_set('captcha_log_wrong_responses', $form_state['values']['captcha_log_wrong_responses']);
-    drupal_set_message(t('The CAPTCHA settings were saved.'), 'status');
   }
+  // description stuff
+  if (module_exists('locale')) {
+    $langs = locale_language_list();
+    foreach ($langs as $lang_code => $lang_name) {
+      variable_set("captcha_description_$lang_code", $form_state['values']["captcha_description_$lang_code"]);
+    }
+  }
+  else {
+    variable_set('captcha_description', $form_state['values']['captcha_description']);
+  }
+  variable_set('captcha_persistence', $form_state['values']['captcha_persistence']);
+  variable_set('captcha_log_wrong_responses', $form_state['values']['captcha_log_wrong_responses']);
+  drupal_set_message(t('The CAPTCHA settings were saved.'), 'status');
 }
 
 /**
