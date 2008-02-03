@@ -3,24 +3,22 @@
 
 /**
  * Implementation of hook_schema().
- */ 
+ */
 function captcha_schema() {
   $schema['captcha_points'] = array(
     'fields' => array(
       'form_id' => array(
         'type' => 'varchar',
         'length' => 128,
-        'not null' => TRUE
+        'not null' => TRUE,
       ),
       'module' => array(
         'type' => 'varchar',
         'length' => 64,
-        'default' => NULL
       ),
       'type' => array(
         'type' => 'varchar',
         'length' => 64,
-        'default' => NULL
       ),
     ),
     'primary key' => array('form_id'),
@@ -33,7 +31,7 @@ function captcha_schema() {
  */
 function captcha_install() {
   drupal_install_schema('captcha');
-  
+
   // insert some defaults
   $form_ids = array('comment_form', 'contact_mail_user', 'contact_mail_page',
     'user_register', 'user_pass', 'user_login', 'user_login_block');
