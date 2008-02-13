@@ -187,6 +187,7 @@ function captcha_point_admin($captcha_point_form_id=NULL, $op=NULL) {
 
 function captcha_point_admin_form($form_state, $captcha_point_form_id=NULL) {
   $form = array();
+  $default_captcha_type = 'none';
   if (isset($captcha_point_form_id)) {
     // use given CAPTCHA point form_id
     $form['captcha_point_form_id'] = array(
@@ -199,10 +200,7 @@ function captcha_point_admin_form($form_state, $captcha_point_form_id=NULL) {
     $result = db_query("SELECT * FROM {captcha_points} WHERE form_id = '%s'", $captcha_point_form_id);
     $captcha_point = db_fetch_object($result);
     if ($captcha_point) {
-      $default_value = "{$captcha_point->module}/{$captcha_point->type}";
-    }
-    else {
-      $default_value = 'none';
+      $default_captcha_type = "{$captcha_point->module}/{$captcha_point->type}";
     }
   }
   else {
@@ -218,7 +216,7 @@ function captcha_point_admin_form($form_state, $captcha_point_form_id=NULL) {
     '#type' => 'select',
     '#title' => t('Challenge type'),
     '#description' => t('The CAPTCHA type to use for this form'),
-    '#default_value' => $default_value,
+    '#default_value' => $default_captcha_type,
     '#options' => _captcha_available_challenge_types(),
   );
   // redirect to general CAPTCHA settings page after submission
