@@ -631,11 +631,15 @@ function captcha_pre_render($form_id, &$form) {
     return;
   }
 
-  // count the number of unsolved CAPTCHAs and flush those if too many
+  // count the number of unsolved CAPTCHAs and unset the oldest if too many
   // minus 1 is needed because 'success' is also an item of $_SESSION['captcha'][$form_id]
   if (count($_SESSION['captcha'][$form_id]) - 1 > CAPTCHA_UNSOLVED_CHALLENGES_MAX) {
-    unset($_SESSION['captcha'][$form_id]);
-    drupal_set_message(t('You can\'t request more than @num challenges without solving them. Your previous challenges were flushed.', array('@num' => CAPTCHA_UNSOLVED_CHALLENGES_MAX)));
+    foreach (array_keys($_SESSION['captcha'][$form_id]) as $captcha_token) {
+      if ($captcha_token != 'success') {
+        unset($_SESSION['captcha'][$form_id][$captcha_token]);
+        break;
+      }
+    }
   }
   // store the current CAPTCHA solution in $_SESSION
   $captcha_token = $form['captcha']['captcha_token']['#value'];
