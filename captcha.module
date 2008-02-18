@@ -259,7 +259,7 @@ function captcha_form_alter(&$form, $form_state, $form_id) {
     );
 
     // Add pre_render function for additional CAPTCHA processing.
-    $form['captcha']['#pre_render'] = array('captcha_pre_render');
+    $form['#pre_render'][] = 'captcha_pre_render';
     // Add pre_render function for placement of CAPTCHA formt element (above submit buttons).
     $form['#pre_render'][] = 'captcha_pre_render_place_captcha';
 
@@ -369,7 +369,7 @@ function captcha_validate($form, &$form_state) {
  * in the $_SESSION variable.
  */
 function captcha_pre_render($form) {
-  $form_id = $form['captcha_info']['#value']['form_id'];
+  $form_id = $form['captcha']['captcha_info']['#value']['form_id'];
   // Unset the CAPTCHA if non-CAPTCHA persistent and the CAPTCHA has
   // already been successfully solved for this form.
   // This needs to be done in this pre_render phase when previewing for example
@@ -399,11 +399,11 @@ function captcha_pre_render($form) {
     }
   }
   // store the current CAPTCHA solution in $_SESSION
-  $captcha_token = $form['captcha_token']['#value'];
-  $_SESSION['captcha'][$form_id][$captcha_token] = $form['captcha_solution']['#value'];
+  $captcha_token = $form['captcha']['captcha_token']['#value'];
+  $_SESSION['captcha'][$form_id][$captcha_token] = $form['captcha']['captcha_solution']['#value'];
   $_SESSION['captcha'][$form_id]['success'] = FALSE;
   // empty the value of the captcha_response form item before rendering
-  $form['captcha_response']['#value'] = '';
+  $form['captcha']['captcha_response']['#value'] = '';
   return $form;
 }
 
