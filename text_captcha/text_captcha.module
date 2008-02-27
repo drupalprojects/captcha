@@ -175,6 +175,7 @@ function text_captcha_captcha($op, $captcha_type='') {
           '#title' => t('What is the @nth word in the phrase "@words"?', array('@nth' => _text_captcha_ordinal($key+1), '@words' => implode(' ', $words))),
           '#weight' => 0,
           '#required' => TRUE,
+          '#size' => 15,
         );
         return $result;
       }
