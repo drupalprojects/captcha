@@ -3,19 +3,19 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  captcha.module,v 1.42.2.43 2008/01/07 12:56:26 soxofaan
+#  captcha.module,v 1.42.2.45 2008/03/08 04:23:14 soxofaan
 #  captcha.info,v 1.3.2.3 2007/10/02 19:21:20 robloach
 #  image_captcha.module,v 1.1.4.25 2007/11/27 23:47:02 soxofaan
 #  captcha.install,v 1.1.4.6 2007/10/02 19:21:20 robloach
 #  image_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
 #  text_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
-#  text_captcha.module,v 1.1.4.11 2007/10/02 19:21:21 robloach
+#  text_captcha.module,v 1.1.4.12 2008/02/27 15:19:07 soxofaan
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-01-07 14:40+0100\n"
+"POT-Creation-Date: 2008-03-08 06:43+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Add CAPTCHA administration links to forms"
 msgstr ""
 
-#: captcha.module:57;67;454;520;106;441;583 captcha.info:0 image_captcha/image_captcha.module:311;397;423
+#: (duplicate) captcha.module:57;67;454;520;106 ;441;583 captcha.info:0 image_captcha/image_captcha.module:311;397;423
 msgid "CAPTCHA"
 msgstr ""
 
@@ -144,6 +144,10 @@ msgstr ""
 msgid "Report information about wrong responses to the !watchdoglog."
 msgstr ""
 
+#: captcha.module:279
+msgid "log"
+msgstr ""
+
 #: captcha.module:285;359;380
 msgid "Submit"
 msgstr ""
@@ -224,35 +228,31 @@ msgstr ""
 msgid "%form_id post blocked by CAPTCHA module: challenge \"%challenge\" (by module \"%module\"), user answered \"%response\", but the solution was \"%solution\"."
 msgstr ""
 
-#: captcha.module:638
-msgid "You can't request more than @num challenges without solving them. Your previous challenges were flushed."
-msgstr ""
-
-#: captcha.module:691
+#: captcha.module:695
 msgid "This page gives an overview of all available challenge types, generated with their current settings."
 msgstr ""
 
-#: captcha.module:702
+#: captcha.module:706
 msgid "Challenge \"%challenge\" by module \"%module\""
 msgstr ""
 
-#: captcha.module:707
+#: captcha.module:711
 msgid "10 more examples of this challenge."
 msgstr ""
 
-#: captcha.module:736
+#: captcha.module:740
 msgid "Math Question"
 msgstr ""
 
-#: captcha.module:737
+#: captcha.module:741
 msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
 msgstr ""
 
-#: captcha.module:738
+#: captcha.module:742
 msgid "@x + @y = "
 msgstr ""
 
-#: captcha.module:107
+#: (duplicate) captcha.module:107 
 msgid "Already @counter blocked form submissions"
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 msgid "<p>Example image, generated with the current settings:</p>!img"
 msgstr ""
 
-#: image_captcha/image_captcha.module:39;363;363;70;79 image_captcha/image_captcha.info:0
+#: (duplicate) image_captcha/image_captcha.module:39;363;363;70 ;79  image_captcha/image_captcha.info:0
 msgid "Image CAPTCHA"
 msgstr ""
 
@@ -464,19 +464,19 @@ msgstr ""
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
 msgstr ""
 
-#: image_captcha/image_captcha.module:71
+#: (duplicate) image_captcha/image_captcha.module:71 
 msgid "No FreeType support"
 msgstr ""
 
-#: image_captcha/image_captcha.module:72
+#: (duplicate) image_captcha/image_captcha.module:72 
 msgid "FreeType support is required for working with TrueType fonts (.ttf), but the GD library for PHP does not support it."
 msgstr ""
 
-#: image_captcha/image_captcha.module:80
+#: (duplicate) image_captcha/image_captcha.module:80 
 msgid "No GD library"
 msgstr ""
 
-#: image_captcha/image_captcha.module:81
+#: (duplicate) image_captcha/image_captcha.module:81 
 msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
 msgstr ""
 
