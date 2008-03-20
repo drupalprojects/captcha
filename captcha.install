@@ -39,6 +39,8 @@ function captcha_install() {
       db_query("INSERT INTO {captcha_points} (form_id, module, type) VALUES ('%s', NULL, NULL)", $form_id);
     }
     drupal_set_message(t('The installation of the captcha_points table and some default entries was successful'), 'status');
+    drupal_set_message(t('You can now <a href="!captcha_admin">configure the CAPTCHA module</a> for your site.',
+      array('!captcha_admin' => url('admin/user/captcha'))), 'status');
   }
   else {
     drupal_set_message(t('The installation of the CAPTCHA module failed'), 'error');
