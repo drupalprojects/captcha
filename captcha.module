@@ -502,10 +502,11 @@ function captcha_form_alter($form_id, &$form) {
     );
 
     // handle the pre_render functions
-    $form['#pre_render'] = ((array) $form['#pre_render']) + array('captcha_pre_render', 'captcha_pre_render_place_captcha');
+    $form['#pre_render'][] = 'captcha_pre_render';
+    $form['#pre_render'][] = 'captcha_pre_render_place_captcha';
 
     // Add a validation function for the CAPTCHA part of the form
-    $form['captcha']['#validate'] = ((array) $form['captcha']['#validate']) + array('captcha_validate' => array());
+    $form['captcha']['#validate']['captcha_validate'] = array());
 
   }
   elseif (user_access('administer CAPTCHA settings') && variable_get('captcha_administration_mode', FALSE) && arg(0) != 'admin') {
