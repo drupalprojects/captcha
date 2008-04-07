@@ -29,6 +29,7 @@ function text_captcha_menu() {
     'file' => 'text_captcha.admin.inc',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('text_captcha_settings_form'),
+    'access arguments' => array('administer CAPTCHA settings'),
     'type' => MENU_LOCAL_TASK,
     );
   return $items;
