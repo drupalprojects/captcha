@@ -415,7 +415,7 @@ msgid "Noise level"
 msgstr "Úroveň šumu"
 
 #: image_captcha.module:258
-msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgid "The image CAPTCHA module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image CAPTCHA module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
 msgstr "Image CAPTCHA modul funguje nejlépe s TrueType souborem písma (TTF) pro generování obrázků, ale kvůli problémům s licencemi není dovoleno přibalovat písma k modulu. Jednoduché built-in bitmapové písmo je dodávání jako výchozí. Můžete nainstalovat TrueType písma sami, vložením do adresáře s TrueType písmy (adresář  \"%fontsdir\") nebo nahráním do souborového systému Drupalu (adresář \"%filesdir\") za pomoci např. upload modulu."
 
 #: image_captcha.module:261

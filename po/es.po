@@ -72,7 +72,7 @@ msgstr "Ejemplos"
 
 #: captcha.module:80
 msgid "An overview of the available challenge types with examples."
-msgstr "Un resumen de los tipos de captcha disponibles con ejemplos."
+msgstr "Un resumen de los tipos de CAPTCHA disponibles con ejemplos."
 
 #: captcha.module:145;148
 msgid "This question is for testing whether you are a human visitor and to prevent automated spam submissions."
@@ -438,8 +438,8 @@ msgid "Noise level"
 msgstr "Nivel de ruido"
 
 #: image_captcha/image_captcha.module:258
-msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
-msgstr "El módulo image captcha trabaja mejor con un fichero de fuente TrueType (TTF) para generar las imágenes, pero por razones de licencia no está permitido empaquetar fuentes con el módulo. Se proporciona sin embargo una fuente incrustada simple de bitmap como defecto. Usted mismo puede instalar fuentes TrueType poniéndolas en el directorio de fuentes del módulo image captcha (directorio \"%fontsdir\") o cargándolas en el sistema de ficheros Drupal (directorio \"%filesdir\") con el módulo upload, por ejemplo."
+msgid "The image CAPTCHA module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image CAPTCHA module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgstr "El módulo image CAPTCHA trabaja mejor con un fichero de fuente TrueType (TTF) para generar las imágenes, pero por razones de licencia no está permitido empaquetar fuentes con el módulo. Se proporciona sin embargo una fuente incrustada simple de bitmap como defecto. Usted mismo puede instalar fuentes TrueType poniéndolas en el directorio de fuentes del módulo image CAPTCHA (directorio \"%fontsdir\") o cargándolas en el sistema de ficheros Drupal (directorio \"%filesdir\") con el módulo upload, por ejemplo."
 
 #: image_captcha/image_captcha.module:261
 msgid "The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support."

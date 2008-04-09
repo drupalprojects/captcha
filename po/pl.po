@@ -426,7 +426,7 @@ msgid "Noise level"
 msgstr "Poziom szumu"
 
 #: image_captcha/image_captcha.module:223
-msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgid "The image CAPTCHA module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image CAPTCHA module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
 msgstr "Graficzny łapirobot działa najlepiej wraz z czcionkami TrueType (pliki o rozszerzeniu TTF), jednak ze względu na ograniczenia licencyjne moduł nie jest dostarczany wraz z tymi czcionkami. W zamian do modułu dodawana jest czcionka bitmapowa. Możesz jednak na własną rękę zainstalować czcionki TrueType, umieszczając ich pliki w katalogu czcionek modułu (\"%fontsdir\"), lub wysyłając je do systemu plików Drupala (katalog \"%filesdir\")."
 
 #: image_captcha/image_captcha.module:226

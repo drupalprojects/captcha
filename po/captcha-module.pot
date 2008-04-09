@@ -3,10 +3,10 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
-#  captcha.module,v 1.42.2.45 2008/03/08 04:23:14 soxofaan
+#  captcha.module,v 1.42.2.48 2008/04/03 22:59:13 soxofaan
 #  captcha.info,v 1.3.2.3 2007/10/02 19:21:20 robloach
-#  image_captcha.module,v 1.1.4.25 2007/11/27 23:47:02 soxofaan
-#  captcha.install,v 1.1.4.6 2007/10/02 19:21:20 robloach
+#  image_captcha.module,v 1.1.4.26 2008/04/06 15:16:55 soxofaan
+#  captcha.install,v 1.1.4.7 2008/03/20 10:22:29 soxofaan
 #  image_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
 #  text_captcha.info,v 1.1.4.3 2007/10/02 19:21:21 robloach
 #  text_captcha.module,v 1.1.4.12 2008/02/27 15:19:07 soxofaan
@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-03-08 06:43+0100\n"
+"POT-Creation-Date: 2008-04-09 10:40+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -52,7 +52,11 @@ msgstr ""
 msgid "Add CAPTCHA administration links to forms"
 msgstr ""
 
-#: (duplicate) captcha.module:57;67;454;520;106 ;441;583 captcha.info:0 image_captcha/image_captcha.module:311;397;423
+#: captcha.module:43
+msgid "skip CAPTCHA"
+msgstr ""
+
+#: (duplicate) captcha.module:57;67;454;521;106 ;441;584 captcha.info:0 image_captcha/image_captcha.module:352;438;479
 msgid "CAPTCHA"
 msgstr ""
 
@@ -72,7 +76,7 @@ msgstr ""
 msgid "An overview of the available challenge types with examples."
 msgstr ""
 
-#: captcha.module:123 image_captcha/image_captcha.module:203
+#: captcha.module:123 image_captcha/image_captcha.module:218;239
 msgid "none"
 msgstr ""
 
@@ -90,6 +94,10 @@ msgstr ""
 
 #: captcha.module:205
 msgid "This option is very helpful to enable/disable challenges on forms. When enabled, users with the \"%admincaptcha\" permission will see CAPTCHA administration links on all forms (except on administrative pages, which shouldn't be accessible to untrusted users in the first place). These links make it possible to enable a challenge of the desired type or disable it."
+msgstr ""
+
+#: captcha.module:205
+msgid "administer CAPTCHA settings"
 msgstr ""
 
 #: captcha.module:210
@@ -184,71 +192,71 @@ msgstr ""
 msgid "CAPTCHA problem: hook_captcha() of module %module returned nothing when trying to retrieve challenge type %type for form %form_id."
 msgstr ""
 
-#: captcha.module:525
+#: captcha.module:526
 msgid "Untrusted users will see a CAPTCHA here (!settings)."
 msgstr ""
 
-#: captcha.module:526
+#: captcha.module:527
 msgid "general CAPTCHA settings"
 msgstr ""
 
-#: captcha.module:530
+#: captcha.module:531
 msgid "Enabled challenge"
 msgstr ""
 
-#: captcha.module:531
+#: captcha.module:532
 msgid "\"@type\" by module \"@module\" (!change, !disable)"
 msgstr ""
 
-#: captcha.module:534
+#: captcha.module:535
 msgid "change"
 msgstr ""
 
-#: captcha.module:535
+#: captcha.module:536
 msgid "disable"
 msgstr ""
 
-#: captcha.module:541
+#: captcha.module:542
 msgid "Place a CAPTCHA here for untrusted users."
 msgstr ""
 
-#: captcha.module:556
+#: captcha.module:557
 msgid "Cookies should be enabled in your browser for CAPTCHA validation."
 msgstr ""
 
-#: captcha.module:569
+#: captcha.module:570
 msgid "Invalid CAPTCHA token."
 msgstr ""
 
-#: captcha.module:578
+#: captcha.module:579
 msgid "The answer you entered for the CAPTCHA was not correct."
 msgstr ""
 
-#: captcha.module:584
+#: captcha.module:585
 msgid "%form_id post blocked by CAPTCHA module: challenge \"%challenge\" (by module \"%module\"), user answered \"%response\", but the solution was \"%solution\"."
 msgstr ""
 
-#: captcha.module:695
+#: captcha.module:696
 msgid "This page gives an overview of all available challenge types, generated with their current settings."
 msgstr ""
 
-#: captcha.module:706
+#: captcha.module:707
 msgid "Challenge \"%challenge\" by module \"%module\""
 msgstr ""
 
-#: captcha.module:711
+#: captcha.module:712
 msgid "10 more examples of this challenge."
 msgstr ""
 
-#: captcha.module:740
+#: captcha.module:741
 msgid "Math Question"
 msgstr ""
 
-#: captcha.module:741
+#: captcha.module:742
 msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
 msgstr ""
 
-#: captcha.module:742
+#: captcha.module:743
 msgid "@x + @y = "
 msgstr ""
 
@@ -256,7 +264,7 @@ msgstr ""
 msgid "Already @counter blocked form submissions"
 msgstr ""
 
-#: captcha.install:31;76
+#: captcha.install:31;78
 msgid "Unsupported database."
 msgstr ""
 
@@ -264,7 +272,11 @@ msgstr ""
 msgid "The installation of the captcha_points table and some default entries was successful"
 msgstr ""
 
-#: captcha.install:44
+#: captcha.install:42
+msgid "You can now <a href=\"!captcha_admin\">configure the CAPTCHA module</a> for your site."
+msgstr ""
+
+#: captcha.install:46
 msgid "The installation of the CAPTCHA module failed"
 msgstr ""
 
@@ -284,12 +296,12 @@ msgstr ""
 msgid "<p>Example image, generated with the current settings:</p>!img"
 msgstr ""
 
-#: (duplicate) image_captcha/image_captcha.module:39;363;363;70 ;79  image_captcha/image_captcha.info:0
+#: (duplicate) image_captcha/image_captcha.module:39;404;404;70 ;79  image_captcha/image_captcha.info:0
 msgid "Image CAPTCHA"
 msgstr ""
 
 #: image_captcha/image_captcha.module:100
-msgid "Could not find or read the configured font \"%font\" for the image captcha."
+msgid "Could not find or read the configured font \"%font\" for the image CAPTCHA."
 msgstr ""
 
 #: image_captcha/image_captcha.module:110
@@ -336,11 +348,11 @@ msgstr ""
 msgid "tiny"
 msgstr ""
 
-#: image_captcha/image_captcha.module:171;186
+#: image_captcha/image_captcha.module:171;186;219
 msgid "small"
 msgstr ""
 
-#: image_captcha/image_captcha.module:172;187;206;244
+#: image_captcha/image_captcha.module:172;187;242;280
 msgid "normal"
 msgstr ""
 
@@ -361,106 +373,150 @@ msgid "Define the average spacing between characters. Note that larger values ma
 msgstr ""
 
 #: image_captcha/image_captcha.module:195
-msgid "Distortion and noise"
+msgid "Color settings"
 msgstr ""
 
 #: image_captcha/image_captcha.module:196
-msgid "With these settings you can control the degree of obfuscation by distortion and added noise. Do not exaggerate the obfuscation and assure that the code in the image is reasonably readable. For example, do not combine high levels of distortion and noise."
+msgid "Configuration of the background and text colors in the image CAPTCHA."
+msgstr ""
+
+#: image_captcha/image_captcha.module:200
+msgid "Background color"
 msgstr ""
 
 #: image_captcha/image_captcha.module:201
-msgid "Distortion level"
+msgid "Enter the hexadecimal code for the background color (e.g. #FFF or #FFCE90)."
 msgstr ""
 
-#: image_captcha/image_captcha.module:204;243
-msgid "low"
+#: image_captcha/image_captcha.module:208
+msgid "Text color"
 msgstr ""
 
-#: image_captcha/image_captcha.module:205
+#: image_captcha/image_captcha.module:209
+msgid "Enter the hexadecimal code for the text color (e.g. #000 or #004283)."
+msgstr ""
+
+#: image_captcha/image_captcha.module:216
+msgid "Additional variation of text color"
+msgstr ""
+
+#: image_captcha/image_captcha.module:220;241
 msgid "moderate"
 msgstr ""
 
-#: image_captcha/image_captcha.module:207;245
+#: image_captcha/image_captcha.module:221;243;281
 msgid "high"
 msgstr ""
 
-#: image_captcha/image_captcha.module:208;246
-msgid "severe"
-msgstr ""
-
-#: image_captcha/image_captcha.module:211
-msgid "Set the degree of wave distortion in the image."
-msgstr ""
-
-#: image_captcha/image_captcha.module:215
-msgid "Smooth distortion"
-msgstr ""
-
-#: image_captcha/image_captcha.module:217
-msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
-msgstr ""
-
 #: image_captcha/image_captcha.module:222
-msgid "Double vision"
+msgid "very high"
 msgstr ""
 
-#: image_captcha/image_captcha.module:224
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
-msgstr ""
-
-#: image_captcha/image_captcha.module:229
-msgid "Add salt and peper noise"
+#: image_captcha/image_captcha.module:225
+msgid "The different characters will have randomized colors in the specified range around the text color."
 msgstr ""
 
 #: image_captcha/image_captcha.module:231
-msgid "This option adds randomly colored point noise."
+msgid "Distortion and noise"
 msgstr ""
 
-#: image_captcha/image_captcha.module:235
-msgid "Add line noise"
+#: image_captcha/image_captcha.module:232
+msgid "With these settings you can control the degree of obfuscation by distortion and added noise. Do not exaggerate the obfuscation and assure that the code in the image is reasonably readable. For example, do not combine high levels of distortion and noise."
 msgstr ""
 
 #: image_captcha/image_captcha.module:237
-msgid "This option enables lines randomly drawn on top of the text code."
+msgid "Distortion level"
 msgstr ""
 
-#: image_captcha/image_captcha.module:241
-msgid "Noise level"
+#: image_captcha/image_captcha.module:240;279
+msgid "low"
+msgstr ""
+
+#: image_captcha/image_captcha.module:244;282
+msgid "severe"
+msgstr ""
+
+#: image_captcha/image_captcha.module:247
+msgid "Set the degree of wave distortion in the image."
+msgstr ""
+
+#: image_captcha/image_captcha.module:251
+msgid "Smooth distortion"
+msgstr ""
+
+#: image_captcha/image_captcha.module:253
+msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr ""
 
 #: image_captcha/image_captcha.module:258
-msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgid "Double vision"
 msgstr ""
 
-#: image_captcha/image_captcha.module:261
+#: image_captcha/image_captcha.module:260
+msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgstr ""
+
+#: image_captcha/image_captcha.module:265
+msgid "Add salt and peper noise"
+msgstr ""
+
+#: image_captcha/image_captcha.module:267
+msgid "This option adds randomly colored point noise."
+msgstr ""
+
+#: image_captcha/image_captcha.module:271
+msgid "Add line noise"
+msgstr ""
+
+#: image_captcha/image_captcha.module:273
+msgid "This option enables lines randomly drawn on top of the text code."
+msgstr ""
+
+#: image_captcha/image_captcha.module:277
+msgid "Noise level"
+msgstr ""
+
+#: image_captcha/image_captcha.module:294
+msgid "The image CAPTCHA module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image CAPTCHA module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgstr ""
+
+#: image_captcha/image_captcha.module:297
 msgid "The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support."
 msgstr ""
 
-#: image_captcha/image_captcha.module:274
+#: image_captcha/image_captcha.module:308
 msgid "The list of characters to use should not contain spaces."
 msgstr ""
 
-#: image_captcha/image_captcha.module:279
+#: image_captcha/image_captcha.module:313
 msgid "You need to select a font"
 msgstr ""
 
-#: image_captcha/image_captcha.module:282
+#: image_captcha/image_captcha.module:316
 msgid "Font does not exist or is not readable."
 msgstr ""
 
-#: image_captcha/image_captcha.module:311
+#: image_captcha/image_captcha.module:320
+msgid "Background color is not a valid hexadecimal color value."
+msgstr ""
+
+#: image_captcha/image_captcha.module:323
+msgid "Text color is not a valid hexadecimal color value."
+msgstr ""
+
+#: image_captcha/image_captcha.module:352
 msgid "Encountered an illegal byte while splitting an utf8 string in characters."
 msgstr ""
 
-#: image_captcha/image_captcha.module:368
+#: image_captcha/image_captcha.module:409
 msgid "What code is in the image?"
 msgstr ""
 
-#: image_captcha/image_captcha.module:369
+#: image_captcha/image_captcha.module:410
 msgid "Copy the characters (respecting upper/lower case) from the image."
 msgstr ""
 
-#: image_captcha/image_captcha.module:397
+#: image_captcha/image_captcha.module:438
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
 msgstr ""
 

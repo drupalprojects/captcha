@@ -277,7 +277,7 @@ msgstr "CAPTCHA image"
 
 #: image_captcha/image_captcha.module:100
 msgid "Could not find or read the configured font \"%font\" for the image captcha."
-msgstr "Impossible de trouver ou de lire la police de caractère \"%font\" configurée pour le captcha image."
+msgstr "Impossible de trouver ou de lire la police de caractère \"%font\" configurée pour le CAPTCHA image."
 
 #: image_captcha/image_captcha.module:110
 msgid "Built-in font"
@@ -420,8 +420,8 @@ msgid "Noise level"
 msgstr "Niveau de bruit"
 
 #: image_captcha/image_captcha.module:258
-msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
-msgstr "Le module Image Captcha fonctionne mieux avec un fichier de police TrueType (TTF) pour générer les images, mais en raison de problèmes de licence, il n'est pas permis de distribuer les polices avec le module. Une simple police \"bitmap\" est fournie par défaut à la place. Vous pouvez installer les polices TrueType vous-même en les plaçant dans le répertoire de polices du module Image Captcha (répertoire \"%fontsdir\") ou en les téléchargeant dans votre système de fichiers Drupal (répertoire \"%filesdir\"), à l'aide du module Upload par exemple."
+msgid "The image CAPTCHA module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image CAPTCHA module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
+msgstr "Le module Image CAPTCHA fonctionne mieux avec un fichier de police TrueType (TTF) pour générer les images, mais en raison de problèmes de licence, il n'est pas permis de distribuer les polices avec le module. Une simple police \"bitmap\" est fournie par défaut à la place. Vous pouvez installer les polices TrueType vous-même en les plaçant dans le répertoire de polices du module Image CAPTCHA (répertoire \"%fontsdir\") ou en les téléchargeant dans votre système de fichiers Drupal (répertoire \"%filesdir\"), à l'aide du module Upload par exemple."
 
 #: image_captcha/image_captcha.module:261
 msgid "The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support."
