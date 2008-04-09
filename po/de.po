@@ -391,10 +391,6 @@ msgstr "Die Zeichen (unter Beachtung von Groß-/Kleinschreibung) aus dem Bild."
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
 msgstr "Generierung des Bild-CAPTCHAs fehlgeschlagen. Prüfen Sie Ihre Bild-CAPTCHA-Konfiguration und insbesondere die genutzte Schriftart."
 
-#: image_captcha/image_captcha.module:265;339;365
-msgid "CAPTCHA"
-msgstr "CAPTCHA"
-
 #: image_captcha/image_captcha.module:0
 msgid "image_captcha"
 msgstr "image_captcha"

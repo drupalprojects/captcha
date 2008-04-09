@@ -47,7 +47,7 @@ msgstr "přeskočit CAPTCHu"
 
 #: captcha.module:57;67;454;521;106;441;584
 msgid "CAPTCHA"
-msgstr ""
+msgstr "CAPTCHA"
 
 #: captcha.module:58
 msgid "Administer how and where CAPTCHAs are used."
@@ -354,10 +354,6 @@ msgstr "S tímto nastavením můžete kontrolovat stupeň zatemnění dle zkresl
 msgid "Distortion level"
 msgstr "Úrověň zkroucení"
 
-#: image_captcha.module:203
-msgid "none"
-msgstr "nic"
-
 #: image_captcha.module:204;243
 msgid "low"
 msgstr "málo"
@@ -466,14 +462,9 @@ msgstr "GD knihovna není k dispozici"
 msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
 msgstr "GD knihovna v PHP chybí, nebo je zastaralá. Prosím zkontrolujte <a href=\"@url\">Dokumentace k PHP obrázkům</a> pro informace, jak to opravit."
 
-#: image_captcha.module:311;397;423
-msgid "CAPTCHA"
-msgstr ""
-
 #: image_captcha.module:0
 msgid "image_captcha"
 msgstr ""
-
 
 #: text_captcha.module:19
 msgid "In this challenge the visitor is asked for the n<sup>th</sup> word of a given phrase."
