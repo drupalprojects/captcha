@@ -1,3 +1,8 @@
+# $Id$
+#
+# Czech translation of Drupal (general)
+# Generated from files:
+#  (unknown)
 msgid ""
 msgstr ""
 "Project-Id-Version: captcha\n"
