@@ -87,7 +87,7 @@ function image_captcha_settings_form() {
     ),
   );
 
-    // color settings
+  // color settings
   $form['image_captcha_color_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Color settings'),
