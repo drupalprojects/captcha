@@ -396,7 +396,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Pokud je zapnuto, znaky se na obrázku vyskytují dvakrát různě přes sebe."
 
 #: image_captcha.module:229
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Přidat zrnitý a papírový šum"
 
 #: image_captcha.module:231
@@ -558,4 +558,3 @@ msgstr "Jaké je @nth slovo ve frázi \"@words\"?"
 #: text_captcha.module:0
 msgid "text_captcha"
 msgstr ""
-

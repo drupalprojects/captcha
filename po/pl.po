@@ -406,7 +406,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Znaki występują podwójnie, nakładając się na siebie."
 
 #: image_captcha/image_captcha.module:194
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Posyp solą i pieprzem"
 
 #: image_captcha/image_captcha.module:196
@@ -561,4 +561,3 @@ msgstr "łapirobot tekstowy"
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
 msgstr "Udostępnia tekstowe pułapki łapirobota."
-

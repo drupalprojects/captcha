@@ -412,7 +412,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Όταν είναι ενεργοποιημένη, οι χαρακτήρες εμφανίζονται δύο φορές στην εικόνα, επικαλυπτόμενοι μεταξύ τους."
 
 #: image_captcha/image_captcha.admin.inc:127
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Προσθήκη θορύβου \"αλατιού\" και \"πιπεριού\""
 
 #: image_captcha/image_captcha.admin.inc:129
@@ -582,4 +582,3 @@ msgstr "text_captcha"
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
 msgstr "Παρέχει ένα βασισμένο σε απλό κείμενο CAPTCHA."
-

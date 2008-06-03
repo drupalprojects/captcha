@@ -239,7 +239,7 @@ msgstr "Veuillez résoudre ce simple problème mathématique et entrer le résul
 msgid "@x + @y = "
 msgstr "@x + @y = "
 
-#: (duplicate) captcha.module:107 
+#: (duplicate) captcha.module:107
 msgid "Already @counter blocked form submissions"
 msgstr "@counter soumissions de formulaires ont été bloqués jusqu'à présent"
 
@@ -400,7 +400,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Quand cette option est activée, les caractères apparaissent en double dans l'image, superposés l'un à l'autre."
 
 #: image_captcha/image_captcha.module:229
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Ajouter du bruit en sel et poivre"
 
 #: image_captcha/image_captcha.module:231
@@ -455,19 +455,19 @@ msgstr "Copier les caractères de l'image (en respectant les majuscules/minuscul
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
 msgstr "La génération de l'image CAPTCHA a échoué. Vérifiez la configuration de votre image CAPTCHA, en particulier la police de caractères utilisée."
 
-#: (duplicate) image_captcha/image_captcha.module:71 
+#: (duplicate) image_captcha/image_captcha.module:71
 msgid "No FreeType support"
 msgstr "FreeType n'est pas supporté"
 
-#: (duplicate) image_captcha/image_captcha.module:72 
+#: (duplicate) image_captcha/image_captcha.module:72
 msgid "FreeType support is required for working with TrueType fonts (.ttf), but the GD library for PHP does not support it."
 msgstr "FreeType est requis afin de travailler avec des polices TrueType (.ttf). Or, la librairie GD installée ne supporte pas FreeType. "
 
-#: (duplicate) image_captcha/image_captcha.module:80 
+#: (duplicate) image_captcha/image_captcha.module:80
 msgid "No GD library"
 msgstr "Pas de librairie GD"
 
-#: (duplicate) image_captcha/image_captcha.module:81 
+#: (duplicate) image_captcha/image_captcha.module:81
 msgid "The GD library for PHP is missing or outdated. Please check the <a href=\"@url\">PHP image documentation</a> for information on how to correct this."
 msgstr "Le librairie GD pour PHP est manquante ou périmée. Veuillez vous référer à la <a href=\"@url\">documentation PHP pour les images</a> pour des informations sur la façon de corriger ce problème."
 

@@ -508,7 +508,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Когда этот режим включен, символы отображаются дважды, перекрывая друг друга."
 
 #: image_captcha/image_captcha.module:229
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Добавление точек"
 
 #: image_captcha/image_captcha.module:231
@@ -695,4 +695,3 @@ msgstr "Напишите @nth слово из фразы \"@words\""
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
 msgstr "Субмодуль CAPTCHA, реализующий простые текстовые задачи."
-

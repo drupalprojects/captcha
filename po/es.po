@@ -418,7 +418,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Cuando se activa, los caracteres se duplican en la imagen, superpuestos uno sobre el otro."
 
 #: image_captcha/image_captcha.module:229
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Añadir ruido sal y pimienta"
 
 #: image_captcha/image_captcha.module:231
@@ -589,4 +589,3 @@ msgstr "text_captcha"
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
 msgstr "Proporciona un CAPTCHA simple basado en texto."
-
