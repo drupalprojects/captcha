@@ -466,7 +466,7 @@ msgstr "De karakters van de code worden telkens twee maal overlappend afgebeeld 
 
 #: image_captcha/image_captcha.admin.inc:127
 #, fuzzy
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Zout en peper ruis toevoegen"
 
 #: image_captcha/image_captcha.admin.inc:129

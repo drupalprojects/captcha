@@ -344,7 +344,7 @@ msgid "When enabled, characters appear twice in the image, overlayed onto each o
 msgstr "Wenn diese Option aktiviert ist, ersscheinen Zeichen zweimal aufeinander überlagert im Bild."
 
 #: image_captcha/image_captcha.module:187
-msgid "Add salt and peper noise"
+msgid "Add salt and pepper noise"
 msgstr "Schneegestöberrauschen hinzufügen"
 
 #: image_captcha/image_captcha.module:189
@@ -495,4 +495,3 @@ msgstr "text_capcha"
 #: text_captcha/text_captcha.info:0
 msgid "Captcha module that implements a simple text based captcha."
 msgstr "CAPTCHA-Modul, das ein einfaches textbasiertes CAPTCHA implementiert."
-
