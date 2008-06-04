@@ -104,7 +104,7 @@ msgstr "<p>CAPTCHA-задачу можно добавить практическ
 "качестве анонимного пользователя).</p>"
 
 #: captcha.module:42;202;210
-msgid "Add CAPTCHA adminstration links to forms"
+msgid "Add CAPTCHA administration links to forms"
 msgstr "Добавить ссылку администрирования CAPTCHA на каждую форму"
 
 #: captcha.module:58
@@ -349,7 +349,7 @@ msgstr "Спам контроль"
 #: image_captcha/image_captcha.module:20
 msgid "The image CAPTCHA is a popular challenge where a random textual code is "
 "obfuscated in an image. The image is generated on the fly for each request, which "
-"is rather CPU intensive for the server. Be carefull with the size and computation "
+"is rather CPU intensive for the server. Be careful with the size and computation "
 "related settings."
 
 msgstr "Графическая CAPTCHA задача - это популярное решение в котором текстовый код "
@@ -494,7 +494,7 @@ msgid "Smooth distortion"
 msgstr "Сглаживание"
 
 #: image_captcha/image_captcha.module:217
-msgid "This option enables bilineair interpolation of the distortion which makes "
+msgid "This option enables bilinear interpolation of the distortion which makes "
 "the image look smoother, but it is more CPU intensive."
 msgstr "Эта опция включает билинейную интерполяцию – сглаживание. "
 "Использует ресурсы процессора более интенсивно."
@@ -504,7 +504,7 @@ msgid "Double vision"
 msgstr "Двойное отображение"
 
 #: image_captcha/image_captcha.module:224
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgid "When enabled, characters appear twice in the image, overlaid onto each other."
 msgstr "Когда этот режим включен, символы отображаются дважды, перекрывая друг друга."
 
 #: image_captcha/image_captcha.module:229

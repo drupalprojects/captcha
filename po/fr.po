@@ -48,7 +48,7 @@ msgid "<p>A CAPTCHA can be added to virtually each Drupal form. Some default for
 msgstr "<p>Un CAPTCHA peut être ajouté à presque chaque formulaire dans Drupal. Certains formulaires sont fournis par défaut dans la liste des formulaires, mais des formulaires peuvent arbitrairement être ajoutés et gérés lorsque l'option \"%adminlinks\" est activée. </p> <p> Les utilisateurs avec la <a href=\"@perm\"> permission</a> \"%skipcaptcha\" n'auront pas à répondre aux défis. Veillez à accorder cette permission aux utilisateurs en qui vous avez confiance (par exemple, les administrateurs du site). Si vous voulez tester un formulaire protégé, assurez-vous de le faire en tant qu'utilisateur sans la permission \"%skipcaptcha \" (par exemple, comme utilisateur anonyme).</p>"
 
 #: captcha.module:42;202;210
-msgid "Add CAPTCHA adminstration links to forms"
+msgid "Add CAPTCHA administration links to forms"
 msgstr "Ajouter des liens d'administration de CAPTCHA aux formulaires"
 
 #: (duplicate) captcha.module:57;67;454;106 ;441;576 captcha.info:0 image_captcha/image_captcha.module:311;397;423
@@ -264,7 +264,7 @@ msgid "Spam control"
 msgstr "Control du spam"
 
 #: image_captcha/image_captcha.module:20
-msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
+msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
 msgstr "Le CAPTCHA image est un défi populaire où un code textuel aléatoire est affiché dans une image. L'image est générée à la volée pour chaque demande, ce qui demande beaucoup de ressources processeur au serveur. Attention à la taille et aux paramètres de calcul."
 
 #: image_captcha/image_captcha.module:24
@@ -388,7 +388,7 @@ msgid "Smooth distortion"
 msgstr "Distorsion lisse"
 
 #: image_captcha/image_captcha.module:217
-msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
+msgid "This option enables bilinear interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr "Cette option permet une interpolation bilinéaire de la distorsion qui rend l'image plus agréable, mais cette procédure est plus intensive pour le processeur."
 
 #: image_captcha/image_captcha.module:222
@@ -396,7 +396,7 @@ msgid "Double vision"
 msgstr "Vision en double"
 
 #: image_captcha/image_captcha.module:224
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgid "When enabled, characters appear twice in the image, overlaid onto each other."
 msgstr "Quand cette option est activée, les caractères apparaissent en double dans l'image, superposés l'un à l'autre."
 
 #: image_captcha/image_captcha.module:229

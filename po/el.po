@@ -400,7 +400,7 @@ msgid "Smooth distortion"
 msgstr "Απαλή παραμόρφωση"
 
 #: image_captcha/image_captcha.admin.inc:115
-msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
+msgid "This option enables bilinear interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr "Η επιλογή αυτή ενεργοποιεί διγραμμική παρεμβολή παραμόρφωσης που κάνει την εικόνα να δείχνει πιο ομαλή, αλλά είναι απαιτητική αναφορικά με την υπολογιστική ισχύ."
 
 #: image_captcha/image_captcha.admin.inc:120
@@ -408,7 +408,7 @@ msgid "Double vision"
 msgstr "Διπλή όψη"
 
 #: image_captcha/image_captcha.admin.inc:122
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgid "When enabled, characters appear twice in the image, overlaid onto each other."
 msgstr "Όταν είναι ενεργοποιημένη, οι χαρακτήρες εμφανίζονται δύο φορές στην εικόνα, επικαλυπτόμενοι μεταξύ τους."
 
 #: image_captcha/image_captcha.admin.inc:127
@@ -456,7 +456,7 @@ msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuratio
 msgstr "Η δημιουργία της εικόνας CAPTCHA απέτυχε. Ελέγξτε τις ρυθμίσεις των εικόνων CAPTCHA και ειδικότερα της γραμματοσειράς που χρησιμοποιείται."
 
 #: image_captcha/image_captcha.module:16
-msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
+msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
 msgstr "Η εικόνα CAPTCHA είναι ένα δημοφιλές είδος πρόκλησης κατά το οποίο ένας τυχαίος κωδικός κειμένου καθίσταται ασαφής μέσα σε μια εικόνα. Η εικόνα δημιουργείται στη στιγμή (on the fly) για κάθε αίτημα, γεγονός που καθιστά απαιτητική τη διαδικασία από πλευρά επεξεργαστικής ισχύος στο διακομιστή. Να είστε προσεκτικοί με το μέγεθος και τις σχετιζόμενες με υπολογισμό ρυθμίσεις."
 
 #: image_captcha/image_captcha.module:20

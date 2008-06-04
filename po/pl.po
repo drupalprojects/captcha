@@ -269,7 +269,7 @@ msgid "Spam control"
 msgstr "Walka ze spamem"
 
 #: image_captcha/image_captcha.module:20
-msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
+msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
 msgstr "Pułapka graficzna jest popularnym rodzajem zadania, polegającym na przedstawieniu użytkownikowi kodu tekstowego zapisanego w obrazku, który poddany został zniekształceniu. Obrazek jest generowany \"w locie\" za każdym otwarciem strony, co jest dosyć wymagające dla procesora serwera. Do ustawień obrazka należy więc podchodzić ostrożnie."
 
 #: image_captcha/image_captcha.module:24
@@ -394,7 +394,7 @@ msgid "Smooth distortion"
 msgstr "Wygładzanie zniekształceń"
 
 #: image_captcha/image_captcha.module:182
-msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
+msgid "This option enables bilinear interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr "Opcja umożliwia korzystanie z interpolacji dwuliniowej podczas zniekształcania obrazka, co sprawia że wygląda on bardziej \"gładko\". Technika ta jest jednak wymagająca dla procesora."
 
 #: image_captcha/image_captcha.module:187
@@ -402,7 +402,7 @@ msgid "Double vision"
 msgstr "Wzrok stereo"
 
 #: image_captcha/image_captcha.module:189
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgid "When enabled, characters appear twice in the image, overlaid onto each other."
 msgstr "Znaki występują podwójnie, nakładając się na siebie."
 
 #: image_captcha/image_captcha.module:194

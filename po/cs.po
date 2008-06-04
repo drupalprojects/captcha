@@ -264,7 +264,7 @@ msgstr ""
 
 
 #: image_captcha.module:20
-msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
+msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
 msgstr "Image CAPTCHA je populární výzva, ve které je generován textový kód v obrázku. Obrázek je generován 'za letu' pro každý požadavek, což je závislé na CPU serveru. Buďte opatrní při nastavování velikosti a dalších vlastností."
 
 #: image_captcha.module:24
@@ -384,7 +384,7 @@ msgid "Smooth distortion"
 msgstr "Hladké pokřivení"
 
 #: image_captcha.module:217
-msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
+msgid "This option enables bilinear interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr "Tato možnost "
 
 #: image_captcha.module:222
@@ -392,7 +392,7 @@ msgid "Double vision"
 msgstr "Dvojité zobrazení"
 
 #: image_captcha.module:224
-msgid "When enabled, characters appear twice in the image, overlayed onto each other."
+msgid "When enabled, characters appear twice in the image, overlaid onto each other."
 msgstr "Pokud je zapnuto, znaky se na obrázku vyskytují dvakrát různě přes sebe."
 
 #: image_captcha.module:229
