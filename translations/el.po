@@ -213,7 +213,7 @@ msgid "Double vision"
 msgstr "Διπλή εμφάνιση"
 
 #: image_captcha/image_captcha.module:96
-msgid "Characters appear twice in the image, overlayed onto each other."
+msgid "Characters appear twice in the image, overlaid onto each other."
 msgstr "Οι χαρακτήρες εμφανίζονται δύο φορές στην εικόνα, η μία επικαλυπτόμενη πάνω στην άλλη."
 
 #: image_captcha/image_captcha.module:100
