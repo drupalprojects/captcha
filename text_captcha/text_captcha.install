@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Installation file for the text CAPTCHA module.
+ */
+
+/**
  * On uninstall: remove module variables and clear variable cache
  */
 function text_captcha_uninstall() {

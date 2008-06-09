@@ -218,7 +218,7 @@ function captcha_admin_settings() {
   $form['captcha_types'] = array(
     '#type' => 'fieldset',
     '#title' => t('Challenge type per form'),
-    '#description' => t('Select the challenge type you want for each of the listed forms (identified by their so called <em>form_id</em>\'s). You can easily add arbitrary forms with the help of the \'%CAPTCHA_admin_links\' option.', array('%CAPTCHA_admin_links'=>t('Add CAPTCHA administration links to forms'))),
+    '#description' => t('Select the challenge type you want for each of the listed forms (identified by their so called <em>form_id</em>\'s). You can easily add arbitrary forms with the help of the \'%CAPTCHA_admin_links\' option.', array('%CAPTCHA_admin_links' => t('Add CAPTCHA administration links to forms'))),
     '#tree' => TRUE,
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
@@ -594,7 +594,7 @@ function captcha_validate($form_values) {
       watchdog('CAPTCHA',
         t('%form_id post blocked by CAPTCHA module: challenge "%challenge" (by module "%module"), user answered "%response", but the solution was "%solution".',
           array('%form_id' => $form_id,
-            '%response' => $captcha_response, '%solution'=> $_SESSION['captcha'][$form_id][$captcha_token],
+            '%response' => $captcha_response, '%solution' => $_SESSION['captcha'][$form_id][$captcha_token],
             '%challenge' => $validationdata['type'], '%module' => $validationdata['module'],
           )
         ),

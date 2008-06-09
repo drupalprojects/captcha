@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Implementation of the image generation for the image CAPTCHA module.
+ */
+
+/**
  * base function for generating a image CAPTCHA
  */
 function _image_captcha_generate_image($code) {
@@ -214,8 +219,8 @@ function _image_captcha_image_generator_print_string(&$image, $width, $height, $
 
   foreach ($characters as $c => $character) {
     // initial position of character: in the center of its cage
-    $center_x = ($c+.5) * $ccage_width;
-    $center_y = .5 * $height;
+    $center_x = ($c + 0.5) * $ccage_width;
+    $center_y = 0.5 * $height;
 
     // get character dimensions for ttf fonts
     if ($font != 'BUILTIN') {

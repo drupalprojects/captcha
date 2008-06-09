@@ -1,6 +1,10 @@
 <?php
 // $Id$
 
+/**
+ * @file
+ * Implementation of a text based CAPTCHA.
+ */
 
 /**
  * Implementation of a simple text based CAPTCHA, for use with the CAPTCHA module

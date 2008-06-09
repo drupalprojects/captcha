@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Implementation of the administration UI of the image CAPTCHA module.
+ */
+
+/**
  * function to get a list of available fonts
  */
 function _image_captcha_available_fonts() {
@@ -217,10 +222,10 @@ function image_captcha_settings_form_validate($form_id, $form_values) {
       form_set_error('image_captcha_font', t('Font does not exist or is not readable.'));
     }
     // check color settings
-    if (!preg_match('/^#([0-9a-fA-F]{3}){1,2}$/', $form_values['image_captcha_background_color'])){
+    if (!preg_match('/^#([0-9a-fA-F]{3}){1,2}$/', $form_values['image_captcha_background_color'])) {
       form_set_error('image_captcha_background_color', t('Background color is not a valid hexadecimal color value.'));
     }
-    if (!preg_match('/^#([0-9a-fA-F]{3}){1,2}$/', $form_values['image_captcha_foreground_color'])){
+    if (!preg_match('/^#([0-9a-fA-F]{3}){1,2}$/', $form_values['image_captcha_foreground_color'])) {
       form_set_error('image_captcha_foreground_color', t('Text color is not a valid hexadecimal color value.'));
     }
   }

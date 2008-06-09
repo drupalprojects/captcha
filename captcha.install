@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Installation file for the core CAPTCHA module.
+ */
+
+/**
  * Create tables on install
  */
 function captcha_install() {

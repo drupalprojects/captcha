@@ -2,6 +2,11 @@
 // $Id$
 
 /**
+ * @file
+ * Installation file for the image CAPTCHA module.
+ */
+
+/**
  * On uninstall: remove module variables and clear variable cache
  */
 function image_captcha_uninstall() {
