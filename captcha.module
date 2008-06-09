@@ -107,6 +107,16 @@ function captcha_requirements($phase) {
       'value' => $t('Already @counter blocked form submissions', array('@counter' => variable_get('captcha_wrong_response_counter', 0))),
       'severity' => REQUIREMENT_INFO,
     );
+    // Check if there is an entry for uid=0 in the users table, this is required
+    // to have working a $_SESSION variable for anonymous users.
+    if (!db_result(db_query('SELECT COUNT(*) FROM {users} WHERE uid=%d', 0))) {
+      $requirements['captcha_no_sessions_for_anonymous'] = array(
+        'title' => $t('CAPTCHA'),
+        'value' => $t('No sessions for anonymous users.'),
+        'description' => $t('There is no entry for uid 0 in the %users table of the database. This disables persistent session data for anonymous users. Because the CAPTCHA module depends on this session data, CAPTCHAs will not work for anonymous users. Add a row for uid 0 to the %users table to resolve this.', array('%users' => 'users')),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
   }
   return $requirements;
 }
