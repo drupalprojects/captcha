@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: French translation of Drupal\n"
 "POT-Creation-Date: 2008-07-29 09:53-0400\n"
-"PO-Revision-Date: 2008-07-29 11:38-0500\n"
+"PO-Revision-Date: 2008-07-31 12:45-0500\n"
 "Last-Translator: Sébastien Couture <sysreq@gmail.com>\n"
 "Language-Team: French translation team\n"
 "MIME-Version: 1.0\n"
@@ -409,7 +409,7 @@ msgstr "Paramètres de couleur"
 
 #: image_captcha/image_captcha.admin.inc:94
 msgid "Configuration of the background and text colors in the image CAPTCHA."
-msgstr "Configuration de l'arrière-plan et de la couleur du texte dans le CAPTCHA visuel."
+msgstr "Configuration de l'arrière-plan et de la couleur du texte dans le CAPTCHA image."
 
 #: image_captcha/image_captcha.admin.inc:98
 msgid "Background color"
@@ -509,7 +509,7 @@ msgstr "Degré d'interférence"
 
 #: image_captcha/image_captcha.admin.inc:194
 msgid "The image captcha module works best with a TrueType font file (TTF) for generating the images, but because of licencing issues it is not allowed to package fonts with the module. A simple built-in bitmap font is provided as default instead. You can install TrueType fonts yourself by putting them in the fonts directory of the image captcha module (directory \"%fontsdir\") or by uploading them to your Drupal file system (directory \"%filesdir\") with for example the upload module."
-msgstr "Le module CAPTCHA visuel est en mesure de génèrer des images de meilleure qualité lorsqu'il est utilisé avec une police de caractères TrueType (TTF). Toutefois, étant donné certains problèmes d'octroi de licences, il est impossible d'inclure ce genre de polices avec le module. Une simple police bitmap incorporée est donc fournie par défaut. Vous pouvez installer des polices TrueType par vous-même en les déplaçant dans le répertoire des polices du module CAPTCHA visuel (le répertoire \"%fontsdir\") ou en les téléversant dans le répertoire de fichiers de Drupal (le répertoire \"%filesdir\") à l'aide du module de téléversement (upload)."
+msgstr "Le module CAPTCHA image est en mesure de génèrer des images de meilleure qualité lorsqu'il est utilisé avec une police de caractères TrueType (TTF). Toutefois, étant donné certains problèmes d'octroi de licences, il est impossible d'inclure ce genre de polices avec le module. Une simple police bitmap incorporée est donc fournie par défaut. Vous pouvez installer des polices TrueType par vous-même en les déplaçant dans le répertoire des polices du module CAPTCHA image (le répertoire \"%fontsdir\") ou en les téléversant dans le répertoire de fichiers de Drupal (le répertoire \"%filesdir\") à l'aide du module de téléversement (upload)."
 
 #: image_captcha/image_captcha.admin.inc:197
 msgid "The usage of the built-in bitmap font it is not recommended because of its small size and missing UTF-8 support."
@@ -537,11 +537,11 @@ msgstr "La couleur du texte n'est pas une valeur hexadécimale valide."
 
 #: image_captcha/image_captcha.user.inc:27
 msgid "Generation of image CAPTCHA failed. Check your image CAPTCHA configuration and especially the used font."
-msgstr "La génération du CAPTCHA visuel a échoué. Vérifiez les paramètres du CAPTCHA visuel et plus particulièrement la police utilisée."
+msgstr "La génération du CAPTCHA image a échoué. Vérifiez les paramètres du CAPTCHA image et plus particulièrement la police utilisée."
 
 #: image_captcha/image_captcha.module:16
 msgid "The image CAPTCHA is a popular challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
-msgstr "Le CAPTCHA visuel est un défi populaire où un code textuel aléatoire est obsurcit à l'intérieur d'une image. L'image en question est générée à la volée à chaque requête, ce qui rend le processus assez lourd en terme de puissance de calcul. Soyez prudents lors de la configuration des paramètres reliés à la taille et au rendu de l'image."
+msgstr "Le CAPTCHA image est un défi populaire où un code textuel aléatoire est obsurcit à l'intérieur d'une image. L'image en question est générée à la volée à chaque requête, ce qui rend le processus assez lourd en terme de puissance de calcul. Soyez prudents lors de la configuration des paramètres reliés à la taille et au rendu de l'image."
 
 #: image_captcha/image_captcha.module:20
 msgid "<p>Example image, generated with the current settings:</p>!img"
@@ -550,7 +550,7 @@ msgstr "<p>Exemple d'image, généré à l'aide des paramètres actuels:</p>!img
 #: image_captcha/image_captcha.module:140;140;33
 #: image_captcha/image_captcha.info:0
 msgid "Image CAPTCHA"
-msgstr "CAPTCHA visuel"
+msgstr "CAPTCHA image"
 
 #: image_captcha/image_captcha.module:145
 msgid "What code is in the image?"
@@ -570,7 +570,7 @@ msgstr "image_captcha"
 
 #: image_captcha/image_captcha.info:0
 msgid "Provides an image based CAPTCHA."
-msgstr "Fournit un CAPTCHA visuel."
+msgstr "Fournit un CAPTCHA image."
 
 #: text_captcha/text_captcha.admin.inc:13
 msgid "Kind of words to use in the phrase"
@@ -655,7 +655,7 @@ msgstr "Quel est le @nth mot de la phrase \"@words\"?"
 #: text_captcha/text_captcha.module:28
 #: text_captcha/text_captcha.info:0
 msgid "Text CAPTCHA"
-msgstr "CAPTCHA textuel"
+msgstr "CAPTCHA texte"
 
 #: text_captcha/text_captcha.module:0
 msgid "text_captcha"
@@ -664,4 +664,3 @@ msgstr "text_captcha"
 #: text_captcha/text_captcha.info:0
 msgid "Provides a simple text based CAPTCHA."
 msgstr "Fournit un CAPTCHA textuel simple."
-
