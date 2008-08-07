@@ -274,7 +274,7 @@ msgstr "Het antwoord dat u opgaf voor de CAPTCHA was niet juist."
 #: captcha.module:448
 #, fuzzy
 msgid "Math Question"
-msgstr "Wiskunge vraag"
+msgstr "Wiskundige vraag"
 
 #: captcha.module:449
 msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
