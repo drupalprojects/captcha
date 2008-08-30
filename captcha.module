@@ -323,6 +323,12 @@ function captcha_form_alter(&$form, $form_state, $form_id) {
  * Implementation of form #validate.
  */
 function captcha_validate($form, &$form_state) {
+  // Check if there is CAPTCHA data available in $_SESSION.
+  // If not, the visitor has most likely disabled cookies.
+  if (!isset($_SESSION['captcha'])) {
+    form_set_error('captcha_response', t('Cookies should be enabled in your browser for CAPTCHA validation.'));
+    return;
+  }
   // Get answer and preprocess if needed
   $captcha_response = $form_state['values']['captcha_response'];
   $captcha_info = $form_state['values']['captcha_info'];
