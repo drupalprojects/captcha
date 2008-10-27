@@ -5,7 +5,7 @@
 # Generated from files:
 #  captcha.admin.inc,v 1.5.2.6 2008/03/29 17:20:25 soxofaan
 #  image_captcha.admin.inc,v 1.3.2.4 2008/06/04 08:20:01 soxofaan
-#  captcha.module,v 1.58.2.8 2008/06/04 08:20:01 soxofaan
+#  captcha.module,v 1.58.2.9 2008/08/30 01:20:18 soxofaan
 #  captcha.info,v 1.5 2007/10/27 18:24:50 robloach
 #  image_captcha.user.inc,v 1.3.2.4 2008/07/14 22:24:51 soxofaan
 #  image_captcha.module,v 1.8.2.3 2008/06/04 08:20:01 soxofaan
@@ -20,7 +20,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2008-08-26 16:47+0300\n"
+"POT-Creation-Date: 2008-10-27 00:48+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -213,7 +213,7 @@ msgstr ""
 msgid "This question is for testing whether you are a human visitor and to prevent automated spam submissions."
 msgstr ""
 
-#: (duplicate) captcha.module:225;293;112 ;120 ;212;354;53;64 captcha.info:0 image_captcha/image_captcha.user.inc:27 image_captcha/image_captcha.module:92
+#: (duplicate) captcha.module:225;293;112 ;120 ;212;360;53;64 captcha.info:0 image_captcha/image_captcha.user.inc:27 image_captcha/image_captcha.module:92
 msgid "CAPTCHA"
 msgstr ""
 
@@ -245,23 +245,27 @@ msgstr ""
 msgid "Place a CAPTCHA here for untrusted users."
 msgstr ""
 
-#: captcha.module:340
+#: captcha.module:329
+msgid "Cookies should be enabled in your browser for CAPTCHA validation."
+msgstr ""
+
+#: captcha.module:346
 msgid "Invalid CAPTCHA token."
 msgstr ""
 
-#: captcha.module:349
+#: captcha.module:355
 msgid "The answer you entered for the CAPTCHA was not correct."
 msgstr ""
 
-#: captcha.module:462
+#: captcha.module:468
 msgid "Math Question"
 msgstr ""
 
-#: captcha.module:463
+#: captcha.module:469
 msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
 msgstr ""
 
-#: captcha.module:464
+#: captcha.module:470
 msgid "@x + @y = "
 msgstr ""
 
@@ -281,7 +285,7 @@ msgstr ""
 msgid "CAPTCHA problem: hook_captcha() of module %module returned nothing when trying to retrieve challenge type %type for form %form_id."
 msgstr ""
 
-#: captcha.module:354
+#: captcha.module:360
 msgid "%form_id post blocked by CAPTCHA module: challenge \"%challenge\" (by module \"%module\"), user answered \"%response\", but the solution was \"%solution\"."
 msgstr ""
 
