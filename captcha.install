@@ -109,6 +109,17 @@ function captcha_update_2() {
 }
 
 /**
+ * Implementation of hook_update_N()
+ */
+function captcha_update_3() {
+  // Clearing of the menu cache is needed because the internal menu structure
+  // of the CAPTCHA module changed a bit.
+  // Because update.php does menu cache clearing automatically,
+  // we just do nothing here except returning an empty array.
+  return array();
+}
+
+/**
  * Remove tables on uninstall.
  */
 function captcha_uninstall() {
