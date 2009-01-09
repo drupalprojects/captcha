@@ -278,7 +278,7 @@ msgstr "Wiskundige vraag"
 
 #: captcha.module:449
 msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
-msgstr "Los deze eenvoudige rekenoefening op en voer het resultaat in. Bv. voor 1+3, voer 4 in."
+msgstr "Los deze eenvoudige rekenoefening op en voer het resultaat in. Bijvoorbeeld: voor 1+3, voer 4 in."
 
 #: captcha.module:450
 msgid "@x + @y = "
