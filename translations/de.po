@@ -152,6 +152,14 @@ msgstr "Ungültige CAPTCHA-Antwort."
 msgid "The answer you entered for the captcha challenge was not correct."
 msgstr "Die Antwort für die CAPTCHA-Aufgabe, die Sie eingegeben haben, war nicht richtig."
 
+#: captcha.module:452
+msgid "Math Question"
+msgstr "Mathematische Frage"
+
+#: captcha.module:453
+msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
+msgstr "Lösen Sie dieses einfache mathematische Problem und geben Sie das Ergebnis ein. Für 1 + 3 geben Sie z.B. 4 ein."
+
 #: captcha.module:490
 msgid "You can't request more than @num captcha challenges without solving them. Your previous captcha challenges were flushed."
 msgstr "Sie können nicht mehr als @num CAPTCHA-Aufgaben anfordern ohne Sie zu lösen. Ihre vorherigen CAPTCHA-Aufgaben wurden verworfen."
@@ -215,7 +223,7 @@ msgid "Spam control"
 msgstr "SPAM-Kontrolle"
 
 #: image_captcha/image_captcha.module:20
-msgid "The image captcha is a popular type of captcha challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be careful with the size and computation related settings."
+msgid "The image captcha is a popular type of captcha challenge where a random textual code is obfuscated in an image. The image is generated on the fly for each request, which is rather CPU intensive for the server. Be carefull with the size and computation related settings."
 msgstr "Das Bild-CAPTCHA ist eine beliebte Art von CAPTCHA-Aufgabe in der ein zufälliger Code als Text verfremdet in einem Bild dargestellt wird. Das Bild wird für jeden Aufruf neu generiert, was für die Server-CPU ziemlich stark belastet. Seien Sie vorsichtig mit der Größe und den berechnungsbezogenen Einstellungen."
 
 #: image_captcha/image_captcha.module:24
@@ -332,7 +340,7 @@ msgid "Smooth distortion"
 msgstr "Geglättete Verzerrung"
 
 #: image_captcha/image_captcha.module:175
-msgid "This option enables bilinear interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
+msgid "This option enables bilineair interpolation of the distortion which makes the image look smoother, but it is more CPU intensive."
 msgstr "Diese Option aktiviert bilineare Interpolation der Verzerrung, was das Bild glatter aussehen lässt, aber CPU-intensiver ist."
 
 #: image_captcha/image_captcha.module:180
@@ -340,11 +348,11 @@ msgid "Double vision"
 msgstr "Doppeldarstellung"
 
 #: image_captcha/image_captcha.module:182
-msgid "When enabled, characters appear twice in the image, overlaid onto each other."
+msgid "When enabled, characters appear twice in the image, overlayed onto each other."
 msgstr "Wenn diese Option aktiviert ist, ersscheinen Zeichen zweimal aufeinander überlagert im Bild."
 
 #: image_captcha/image_captcha.module:187
-msgid "Add salt and pepper noise"
+msgid "Add salt and peper noise"
 msgstr "Schneegestöberrauschen hinzufügen"
 
 #: image_captcha/image_captcha.module:189
@@ -495,3 +503,4 @@ msgstr "text_capcha"
 #: text_captcha/text_captcha.info:0
 msgid "Captcha module that implements a simple text based captcha."
 msgstr "CAPTCHA-Modul, das ein einfaches textbasiertes CAPTCHA implementiert."
+
