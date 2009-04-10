@@ -2,7 +2,7 @@
 // $Id$
 
 /**
- * Implementation of image CAPTCHA for use with the CAPTCHA module
+ * @file Implementation of image CAPTCHA for use with the CAPTCHA module
  *
  * Loosely Based on MyCaptcha by Heine Deelstra
  * (http://heine.familiedeelstra.com/mycaptcha-download)
@@ -147,9 +147,9 @@ function _image_captcha_utf8_split($str) {
 }
 
 /**
- * Implementation of hook_captcha
+ * Implementation of hook_captcha().
  */
-function image_captcha_captcha($op, $captcha_type='') {
+function image_captcha_captcha($op, $captcha_type='', $response='') {
   switch ($op) {
     case 'list':
       // only offer image CAPTCHA if possible to generate an image CAPTCHA
@@ -160,6 +160,8 @@ function image_captcha_captcha($op, $captcha_type='') {
       else {
         return array();
       }
+      break;
+
     case 'generate':
       if ($captcha_type == 'Image') {
         // In offline mode, the image CAPTCHA does not work because the request
@@ -181,6 +183,16 @@ function image_captcha_captcha($op, $captcha_type='') {
         $_SESSION['image_captcha'][$seed] = $code;
         // build the result to return
         $result = array();
+        // Handle the case insesitivity option and change the code to lower case
+        // before saving it as solution.
+        if (variable_get('image_captcha_case_insensitive', FALSE)) {
+          $code = strtolower($code);
+          $result['preprocess'] = TRUE;
+          $description = t('Enter the characters shown in the image without spaces.');
+        }
+        else {
+          $description = t('Enter the characters shown in the image without spaces, also respect upper and lower case.');
+        }
         $result['solution'] = $code;
         // Create the image CAPTCHA form elements
         // The img markup isn't done with theme('image', ...) because that
@@ -194,14 +206,20 @@ function image_captcha_captcha($op, $captcha_type='') {
         $result['form']['captcha_response'] = array(
           '#type' => 'textfield',
           '#title' => t('What code is in the image?'),
-          '#description' => t('Copy the characters (respecting upper/lower case) from the image.'),
+          '#description' => $description,
           '#weight' => 0,
           '#required' => TRUE,
           '#size' => 15,
         );
         return $result;
       }
-    break;
+      break;
+    case 'preprocess':
+      // Preprocessing the response for case insesitive validation
+      if ($captcha_type == 'Image') {
+        return strtolower($response);
+      }
+      break;
   }
 }
 
