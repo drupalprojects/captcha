@@ -162,7 +162,7 @@ function captcha_requirements($phase) {
 function _captcha_available_challenge_types() {
   $captcha_types['none'] = '<'. t('none') .'>';
   foreach (module_implements('captcha') as $module) {
-    $result = call_user_func_array($module .'_captcha', 'list');
+    $result = call_user_func_array($module .'_captcha', array('list'));
     if (is_array($result)) {
       foreach ($result as $type) {
         $captcha_types["$module/$type"] = "$type ($module)";
@@ -762,7 +762,7 @@ function captcha_examples($module=NULL, $challenge=NULL) {
     // generate a list with examples of the available CAPTCHA types
     $output = t('This page gives an overview of all available challenge types, generated with their current settings.');
     foreach (module_implements('captcha') as $module) {
-      $challenges = call_user_func_array($module .'_captcha', 'list');
+      $challenges = call_user_func_array($module .'_captcha', array('list'));
       if ($challenges) {
         foreach ($challenges as $challenge) {
           // generate CAPTCHA
