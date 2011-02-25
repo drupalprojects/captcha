@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 function captcha_help($section = "admin/help#captcha") {
   $output = "";
