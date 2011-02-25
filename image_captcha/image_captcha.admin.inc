@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * function to get a list of available fonts

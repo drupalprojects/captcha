@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Implementation of image CAPTCHA for use with the CAPTCHA module

@@ -1,4 +1,3 @@
-# $Id$
 #
 # LANGUAGE translation of Drupal (general)
 # Copyright 2008 Juan Arias Alvarez <hwangar@gmail.com>
